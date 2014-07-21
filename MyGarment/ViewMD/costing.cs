@@ -53,12 +53,14 @@ namespace MyGarment.ViewMD
                 k.ID = Convert.ToInt32(dtGrid.Rows[i].Cells["ID"].Value);
                 if (new costingdetailCRUD().insertData(k))
                 {
-                    MessageBox.Show("Data berhasil di tambahkan");
+                   // MessageBox.Show("Data berhasil di tambahkan");
                     // Binding();
+                    dtGrid.Rows[i].Cells["Check"].Value = "OK";
                 }
                 else
                 {
-                    MessageBox.Show("Data gagal ditambahkan");
+                   // MessageBox.Show("Data gagal ditambahkan");
+                    dtGrid.Rows[i].Cells["Check"].Value = "ER";
                 }
                 
             }

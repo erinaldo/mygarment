@@ -62,9 +62,12 @@
             this.txtCustomerDesc = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.dtGrid = new System.Windows.Forms.DataGridView();
+            this.Check = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.COSTINGNO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DESCRIPTION = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.TSTombol.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.Panel1.SuspendLayout();
@@ -140,9 +143,9 @@
             this.RecordTSB,
             this.TutupTSB});
             this.TSTombol.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.TSTombol.Location = new System.Drawing.Point(0, 435);
+            this.TSTombol.Location = new System.Drawing.Point(0, 473);
             this.TSTombol.Name = "TSTombol";
-            this.TSTombol.Size = new System.Drawing.Size(792, 25);
+            this.TSTombol.Size = new System.Drawing.Size(843, 25);
             this.TSTombol.TabIndex = 83;
             // 
             // label4
@@ -175,7 +178,7 @@
             this.Panel1.Controls.Add(this.label4);
             this.Panel1.Location = new System.Drawing.Point(0, -2);
             this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(780, 38);
+            this.Panel1.Size = new System.Drawing.Size(843, 38);
             this.Panel1.TabIndex = 82;
             // 
             // label1
@@ -205,7 +208,7 @@
             // txtCategoryID
             // 
             this.txtCategoryID.BackColor = System.Drawing.SystemColors.Info;
-            this.txtCategoryID.Location = new System.Drawing.Point(96, 114);
+            this.txtCategoryID.Location = new System.Drawing.Point(96, 138);
             this.txtCategoryID.Name = "txtCategoryID";
             this.txtCategoryID.Size = new System.Drawing.Size(72, 20);
             this.txtCategoryID.TabIndex = 87;
@@ -213,7 +216,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 114);
+            this.label2.Location = new System.Drawing.Point(13, 138);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 88;
@@ -231,7 +234,7 @@
             // txtItemsID
             // 
             this.txtItemsID.BackColor = System.Drawing.SystemColors.Info;
-            this.txtItemsID.Location = new System.Drawing.Point(96, 143);
+            this.txtItemsID.Location = new System.Drawing.Point(96, 167);
             this.txtItemsID.Name = "txtItemsID";
             this.txtItemsID.Size = new System.Drawing.Size(72, 20);
             this.txtItemsID.TabIndex = 90;
@@ -239,7 +242,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 137);
+            this.label5.Location = new System.Drawing.Point(13, 161);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 91;
@@ -247,7 +250,7 @@
             // 
             // txtQty
             // 
-            this.txtQty.Location = new System.Drawing.Point(96, 166);
+            this.txtQty.Location = new System.Drawing.Point(96, 190);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(100, 20);
             this.txtQty.TabIndex = 92;
@@ -255,7 +258,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 166);
+            this.label6.Location = new System.Drawing.Point(13, 190);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(46, 13);
             this.label6.TabIndex = 93;
@@ -281,7 +284,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 88);
+            this.label8.Location = new System.Drawing.Point(13, 112);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 13);
             this.label8.TabIndex = 96;
@@ -290,15 +293,15 @@
             // cbTypeID
             // 
             this.cbTypeID.FormattingEnabled = true;
-            this.cbTypeID.Location = new System.Drawing.Point(96, 85);
+            this.cbTypeID.Location = new System.Drawing.Point(96, 109);
             this.cbTypeID.Name = "cbTypeID";
-            this.cbTypeID.Size = new System.Drawing.Size(121, 21);
+            this.cbTypeID.Size = new System.Drawing.Size(100, 21);
             this.cbTypeID.TabIndex = 97;
             // 
             // cmdCategory
             // 
             this.cmdCategory.Image = ((System.Drawing.Image)(resources.GetObject("cmdCategory.Image")));
-            this.cmdCategory.Location = new System.Drawing.Point(174, 114);
+            this.cmdCategory.Location = new System.Drawing.Point(174, 138);
             this.cmdCategory.Name = "cmdCategory";
             this.cmdCategory.Size = new System.Drawing.Size(28, 23);
             this.cmdCategory.TabIndex = 98;
@@ -307,7 +310,7 @@
             // button1
             // 
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(174, 143);
+            this.button1.Location = new System.Drawing.Point(174, 167);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(28, 23);
             this.button1.TabIndex = 99;
@@ -325,7 +328,7 @@
             // txtCatergoryDesc
             // 
             this.txtCatergoryDesc.BackColor = System.Drawing.SystemColors.Info;
-            this.txtCatergoryDesc.Location = new System.Drawing.Point(208, 117);
+            this.txtCatergoryDesc.Location = new System.Drawing.Point(208, 141);
             this.txtCatergoryDesc.Name = "txtCatergoryDesc";
             this.txtCatergoryDesc.Size = new System.Drawing.Size(157, 20);
             this.txtCatergoryDesc.TabIndex = 101;
@@ -333,7 +336,7 @@
             // txtStyleDesc
             // 
             this.txtStyleDesc.BackColor = System.Drawing.SystemColors.Info;
-            this.txtStyleDesc.Location = new System.Drawing.Point(208, 143);
+            this.txtStyleDesc.Location = new System.Drawing.Point(208, 167);
             this.txtStyleDesc.Name = "txtStyleDesc";
             this.txtStyleDesc.Size = new System.Drawing.Size(157, 20);
             this.txtStyleDesc.TabIndex = 102;
@@ -359,13 +362,21 @@
             // 
             this.dtGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Check,
             this.COSTINGNO,
             this.ID,
             this.DESCRIPTION});
-            this.dtGrid.Location = new System.Drawing.Point(16, 213);
+            this.dtGrid.Location = new System.Drawing.Point(12, 216);
             this.dtGrid.Name = "dtGrid";
-            this.dtGrid.Size = new System.Drawing.Size(764, 208);
+            this.dtGrid.Size = new System.Drawing.Size(819, 244);
             this.dtGrid.TabIndex = 105;
+            // 
+            // Check
+            // 
+            this.Check.HeaderText = "Check";
+            this.Check.Name = "Check";
+            this.Check.ReadOnly = true;
+            this.Check.Width = 50;
             // 
             // COSTINGNO
             // 
@@ -382,11 +393,30 @@
             this.DESCRIPTION.HeaderText = "Description";
             this.DESCRIPTION.Name = "DESCRIPTION";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(96, 82);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 106;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 85);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(32, 13);
+            this.label9.TabIndex = 107;
+            this.label9.Text = "Divisi";
+            // 
             // frmcosting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 460);
+            this.ClientSize = new System.Drawing.Size(843, 498);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dtGrid);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.txtCustomerDesc);
@@ -461,8 +491,11 @@
         private System.Windows.Forms.TextBox txtCustomerDesc;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dtGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Check;
         private System.Windows.Forms.DataGridViewTextBoxColumn COSTINGNO;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn DESCRIPTION;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label9;
     }
 }
