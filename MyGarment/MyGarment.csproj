@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B5DF2D11-FB3B-477C-BD5E-AC25D515ECC9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyGarment</RootNamespace>
+    <AssemblyName>MyGarment</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="1Global\Active.cs" />
+    <Compile Include="1Global\Connection.cs" />
+    <Compile Include="ClassMaster\mcategory.cs" />
+    <Compile Include="ClassMaster\mcategoryCRUD.cs" />
+    <Compile Include="ClassMaster\mcolor.cs" />
+    <Compile Include="ClassMaster\mcolorCRUD.cs" />
+    <Compile Include="ClassMaster\mcurrency.cs" />
+    <Compile Include="ClassMaster\mcurrencyCRUD.cs" />
+    <Compile Include="ClassMaster\mcustvend.cs" />
+    <Compile Include="ClassMaster\mcustvendCRUD.cs" />
+    <Compile Include="ClassMaster\mitems.cs" />
+    <Compile Include="ClassMaster\mitemscategory.cs" />
+    <Compile Include="ClassMaster\mitemscategoryCRUD.cs" />
+    <Compile Include="ClassMaster\mitemsCRUD.cs" />
+    <Compile Include="ClassMaster\mitemstype.cs" />
+    <Compile Include="ClassMaster\mitemstypeCRUD.cs" />
+    <Compile Include="ClassMaster\mrate.cs" />
+    <Compile Include="ClassMaster\mrateCRUD.cs" />
+    <Compile Include="ClassMaster\mstore.cs" />
+    <Compile Include="ClassMaster\mstoreCRUD.cs" />
+    <Compile Include="ClassMaster\mtermofpayment.cs" />
+    <Compile Include="ClassMaster\mtermofpaymentCRUD.cs" />
+    <Compile Include="ClassMaster\mtype.cs" />
+    <Compile Include="ClassMaster\mtypeCRUD.cs" />
+    <Compile Include="ClassMD\costing.cs" />
+    <Compile Include="ClassMD\costingCRUD.cs" />
+    <Compile Include="ClassMD\costingdetail.cs" />
+    <Compile Include="ClassMD\costingdetailCRUD.cs" />
+    <Compile Include="ViewMaster\mcurrency.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mcurrency.Designer.cs">
+      <DependentUpon>mcurrency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClassMaster\mcostCRUD.cs" />
+    <Compile Include="ClassMaster\muom.cs" />
+    <Compile Include="ClassMaster\muomCRUD.cs" />
+    <Compile Include="ViewMaster\mcategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mcategory.Designer.cs">
+      <DependentUpon>mcategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mcolor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mcolor.Designer.cs">
+      <DependentUpon>mcolor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mcolorSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mcolorSearch.Designer.cs">
+      <DependentUpon>mcolorSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mcost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mcost.Designer.cs">
+      <DependentUpon>mcost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClassMaster\mcost.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewMaster\mcurrencySearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mcurrencySearch.Designer.cs">
+      <DependentUpon>mcurrencySearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mcustvend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mcustvend.Designer.cs">
+      <DependentUpon>mcustvend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mcustvendorSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mcustvendorSearch.Designer.cs">
+      <DependentUpon>mcustvendorSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mitems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mitems.Designer.cs">
+      <DependentUpon>mitems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mitemscategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mitemscategory.Designer.cs">
+      <DependentUpon>mitemscategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mitemsSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mitemsSearch.Designer.cs">
+      <DependentUpon>mitemsSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mitemstype.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mitemstype.Designer.cs">
+      <DependentUpon>mitemstype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mitemscategorySearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mitemscategorySearch.Designer.cs">
+      <DependentUpon>mitemscategorySearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mitemstypeSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mitemstypeSearch.Designer.cs">
+      <DependentUpon>mitemstypeSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mrate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mrate.Designer.cs">
+      <DependentUpon>mrate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mrateSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mrateSearch.Designer.cs">
+      <DependentUpon>mrateSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mstore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mstore.Designer.cs">
+      <DependentUpon>mstore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mtermofpayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mtermofpayment.Designer.cs">
+      <DependentUpon>mtermofpayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mtype.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mtype.Designer.cs">
+      <DependentUpon>mtype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\mtypeSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mtypeSearch.Designer.cs">
+      <DependentUpon>mtypeSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\muom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\muom.Designer.cs">
+      <DependentUpon>muom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\termsofpaymentSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\termsofpaymentSearch.Designer.cs">
+      <DependentUpon>termsofpaymentSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMD\costing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMD\costing.Designer.cs">
+      <DependentUpon>costing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\GRN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\GRN.Designer.cs">
+      <DependentUpon>GRN.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mcategory.resx">
+      <DependentUpon>mcategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mcolor.resx">
+      <DependentUpon>mcolor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mcolorSearch.resx">
+      <DependentUpon>mcolorSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mcost.resx">
+      <DependentUpon>mcost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ViewMaster\mcurrency.resx">
+      <DependentUpon>mcurrency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mcurrencySearch.resx">
+      <DependentUpon>mcurrencySearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mcustvend.resx">
+      <DependentUpon>mcustvend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mcustvendorSearch.resx">
+      <DependentUpon>mcustvendorSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mitems.resx">
+      <DependentUpon>mitems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mitemscategory.resx">
+      <DependentUpon>mitemscategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mitemsSearch.resx">
+      <DependentUpon>mitemsSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mitemstype.resx">
+      <DependentUpon>mitemstype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mitemscategorySearch.resx">
+      <DependentUpon>mitemscategorySearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mitemstypeSearch.resx">
+      <DependentUpon>mitemstypeSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mrate.resx">
+      <DependentUpon>mrate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mrateSearch.resx">
+      <DependentUpon>mrateSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mstore.resx">
+      <DependentUpon>mstore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mtermofpayment.resx">
+      <DependentUpon>mtermofpayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mtype.resx">
+      <DependentUpon>mtype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mtypeSearch.resx">
+      <DependentUpon>mtypeSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\muom.resx">
+      <DependentUpon>muom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\termsofpaymentSearch.resx">
+      <DependentUpon>termsofpaymentSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMD\costing.resx">
+      <DependentUpon>costing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\GRN.resx">
+      <DependentUpon>GRN.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClassFinance\" />
+    <Folder Include="ViewFinance\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
