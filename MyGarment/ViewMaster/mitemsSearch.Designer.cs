@@ -233,6 +233,7 @@
             this.RecordTSB.Name = "RecordTSB";
             this.RecordTSB.Size = new System.Drawing.Size(53, 22);
             this.RecordTSB.Text = "Find";
+            this.RecordTSB.Click += new System.EventHandler(this.RecordTSB_Click);
             // 
             // TSTombol
             // 

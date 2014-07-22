@@ -12,7 +12,7 @@ namespace MyGarment.ClassMD
         public string GDIV{ get; set; }
         public string TYPEID{ get; set; }
         public string CATEGORYID{ get; set;}
-        public string STATUS{ get; set; }
+        public string STAT{ get; set; }
         public DateTime DATE{ get; set; }
         public string OFFICER{ get; set; }
         public string ITEMSID{ get; set; }

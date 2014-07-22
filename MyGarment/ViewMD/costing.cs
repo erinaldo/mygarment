@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MyGarment.ClassMD;
+using MyGarment.ViewMaster;
+using MyGarment.ViewSearch;
+using MyGarment.ClassMaster;
 
 namespace MyGarment.ViewMD
 {
     public partial class frmcosting : Form
     {
+        DataSet data = new mcostCRUD().getData();
         public frmcosting()
         {
             InitializeComponent();
@@ -26,7 +30,7 @@ namespace MyGarment.ViewMD
             K.QTYORDER = Convert.ToInt32(txtQty.Text);
             K.CATEGORYID = txtCategoryID.Text;
             K.CUSTVENDCODE = txtCustomerID.Text;
-            K.ITEMSID = txtItemsID.Text;
+            K.ITEMSID = txtStyleID.Text;
 
             if (new costingCRUD().insertData(K))
             {
@@ -65,5 +69,91 @@ namespace MyGarment.ViewMD
                 
             }
         }
+
+        private void RecordTSB_Click(object sender, EventArgs e)
+        {
+            costingSearch f =new costingSearch();
+            f.ShowDialog();
+           
+
+        }
+
+        private void cmdCategory_Click(object sender, EventArgs e)
+        {
+            frmmcategorySearch f= new frmmcategorySearch();
+            f.AddItemCallback = new frmmcategorySearch.AddCategoryDelegate(this.SetCategoryCallBack);
+            f.ShowDialog();
+        }
+        private void SetCategoryCallBack(string categoryID, string categoryDesc)
+        {
+            txtCategoryID.Text = categoryID;
+            txtCategoryDesc.Text = categoryDesc;
+
+        }
+
+        private void cmdStyle_Click(object sender, EventArgs e)
+        {
+            frmStyleSearch f = new frmStyleSearch();
+            f.AddItemCallback = new frmStyleSearch.AddStyleDelegate(this.SetStyleCallBack);
+            f.ShowDialog();
+        }
+
+        private void SetStyleCallBack(string StyleID, string StyleDesc)
+        {
+            txtStyleID.Text = StyleID;
+            txtStyleDesc.Text = StyleDesc;
+
+        }
+
+        private void cmdCustomer_Click(object sender, EventArgs e)
+        {
+            frmCustomerSearch f = new frmCustomerSearch();
+            f.AddItemCallback = new frmCustomerSearch.AddCustomerDelegate(this.SetStyleCallBack);
+            f.ShowDialog();
+
+        }
+        private void SetCustomerCallBack(string CustID, string CustDesc)
+        {
+            txtCustomerID.Text = CustID;
+            txtCustomerDesc.Text = CustDesc;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataSet data = new mcostCRUD().getData();
+            //data.geData();
+            //dtGrid.Rows[].Cells = data;
+            //DtGrid.DataMember = "tblmcost";
+           // DataGridViewComboBoxCell box = dtGrid.Rows[e.RowIndex].Cells[3] as DataGridViewComboBoxCell;
+           // box.DisplayMember="";
+           // box.ValueMember="";
+           // box.DataSource = data.Tables[0];
+        }
+
+        private void dtGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dtGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            DataGridViewComboBoxCell box = dtGrid.Rows[e.RowIndex].Cells[3] as DataGridViewComboBoxCell;
+            box.DisplayMember = "DESCRIPTION";
+            box.ValueMember = "COSTID";
+            box.DataSource = data.Tables[0];
+            /*
+            if (dtGrid.Rows[e.RowIndex].IsNewRow)
+            {
+                dtGrid.Rows[e.RowIndex].HeaderCell.Value = "Test "+ e.RowIndex;
+            }
+             * */
+        }
+
+        private void TutupTSB_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

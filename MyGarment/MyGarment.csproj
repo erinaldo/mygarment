@@ -76,6 +76,12 @@
     <Compile Include="ClassMD\costingCRUD.cs" />
     <Compile Include="ClassMD\costingdetail.cs" />
     <Compile Include="ClassMD\costingdetailCRUD.cs" />
+    <Compile Include="ViewMaster\mcategorySearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\mcategorySearch.Designer.cs">
+      <DependentUpon>mcategorySearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewMaster\mcurrency.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +232,24 @@
     <Compile Include="ViewMD\costing.Designer.cs">
       <DependentUpon>costing.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewMD\costingSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMD\costingSearch.Designer.cs">
+      <DependentUpon>costingSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSearch\frmCustomerSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewSearch\frmCustomerSearch.Designer.cs">
+      <DependentUpon>frmCustomerSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSearch\frmStyleSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewSearch\frmStyleSearch.Designer.cs">
+      <DependentUpon>frmStyleSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewStore\GRN.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMaster\mcategory.resx">
       <DependentUpon>mcategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\mcategorySearch.resx">
+      <DependentUpon>mcategorySearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMaster\mcolor.resx">
       <DependentUpon>mcolor.cs</DependentUpon>
@@ -313,6 +340,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMD\costing.resx">
       <DependentUpon>costing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMD\costingSearch.resx">
+      <DependentUpon>costingSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewSearch\frmCustomerSearch.resx">
+      <DependentUpon>frmCustomerSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewSearch\frmStyleSearch.resx">
+      <DependentUpon>frmStyleSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewStore\GRN.resx">
       <DependentUpon>GRN.cs</DependentUpon>

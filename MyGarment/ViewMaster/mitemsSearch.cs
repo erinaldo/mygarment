@@ -15,5 +15,10 @@ namespace MyGarment.ViewForm
         {
             InitializeComponent();
         }
+
+        private void RecordTSB_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

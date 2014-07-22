@@ -46,7 +46,7 @@
             this.txtCategoryID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtItemsID = new System.Windows.Forms.TextBox();
+            this.txtStyleID = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtQty = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -55,19 +55,30 @@
             this.label8 = new System.Windows.Forms.Label();
             this.cbTypeID = new System.Windows.Forms.ComboBox();
             this.cmdCategory = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.txtCatergoryDesc = new System.Windows.Forms.TextBox();
+            this.cmdStyle = new System.Windows.Forms.Button();
+            this.cmdCustomer = new System.Windows.Forms.Button();
+            this.txtCategoryDesc = new System.Windows.Forms.TextBox();
             this.txtStyleDesc = new System.Windows.Forms.TextBox();
             this.txtCustomerDesc = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.dtGrid = new System.Windows.Forms.DataGridView();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.Check = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.COSTINGNO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostType = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.DESCRIPTION = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.Widt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comsumption = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Uom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kurs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Allowance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TSTombol.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.Panel1.SuspendLayout();
@@ -110,6 +121,7 @@
             this.RecordTSB.Name = "RecordTSB";
             this.RecordTSB.Size = new System.Drawing.Size(53, 22);
             this.RecordTSB.Text = "Find";
+            this.RecordTSB.Click += new System.EventHandler(this.RecordTSB_Click);
             // 
             // SimpanTSB
             // 
@@ -128,6 +140,7 @@
             this.TutupTSB.Name = "TutupTSB";
             this.TutupTSB.Size = new System.Drawing.Size(61, 22);
             this.TutupTSB.Text = "Tutup";
+            this.TutupTSB.Click += new System.EventHandler(this.TutupTSB_Click);
             // 
             // TSTombol
             // 
@@ -145,7 +158,7 @@
             this.TSTombol.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TSTombol.Location = new System.Drawing.Point(0, 473);
             this.TSTombol.Name = "TSTombol";
-            this.TSTombol.Size = new System.Drawing.Size(843, 25);
+            this.TSTombol.Size = new System.Drawing.Size(970, 25);
             this.TSTombol.TabIndex = 83;
             // 
             // label4
@@ -178,7 +191,7 @@
             this.Panel1.Controls.Add(this.label4);
             this.Panel1.Location = new System.Drawing.Point(0, -2);
             this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(843, 38);
+            this.Panel1.Size = new System.Drawing.Size(970, 38);
             this.Panel1.TabIndex = 82;
             // 
             // label1
@@ -225,19 +238,19 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(433, 79);
+            this.label3.Location = new System.Drawing.Point(412, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 89;
             this.label3.Text = "Date";
             // 
-            // txtItemsID
+            // txtStyleID
             // 
-            this.txtItemsID.BackColor = System.Drawing.SystemColors.Info;
-            this.txtItemsID.Location = new System.Drawing.Point(96, 167);
-            this.txtItemsID.Name = "txtItemsID";
-            this.txtItemsID.Size = new System.Drawing.Size(72, 20);
-            this.txtItemsID.TabIndex = 90;
+            this.txtStyleID.BackColor = System.Drawing.SystemColors.Info;
+            this.txtStyleID.Location = new System.Drawing.Point(96, 167);
+            this.txtStyleID.Name = "txtStyleID";
+            this.txtStyleID.Size = new System.Drawing.Size(72, 20);
+            this.txtStyleID.TabIndex = 90;
             // 
             // label5
             // 
@@ -306,32 +319,35 @@
             this.cmdCategory.Size = new System.Drawing.Size(28, 23);
             this.cmdCategory.TabIndex = 98;
             this.cmdCategory.UseVisualStyleBackColor = true;
+            this.cmdCategory.Click += new System.EventHandler(this.cmdCategory_Click);
             // 
-            // button1
+            // cmdStyle
             // 
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(174, 167);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(28, 23);
-            this.button1.TabIndex = 99;
-            this.button1.UseVisualStyleBackColor = true;
+            this.cmdStyle.Image = ((System.Drawing.Image)(resources.GetObject("cmdStyle.Image")));
+            this.cmdStyle.Location = new System.Drawing.Point(174, 167);
+            this.cmdStyle.Name = "cmdStyle";
+            this.cmdStyle.Size = new System.Drawing.Size(28, 23);
+            this.cmdStyle.TabIndex = 99;
+            this.cmdStyle.UseVisualStyleBackColor = true;
+            this.cmdStyle.Click += new System.EventHandler(this.cmdStyle_Click);
             // 
-            // button2
+            // cmdCustomer
             // 
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(561, 50);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(28, 23);
-            this.button2.TabIndex = 100;
-            this.button2.UseVisualStyleBackColor = true;
+            this.cmdCustomer.Image = ((System.Drawing.Image)(resources.GetObject("cmdCustomer.Image")));
+            this.cmdCustomer.Location = new System.Drawing.Point(561, 50);
+            this.cmdCustomer.Name = "cmdCustomer";
+            this.cmdCustomer.Size = new System.Drawing.Size(28, 23);
+            this.cmdCustomer.TabIndex = 100;
+            this.cmdCustomer.UseVisualStyleBackColor = true;
+            this.cmdCustomer.Click += new System.EventHandler(this.cmdCustomer_Click);
             // 
-            // txtCatergoryDesc
+            // txtCategoryDesc
             // 
-            this.txtCatergoryDesc.BackColor = System.Drawing.SystemColors.Info;
-            this.txtCatergoryDesc.Location = new System.Drawing.Point(208, 141);
-            this.txtCatergoryDesc.Name = "txtCatergoryDesc";
-            this.txtCatergoryDesc.Size = new System.Drawing.Size(157, 20);
-            this.txtCatergoryDesc.TabIndex = 101;
+            this.txtCategoryDesc.BackColor = System.Drawing.SystemColors.Info;
+            this.txtCategoryDesc.Location = new System.Drawing.Point(208, 141);
+            this.txtCategoryDesc.Name = "txtCategoryDesc";
+            this.txtCategoryDesc.Size = new System.Drawing.Size(157, 20);
+            this.txtCategoryDesc.TabIndex = 101;
             // 
             // txtStyleDesc
             // 
@@ -350,7 +366,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(484, 156);
+            this.button3.Location = new System.Drawing.Point(677, 156);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 104;
@@ -365,33 +381,25 @@
             this.Check,
             this.COSTINGNO,
             this.ID,
-            this.DESCRIPTION});
+            this.CostType,
+            this.DESCRIPTION,
+            this.Widt,
+            this.Usage,
+            this.Comsumption,
+            this.Uom,
+            this.Price,
+            this.Amount,
+            this.Currency,
+            this.Kurs,
+            this.Allowance});
             this.dtGrid.Location = new System.Drawing.Point(12, 216);
             this.dtGrid.Name = "dtGrid";
-            this.dtGrid.Size = new System.Drawing.Size(819, 244);
+            this.dtGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dtGrid.RowHeadersWidth = 30;
+            this.dtGrid.Size = new System.Drawing.Size(946, 244);
             this.dtGrid.TabIndex = 105;
-            // 
-            // Check
-            // 
-            this.Check.HeaderText = "Check";
-            this.Check.Name = "Check";
-            this.Check.ReadOnly = true;
-            this.Check.Width = 50;
-            // 
-            // COSTINGNO
-            // 
-            this.COSTINGNO.HeaderText = "Costing No";
-            this.COSTINGNO.Name = "COSTINGNO";
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            // 
-            // DESCRIPTION
-            // 
-            this.DESCRIPTION.HeaderText = "Description";
-            this.DESCRIPTION.Name = "DESCRIPTION";
+            this.dtGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dtGrid_CellBeginEdit);
+            this.dtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellContentClick);
             // 
             // comboBox1
             // 
@@ -410,20 +418,118 @@
             this.label9.TabIndex = 107;
             this.label9.Text = "Divisi";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(514, 165);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 108;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // Check
+            // 
+            this.Check.HeaderText = "Check";
+            this.Check.Name = "Check";
+            this.Check.ReadOnly = true;
+            this.Check.Width = 40;
+            // 
+            // COSTINGNO
+            // 
+            this.COSTINGNO.HeaderText = "Costing No";
+            this.COSTINGNO.Name = "COSTINGNO";
+            this.COSTINGNO.Visible = false;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Width = 40;
+            // 
+            // CostType
+            // 
+            this.CostType.HeaderText = "Cost Type";
+            this.CostType.Name = "CostType";
+            this.CostType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.CostType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // DESCRIPTION
+            // 
+            this.DESCRIPTION.HeaderText = "Description";
+            this.DESCRIPTION.Name = "DESCRIPTION";
+            // 
+            // Widt
+            // 
+            this.Widt.HeaderText = "Width";
+            this.Widt.Name = "Widt";
+            // 
+            // Usage
+            // 
+            this.Usage.HeaderText = "Usage";
+            this.Usage.Name = "Usage";
+            // 
+            // Comsumption
+            // 
+            this.Comsumption.FillWeight = 50F;
+            this.Comsumption.HeaderText = "Consump";
+            this.Comsumption.Name = "Comsumption";
+            this.Comsumption.Width = 50;
+            // 
+            // Uom
+            // 
+            this.Uom.FillWeight = 50F;
+            this.Uom.HeaderText = "Uom";
+            this.Uom.Name = "Uom";
+            this.Uom.Width = 50;
+            // 
+            // Price
+            // 
+            this.Price.FillWeight = 50F;
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.Width = 50;
+            // 
+            // Amount
+            // 
+            this.Amount.HeaderText = "Amount";
+            this.Amount.Name = "Amount";
+            // 
+            // Currency
+            // 
+            this.Currency.FillWeight = 50F;
+            this.Currency.HeaderText = "Currency";
+            this.Currency.Name = "Currency";
+            this.Currency.Width = 50;
+            // 
+            // Kurs
+            // 
+            this.Kurs.FillWeight = 50F;
+            this.Kurs.HeaderText = "Kurs";
+            this.Kurs.Name = "Kurs";
+            this.Kurs.Width = 50;
+            // 
+            // Allowance
+            // 
+            this.Allowance.HeaderText = "Allowance";
+            this.Allowance.Name = "Allowance";
+            this.Allowance.Width = 50;
+            // 
             // frmcosting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 498);
+            this.ClientSize = new System.Drawing.Size(970, 498);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dtGrid);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.txtCustomerDesc);
             this.Controls.Add(this.txtStyleDesc);
-            this.Controls.Add(this.txtCatergoryDesc);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtCategoryDesc);
+            this.Controls.Add(this.cmdCustomer);
+            this.Controls.Add(this.cmdStyle);
             this.Controls.Add(this.cmdCategory);
             this.Controls.Add(this.cbTypeID);
             this.Controls.Add(this.label8);
@@ -432,7 +538,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtQty);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtItemsID);
+            this.Controls.Add(this.txtStyleID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtCategoryID);
@@ -475,7 +581,7 @@
         private System.Windows.Forms.TextBox txtCategoryID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtItemsID;
+        private System.Windows.Forms.TextBox txtStyleID;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtQty;
         private System.Windows.Forms.Label label6;
@@ -484,18 +590,29 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbTypeID;
         internal System.Windows.Forms.Button cmdCategory;
-        internal System.Windows.Forms.Button button1;
-        internal System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox txtCatergoryDesc;
+        internal System.Windows.Forms.Button cmdStyle;
+        internal System.Windows.Forms.Button cmdCustomer;
+        private System.Windows.Forms.TextBox txtCategoryDesc;
         private System.Windows.Forms.TextBox txtStyleDesc;
         private System.Windows.Forms.TextBox txtCustomerDesc;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dtGrid;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Check;
         private System.Windows.Forms.DataGridViewTextBoxColumn COSTINGNO;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewComboBoxColumn CostType;
         private System.Windows.Forms.DataGridViewTextBoxColumn DESCRIPTION;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Widt;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Usage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Comsumption;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Uom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Currency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Kurs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Allowance;
     }
 }
