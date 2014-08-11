@@ -30,5 +30,20 @@ namespace MyGarment.ViewMaster
         {
 
         }
+
+        private void DtGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void DtGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.DtGrid.Rows[e.RowIndex];
+                AddItemCallback(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString());
+                this.Close();
+            }
+        }
     }
 }

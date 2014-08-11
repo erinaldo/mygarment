@@ -36,6 +36,32 @@ namespace MyGarment.ClassMD
             return ds;
         }
 
+        public DataSet getData(string COSTINGNO)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT COSTINGNO,ID,COSTID,DESCRIPTION,WIDTH,USAG,CONSUMPTION,UOMID," +
+                                       "PRICE,AMOUNT,CURRENCY,KURS,ALLOWANCE,APPROVE,APPROVEDATE,APPROVEBY" +
+                                       " FROM tblcostingdetail WHERE COSTINGNO=@COSTINGNO";
+                strQuery.Parameters.AddWithValue("@COSTINGNO",COSTINGNO);
+                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblcostingdetail");
+                Conn.Putus();
+            }
+            catch
+            {
+            }
+            return ds;
+        }
+
+        
         public bool insertData(costingdetail k)
         {
             bool stat = false;
@@ -89,8 +115,8 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "UPDATE tblmcost SET @ID=ID,@COSTID=COSTID,@DESCRIPTION=DESCRIPTION,@WIDTH=WIDTH,@USAG=USAG,@CONSUMPTION=CONSUMPTION,@UOMID=UOMID," +
-                                       "@PRICE=PRICE,@AMOUNT=AMOUNT,@CURRENCY=CURRENCY,@KURS=KURS,@ALLOWANCE=ALLOWANCE,@APPROVE=APPROVE,@APPROVEDATE=APPROVEDATE,@APPROVEBY=APPROVEBY WHERE COSTINGNO=@COSTINGNO";
+                strQuery.CommandText = "UPDATE tblcostingdetail SET ID=@ID,COSTID=@COSTID,DESCRIPTION=@DESCRIPTION,WIDTH=@WIDTH,USAG=@USAG,CONSUMPTION=@CONSUMPTION,UOMID=@UOMID," +
+                                       "PRICE=@PRICE,AMOUNT=@AMOUNT,CURRENCY=@CURRENCY,KURS=@KURS,ALLOWANCE=@ALLOWANCE,APPROVE=@APPROVE,APPROVEDATE=@APPROVEDATE,APPROVEBY=@APPROVEBY WHERE COSTINGNO=@COSTINGNO";
                 strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);
                 strQuery.Parameters.AddWithValue("@ID", k.ID);
                 strQuery.Parameters.AddWithValue("@COSTID", k.COSTID);

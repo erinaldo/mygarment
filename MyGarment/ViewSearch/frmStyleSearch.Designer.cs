@@ -180,6 +180,8 @@
             this.DtGrid.ReadOnly = true;
             this.DtGrid.Size = new System.Drawing.Size(475, 181);
             this.DtGrid.TabIndex = 71;
+            this.DtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellContentClick);
+            this.DtGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellDoubleClick);
             // 
             // frmStyleSearch
             // 
@@ -192,6 +194,7 @@
             this.Controls.Add(this.DtGrid);
             this.Name = "frmStyleSearch";
             this.Text = "frmStyleSearch";
+            this.Load += new System.EventHandler(this.frmStyleSearch_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.Panel1.ResumeLayout(false);

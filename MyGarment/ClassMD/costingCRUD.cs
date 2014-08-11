@@ -37,6 +37,34 @@ namespace MyGarment.ClassMD
             return ds;
         }
 
+        public DataSet getData(string COSTINGNO)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT COSTINGNO,QTYORDER,GDIV,TYPEID,CATEGORYID,STAT,DATE,OFFICER," +
+                        "ITEMSID,CUSTVENDCODE,APPROVE,APPROVEDATE,APPROVEBY,COGS,MARGIN,MARGINVALUE,NETTPRICE," +
+                        "DISCOUNT,DISCOUNTVALUE,PPN,PPNVALUE,SELLINGPRICE,KURS,VALUEIN,REVISE,REVISEDATE,REVISEBY" +
+                        " FROM tblcosting WHERE COSTINGNO LIKE @COSTINGNO";
+                strQuery.Parameters.AddWithValue("@COSTINGNO", "%" + COSTINGNO + "%");
+                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblcosting");
+                Conn.Putus();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ds;
+        }
+
         public DataSet getData(string COSTINGNO, string TYPEID, string STAT, string OFFICER, string CUSTVENDCODE, int APPROVE)
         {
             DataSet ds = null;
@@ -51,8 +79,8 @@ namespace MyGarment.ClassMD
                 strQuery.CommandText = "SELECT COSTINGNO,QTYORDER,GDIV,TYPEID,CATEGORYID,STAT,DATE,OFFICER," +
                         "ITEMSID,CUSTVENDCODE,APPROVE,APPROVEDATE,APPROVEBY,COGS,MARGIN,MARGINVALUE,NETTPRICE," +
                         "DISCOUNT,DISCOUNTVALUE,PPN,PPNVALUE,SELLINGPRICE,KURS,VALUEIN,REVISE,REVISEDATE,REVISEBY" +
-                        " FROM tblcosting WHERE COSTINGNO LIKE @COSTINGNO AND TYPEID LIKE @TYPEID AND STAT LIKE @STAT "+
-                        "AND OFFICER LIKE @OFFICER AND CUSTVENDCODE LIKE @CUSTVENDCODE AND APPROVE LIKE @APPROVE";
+                        " FROM tblcosting WHERE COSTINGNO LIKE @COSTINGNO AND TYPEID LIKE @TYPEID AND IFNULL(STAT,1) LIKE @STAT " +
+                        "AND IFNULL(OFFICER,1) LIKE @OFFICER AND CUSTVENDCODE LIKE @CUSTVENDCODE AND APPROVE LIKE @APPROVE";
                 strQuery.Parameters.AddWithValue("@COSTINGNO", "%" + COSTINGNO + "%");
                 strQuery.Parameters.AddWithValue("@TYPEID", "%" + TYPEID + "%");
                 strQuery.Parameters.AddWithValue("@STAT", "%" + STAT + "%");
@@ -132,10 +160,10 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "UPDATE tblmcost SET QTYORDER=@QTYORDER,GDIV=@GDIV,TYPEID=@TYPEID,CATEGORYID=@CATEGORYID,STAT=@STAT,DATE=@DATE,OFFICER=@OFFICER," +
+                strQuery.CommandText = "UPDATE tblcosting SET QTYORDER=@QTYORDER,GDIV=@GDIV,TYPEID=@TYPEID,CATEGORYID=@CATEGORYID,STAT=@STAT,DATE=@DATE,OFFICER=@OFFICER," +
                         "ITEMSID=@ITEMSID,CUSTVENDCODE=@CUSTVENDCODE,APPROVE=@APPROVE,APPROVEDATE=@APPROVEDATE,APPROVEBY=@APPROVEBY,COGS=@COGS,MARGIN=@MARGIN,MARGINVALUE=@MARGINVALUE,NETTPRICE=@NETTPRICE," +
                         "DISCOUNT=@DISCOUNT,DISCOUNTVALUE=@DISCOUNTVALUE,PPN=@PPN,PPNVALUE=@PPNVALUE,SELLINGPRICE=@SELLINGPRICE,KURS=@KURS,VALUEIN=@VALUEIN,REVISE=@REVISE,REVISEDATE=@REVISEDATE,REVISEBY=@REVISEBY" +
-                        "WHERE COSTINGNO=@COSTINGNO";
+                        " WHERE COSTINGNO=@COSTINGNO";
                 strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);
                 strQuery.Parameters.AddWithValue("@QTYORDER", k.QTYORDER);
                 strQuery.Parameters.AddWithValue("@GDIV", k.GDIV);
@@ -169,9 +197,10 @@ namespace MyGarment.ClassMD
                 stat = true;
 
             }
-            catch
+            catch(Exception ex)
             {
-            }
+                MessageBox.Show(ex.Message);
+            } 
             return stat;
         }
         public bool deleteData(string costID)
@@ -184,7 +213,7 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "DELETE FROM tblmcosting WHERE COSTINGNO = @CostID";
+                strQuery.CommandText = "DELETE FROM tblcosting WHERE COSTINGNO = @CostID";
                 strQuery.Parameters.AddWithValue("@CostID", costID);
                 strQuery.ExecuteNonQuery();
                 stat = true;

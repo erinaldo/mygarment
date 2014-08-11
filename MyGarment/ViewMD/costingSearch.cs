@@ -10,9 +10,12 @@ using MyGarment.ClassMD;
 
 namespace MyGarment.ViewMD
 {
-    public partial class costingSearch : Form
+    public partial class frmcostingSearch : Form
     {
-        public costingSearch()
+        public delegate void AddCostingDelegate(string itemID);
+        public AddCostingDelegate AddItemCallback;
+
+        public frmcostingSearch()
         {
             InitializeComponent();
         }
@@ -27,6 +30,43 @@ namespace MyGarment.ViewMD
         private void TutupTSB_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+ 
+
+        private void frmcostingSearch_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DtGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void DtGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.DtGrid.Rows[e.RowIndex];
+                AddItemCallback(row.Cells[0].Value.ToString());
+                this.Close();
+            }
+        }
+
+        private void DtGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void DtGrid_Enter(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void DtGrid_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+     
         }
     }
 }

@@ -29,7 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmcosting));
-            this.BatalTSB = new System.Windows.Forms.ToolStripButton();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.HapusTSB = new System.Windows.Forms.ToolStripButton();
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.UbahTSB = new System.Windows.Forms.ToolStripButton();
@@ -60,38 +64,28 @@
             this.txtCategoryDesc = new System.Windows.Forms.TextBox();
             this.txtStyleDesc = new System.Windows.Forms.TextBox();
             this.txtCustomerDesc = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.dtGrid = new System.Windows.Forms.DataGridView();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbDIV = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.Check = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.COSTINGNO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CostType = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.DESCRIPTION = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Widt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Usage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comsumption = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Uom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kurs = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Allowance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.hCostingNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hCostType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.hDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hUsage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hConsumption = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hUom = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.hPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hCurrency = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.hKurs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hAllowance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TSTombol.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGrid)).BeginInit();
             this.SuspendLayout();
-            // 
-            // BatalTSB
-            // 
-            this.BatalTSB.Image = ((System.Drawing.Image)(resources.GetObject("BatalTSB.Image")));
-            this.BatalTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BatalTSB.Name = "BatalTSB";
-            this.BatalTSB.Size = new System.Drawing.Size(56, 22);
-            this.BatalTSB.Text = "Batal";
             // 
             // HapusTSB
             // 
@@ -113,6 +107,7 @@
             this.UbahTSB.Name = "UbahTSB";
             this.UbahTSB.Size = new System.Drawing.Size(56, 22);
             this.UbahTSB.Text = "Ubah";
+            this.UbahTSB.Click += new System.EventHandler(this.UbahTSB_Click);
             // 
             // RecordTSB
             // 
@@ -151,10 +146,10 @@
             this.SimpanTSB,
             this.UbahTSB,
             this.HapusTSB,
-            this.BatalTSB,
             this.ToolStripSeparator1,
             this.RecordTSB,
-            this.TutupTSB});
+            this.TutupTSB,
+            this.toolStripButton1});
             this.TSTombol.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TSTombol.Location = new System.Drawing.Point(0, 473);
             this.TSTombol.Name = "TSTombol";
@@ -267,6 +262,7 @@
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(100, 20);
             this.txtQty.TabIndex = 92;
+            this.txtQty.Text = "0";
             // 
             // label6
             // 
@@ -308,7 +304,7 @@
             this.cbTypeID.FormattingEnabled = true;
             this.cbTypeID.Location = new System.Drawing.Point(96, 109);
             this.cbTypeID.Name = "cbTypeID";
-            this.cbTypeID.Size = new System.Drawing.Size(100, 21);
+            this.cbTypeID.Size = new System.Drawing.Size(184, 21);
             this.cbTypeID.TabIndex = 97;
             // 
             // cmdCategory
@@ -364,50 +360,40 @@
             this.txtCustomerDesc.Size = new System.Drawing.Size(185, 20);
             this.txtCustomerDesc.TabIndex = 103;
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(677, 156);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 104;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // dtGrid
             // 
             this.dtGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Check,
-            this.COSTINGNO,
-            this.ID,
-            this.CostType,
-            this.DESCRIPTION,
-            this.Widt,
-            this.Usage,
-            this.Comsumption,
-            this.Uom,
-            this.Price,
-            this.Amount,
-            this.Currency,
-            this.Kurs,
-            this.Allowance});
+            this.hCostingNo,
+            this.hID,
+            this.hCostType,
+            this.hDescription,
+            this.hWidth,
+            this.hUsage,
+            this.hConsumption,
+            this.hUom,
+            this.hPrice,
+            this.hAmount,
+            this.hCurrency,
+            this.hKurs,
+            this.hAllowance});
             this.dtGrid.Location = new System.Drawing.Point(12, 216);
             this.dtGrid.Name = "dtGrid";
             this.dtGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dtGrid.RowHeadersWidth = 30;
+            this.dtGrid.RowHeadersWidth = 50;
             this.dtGrid.Size = new System.Drawing.Size(946, 244);
             this.dtGrid.TabIndex = 105;
             this.dtGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dtGrid_CellBeginEdit);
             this.dtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellContentClick);
+            this.dtGrid.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dtGrid_CellValidating);
             // 
-            // comboBox1
+            // cbDIV
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(96, 82);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 106;
+            this.cbDIV.FormattingEnabled = true;
+            this.cbDIV.Location = new System.Drawing.Point(96, 82);
+            this.cbDIV.Name = "cbDIV";
+            this.cbDIV.Size = new System.Drawing.Size(184, 21);
+            this.cbDIV.TabIndex = 106;
             // 
             // label9
             // 
@@ -418,113 +404,124 @@
             this.label9.TabIndex = 107;
             this.label9.Text = "Divisi";
             // 
-            // button1
+            // toolStripButton1
             // 
-            this.button1.Location = new System.Drawing.Point(514, 165);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 108;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
             // 
-            // Check
+            // hCostingNo
             // 
-            this.Check.HeaderText = "Check";
-            this.Check.Name = "Check";
-            this.Check.ReadOnly = true;
-            this.Check.Width = 40;
+            this.hCostingNo.HeaderText = "Costing No";
+            this.hCostingNo.Name = "hCostingNo";
+            this.hCostingNo.Visible = false;
             // 
-            // COSTINGNO
+            // hID
             // 
-            this.COSTINGNO.HeaderText = "Costing No";
-            this.COSTINGNO.Name = "COSTINGNO";
-            this.COSTINGNO.Visible = false;
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = null;
+            this.hID.DefaultCellStyle = dataGridViewCellStyle11;
+            this.hID.HeaderText = "ID";
+            this.hID.Name = "hID";
+            this.hID.Visible = false;
+            this.hID.Width = 40;
             // 
-            // ID
+            // hCostType
             // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Width = 40;
+            this.hCostType.HeaderText = "Cost Type";
+            this.hCostType.Name = "hCostType";
+            this.hCostType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.hCostType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // CostType
+            // hDescription
             // 
-            this.CostType.HeaderText = "Cost Type";
-            this.CostType.Name = "CostType";
-            this.CostType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.CostType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.hDescription.HeaderText = "Description";
+            this.hDescription.Name = "hDescription";
             // 
-            // DESCRIPTION
+            // hWidth
             // 
-            this.DESCRIPTION.HeaderText = "Description";
-            this.DESCRIPTION.Name = "DESCRIPTION";
+            this.hWidth.HeaderText = "Width";
+            this.hWidth.Name = "hWidth";
             // 
-            // Widt
+            // hUsage
             // 
-            this.Widt.HeaderText = "Width";
-            this.Widt.Name = "Widt";
+            this.hUsage.HeaderText = "Usage";
+            this.hUsage.Name = "hUsage";
             // 
-            // Usage
+            // hConsumption
             // 
-            this.Usage.HeaderText = "Usage";
-            this.Usage.Name = "Usage";
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.hConsumption.DefaultCellStyle = dataGridViewCellStyle12;
+            this.hConsumption.FillWeight = 50F;
+            this.hConsumption.HeaderText = "Consump";
+            this.hConsumption.Name = "hConsumption";
+            this.hConsumption.Width = 50;
             // 
-            // Comsumption
+            // hUom
             // 
-            this.Comsumption.FillWeight = 50F;
-            this.Comsumption.HeaderText = "Consump";
-            this.Comsumption.Name = "Comsumption";
-            this.Comsumption.Width = 50;
+            this.hUom.FillWeight = 50F;
+            this.hUom.HeaderText = "Uom";
+            this.hUom.Name = "hUom";
+            this.hUom.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.hUom.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.hUom.Width = 50;
             // 
-            // Uom
+            // hPrice
             // 
-            this.Uom.FillWeight = 50F;
-            this.Uom.HeaderText = "Uom";
-            this.Uom.Name = "Uom";
-            this.Uom.Width = 50;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.hPrice.DefaultCellStyle = dataGridViewCellStyle13;
+            this.hPrice.FillWeight = 50F;
+            this.hPrice.HeaderText = "Price";
+            this.hPrice.Name = "hPrice";
+            this.hPrice.Width = 50;
             // 
-            // Price
+            // hAmount
             // 
-            this.Price.FillWeight = 50F;
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.Width = 50;
+            dataGridViewCellStyle14.Format = "N2";
+            dataGridViewCellStyle14.NullValue = null;
+            this.hAmount.DefaultCellStyle = dataGridViewCellStyle14;
+            this.hAmount.HeaderText = "Amount";
+            this.hAmount.Name = "hAmount";
             // 
-            // Amount
+            // hCurrency
             // 
-            this.Amount.HeaderText = "Amount";
-            this.Amount.Name = "Amount";
+            this.hCurrency.FillWeight = 50F;
+            this.hCurrency.HeaderText = "Currency";
+            this.hCurrency.Name = "hCurrency";
+            this.hCurrency.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.hCurrency.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.hCurrency.Width = 50;
             // 
-            // Currency
+            // hKurs
             // 
-            this.Currency.FillWeight = 50F;
-            this.Currency.HeaderText = "Currency";
-            this.Currency.Name = "Currency";
-            this.Currency.Width = 50;
+            dataGridViewCellStyle15.Format = "N2";
+            dataGridViewCellStyle15.NullValue = null;
+            this.hKurs.DefaultCellStyle = dataGridViewCellStyle15;
+            this.hKurs.FillWeight = 50F;
+            this.hKurs.HeaderText = "Kurs";
+            this.hKurs.Name = "hKurs";
+            this.hKurs.Width = 50;
             // 
-            // Kurs
+            // hAllowance
             // 
-            this.Kurs.FillWeight = 50F;
-            this.Kurs.HeaderText = "Kurs";
-            this.Kurs.Name = "Kurs";
-            this.Kurs.Width = 50;
-            // 
-            // Allowance
-            // 
-            this.Allowance.HeaderText = "Allowance";
-            this.Allowance.Name = "Allowance";
-            this.Allowance.Width = 50;
+            this.hAllowance.HeaderText = "Allow (%)";
+            this.hAllowance.Name = "hAllowance";
+            this.hAllowance.Width = 50;
             // 
             // frmcosting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(970, 498);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbDIV);
             this.Controls.Add(this.dtGrid);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.txtCustomerDesc);
             this.Controls.Add(this.txtStyleDesc);
             this.Controls.Add(this.txtCategoryDesc);
@@ -564,7 +561,6 @@
 
         #endregion
 
-        internal System.Windows.Forms.ToolStripButton BatalTSB;
         internal System.Windows.Forms.ToolStripButton HapusTSB;
         internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
         internal System.Windows.Forms.ToolStripButton UbahTSB;
@@ -595,24 +591,22 @@
         private System.Windows.Forms.TextBox txtCategoryDesc;
         private System.Windows.Forms.TextBox txtStyleDesc;
         private System.Windows.Forms.TextBox txtCustomerDesc;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dtGrid;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbDIV;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Check;
-        private System.Windows.Forms.DataGridViewTextBoxColumn COSTINGNO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewComboBoxColumn CostType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DESCRIPTION;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Widt;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Usage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Comsumption;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Uom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Currency;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Kurs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Allowance;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hCostingNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hID;
+        private System.Windows.Forms.DataGridViewComboBoxColumn hCostType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hDescription;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hWidth;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hUsage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hConsumption;
+        private System.Windows.Forms.DataGridViewComboBoxColumn hUom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hAmount;
+        private System.Windows.Forms.DataGridViewComboBoxColumn hCurrency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hKurs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hAllowance;
     }
 }

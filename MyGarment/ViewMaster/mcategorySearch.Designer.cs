@@ -141,6 +141,8 @@
             this.DtGrid.ReadOnly = true;
             this.DtGrid.Size = new System.Drawing.Size(475, 147);
             this.DtGrid.TabIndex = 73;
+            this.DtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellContentClick);
+            this.DtGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellDoubleClick);
             // 
             // PictureBox1
             // 

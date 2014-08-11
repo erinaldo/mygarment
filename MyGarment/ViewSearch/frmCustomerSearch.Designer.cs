@@ -110,6 +110,7 @@
             this.RecordTSB.Name = "RecordTSB";
             this.RecordTSB.Size = new System.Drawing.Size(53, 22);
             this.RecordTSB.Text = "Find";
+            this.RecordTSB.Click += new System.EventHandler(this.RecordTSB_Click);
             // 
             // Label3
             // 
@@ -179,6 +180,8 @@
             this.DtGrid.ReadOnly = true;
             this.DtGrid.Size = new System.Drawing.Size(475, 181);
             this.DtGrid.TabIndex = 75;
+            this.DtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellContentClick);
+            this.DtGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellDoubleClick);
             // 
             // frmCustomerSearch
             // 

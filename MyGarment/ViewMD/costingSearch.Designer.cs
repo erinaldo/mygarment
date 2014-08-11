@@ -1,6 +1,6 @@
 ﻿namespace MyGarment.ViewMD
 {
-    partial class costingSearch
+    partial class frmcostingSearch
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(costingSearch));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmcostingSearch));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtCustomer = new System.Windows.Forms.TextBox();
+            this.cbApprove = new System.Windows.Forms.ComboBox();
+            this.txtOfficer = new System.Windows.Forms.TextBox();
+            this.txtStatus = new System.Windows.Forms.TextBox();
             this.txtCostingNo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,12 +47,6 @@
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.RecordTSB = new System.Windows.Forms.ToolStripButton();
             this.DtGrid = new System.Windows.Forms.DataGridView();
-            this.txtActive = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtStatus = new System.Windows.Forms.TextBox();
-            this.txtOfficer = new System.Windows.Forms.TextBox();
-            this.cbApprove = new System.Windows.Forms.ComboBox();
-            this.txtCustomer = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
@@ -62,8 +60,6 @@
             this.panel2.Controls.Add(this.cbApprove);
             this.panel2.Controls.Add(this.txtOfficer);
             this.panel2.Controls.Add(this.txtStatus);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.txtActive);
             this.panel2.Controls.Add(this.txtCostingNo);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label5);
@@ -72,6 +68,39 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(675, 100);
             this.panel2.TabIndex = 73;
+            // 
+            // txtCustomer
+            // 
+            this.txtCustomer.Location = new System.Drawing.Point(477, 10);
+            this.txtCustomer.Name = "txtCustomer";
+            this.txtCustomer.Size = new System.Drawing.Size(164, 20);
+            this.txtCustomer.TabIndex = 78;
+            // 
+            // cbApprove
+            // 
+            this.cbApprove.FormattingEnabled = true;
+            this.cbApprove.Items.AddRange(new object[] {
+            "1",
+            "0"});
+            this.cbApprove.Location = new System.Drawing.Point(292, 62);
+            this.cbApprove.Name = "cbApprove";
+            this.cbApprove.Size = new System.Drawing.Size(46, 21);
+            this.cbApprove.TabIndex = 77;
+            this.cbApprove.Text = "0";
+            // 
+            // txtOfficer
+            // 
+            this.txtOfficer.Location = new System.Drawing.Point(292, 36);
+            this.txtOfficer.Name = "txtOfficer";
+            this.txtOfficer.Size = new System.Drawing.Size(164, 20);
+            this.txtOfficer.TabIndex = 76;
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(292, 10);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(164, 20);
+            this.txtStatus.TabIndex = 75;
             // 
             // txtCostingNo
             // 
@@ -199,62 +228,12 @@
             this.DtGrid.ReadOnly = true;
             this.DtGrid.Size = new System.Drawing.Size(675, 181);
             this.DtGrid.TabIndex = 71;
+            this.DtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellContentClick);
+            this.DtGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellDoubleClick);
+            this.DtGrid.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellEnter);
+            this.DtGrid.Enter += new System.EventHandler(this.DtGrid_Enter);
             // 
-            // txtActive
-            // 
-            this.txtActive.FormattingEnabled = true;
-            this.txtActive.Items.AddRange(new object[] {
-            "1",
-            "0"});
-            this.txtActive.Location = new System.Drawing.Point(87, 65);
-            this.txtActive.Name = "txtActive";
-            this.txtActive.Size = new System.Drawing.Size(46, 21);
-            this.txtActive.TabIndex = 73;
-            this.txtActive.Text = "1";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 68);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 13);
-            this.label1.TabIndex = 74;
-            this.label1.Text = "Costing No";
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.Location = new System.Drawing.Point(292, 10);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(164, 20);
-            this.txtStatus.TabIndex = 75;
-            // 
-            // txtOfficer
-            // 
-            this.txtOfficer.Location = new System.Drawing.Point(292, 36);
-            this.txtOfficer.Name = "txtOfficer";
-            this.txtOfficer.Size = new System.Drawing.Size(164, 20);
-            this.txtOfficer.TabIndex = 76;
-            // 
-            // cbApprove
-            // 
-            this.cbApprove.FormattingEnabled = true;
-            this.cbApprove.Items.AddRange(new object[] {
-            "1",
-            "0"});
-            this.cbApprove.Location = new System.Drawing.Point(292, 62);
-            this.cbApprove.Name = "cbApprove";
-            this.cbApprove.Size = new System.Drawing.Size(46, 21);
-            this.cbApprove.TabIndex = 77;
-            this.cbApprove.Text = "1";
-            // 
-            // txtCustomer
-            // 
-            this.txtCustomer.Location = new System.Drawing.Point(477, 10);
-            this.txtCustomer.Name = "txtCustomer";
-            this.txtCustomer.Size = new System.Drawing.Size(164, 20);
-            this.txtCustomer.TabIndex = 78;
-            // 
-            // costingSearch
+            // frmcostingSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -263,8 +242,9 @@
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.TSTombol);
             this.Controls.Add(this.DtGrid);
-            this.Name = "costingSearch";
+            this.Name = "frmcostingSearch";
             this.Text = "costingSearch";
+            this.Load += new System.EventHandler(this.frmcostingSearch_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.Panel1.ResumeLayout(false);
@@ -294,8 +274,6 @@
         private System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
         private System.Windows.Forms.ToolStripButton RecordTSB;
         private System.Windows.Forms.DataGridView DtGrid;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox txtActive;
         private System.Windows.Forms.TextBox txtOfficer;
         private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.ComboBox cbApprove;

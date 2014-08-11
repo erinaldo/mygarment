@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="1Global\Active.cs" />
     <Compile Include="1Global\Connection.cs" />
+    <Compile Include="1Global\Generate.cs" />
     <Compile Include="ClassMaster\mcategory.cs" />
     <Compile Include="ClassMaster\mcategoryCRUD.cs" />
     <Compile Include="ClassMaster\mcolor.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="ClassMaster\mcurrencyCRUD.cs" />
     <Compile Include="ClassMaster\mcustvend.cs" />
     <Compile Include="ClassMaster\mcustvendCRUD.cs" />
+    <Compile Include="ClassMaster\mdiv.cs" />
+    <Compile Include="ClassMaster\mdivCRUD.cs" />
     <Compile Include="ClassMaster\mitems.cs" />
     <Compile Include="ClassMaster\mitemscategory.cs" />
     <Compile Include="ClassMaster\mitemscategoryCRUD.cs" />
