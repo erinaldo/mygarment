@@ -24,7 +24,7 @@ namespace MyGarment.ClassMaster
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT ITEMSID,DESCRIPTION,ITEMSTYPEID,TYPE,ACTIVE from tblmitems";
+                strQuery.CommandText = "SELECT ITEMSID,DESCRIPTION,ITEMSTYPEID,TYPE,ACTIVE,IMAGE,PATH from tblmitems";
                 MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
                 data.Fill(ds, "tblmitems");
                 Conn.Putus();
@@ -49,7 +49,7 @@ namespace MyGarment.ClassMaster
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT ITEMSID,DESCRIPTION,ITEMSTYPEID,TYPE,ACTIVE FROM tblmitems WHERE ITEMSID LIKE @ItemsID AND DESCRIPTION LIKE @Description AND ITEMSTYPEID LIKE @ItemsTypeID AND TYPE LIKE @Type";
+                strQuery.CommandText = "SELECT ITEMSID,DESCRIPTION,ITEMSTYPEID,TYPE,ACTIVE,IMAGE,PATH FROM tblmitems WHERE ITEMSID LIKE @ItemsID AND DESCRIPTION LIKE @Description AND ITEMSTYPEID LIKE @ItemsTypeID AND TYPE LIKE @Type";
                 strQuery.Parameters.AddWithValue("@ItemsID","%"+ ItemsID+"%");
                 strQuery.Parameters.AddWithValue("@Description","%"+Description+"%");
                 strQuery.Parameters.AddWithValue("@ItemsTypeID","%"+ ItemsTypeID+"%");
@@ -76,12 +76,14 @@ namespace MyGarment.ClassMaster
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "INSERT INTO tblmitems VALUES(@ItemsID,@Description,@ItemsTypeID,@Type,@Active)";
+                strQuery.CommandText = "INSERT INTO tblmitems VALUES(@ItemsID,@Description,@ItemsTypeID,@Type,@Active,@Image,@Path)";
                 strQuery.Parameters.AddWithValue("@ItemsID", k.ItemsID);
                 strQuery.Parameters.AddWithValue("@Description", k.Description);
                 strQuery.Parameters.AddWithValue("@ItemsTypeID", k.ItemsTypeID);
                 strQuery.Parameters.AddWithValue("@Type", k.Type);
                 strQuery.Parameters.AddWithValue("@Active", k.Active);
+                strQuery.Parameters.AddWithValue("@Image", k.Image);
+                strQuery.Parameters.AddWithValue("@Path", k.Path);
 
                 strQuery.ExecuteNonQuery();
                 stat = true;
@@ -103,12 +105,14 @@ namespace MyGarment.ClassMaster
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "UPDATE tblmitems SET DESCRIPTION=@Description,ITEMSTYPEID=@ItemsTypeID,TYPE=@Type,ACTIVE=@Active WHERE ITEMSID=@ITEMSID";
+                strQuery.CommandText = "UPDATE tblmitems SET DESCRIPTION=@Description,ITEMSTYPEID=@ItemsTypeID,TYPE=@Type,ACTIVE=@Active,IMAGE=@Image,PATH=@Path WHERE ITEMSID=@ITEMSID";
                 strQuery.Parameters.AddWithValue("@ITEMSID", k.ItemsID);
                 strQuery.Parameters.AddWithValue("@Description", k.Description);
                 strQuery.Parameters.AddWithValue("@ItemsTypeID", k.ItemsTypeID);
                 strQuery.Parameters.AddWithValue("@Type", k.Type);
                 strQuery.Parameters.AddWithValue("@Active", k.Active);
+                strQuery.Parameters.AddWithValue("@Image", k.Image);
+                strQuery.Parameters.AddWithValue("@Path", k.Path);
                 strQuery.ExecuteNonQuery();
                 ConnG.Putus();
                 stat = true;

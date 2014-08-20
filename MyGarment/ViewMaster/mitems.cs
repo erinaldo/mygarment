@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MyGarment.ClassMaster;
+using System.IO;
+//using System.Drawing;
 
 namespace MyGarment.ViewForm
 {
@@ -43,11 +45,20 @@ namespace MyGarment.ViewForm
         private void SimpanTSB_Click(object sender, EventArgs e)
         {
             mitems K = new mitems();
+            
+            FileStream fs;
+            BinaryReader br;
+            fs = new FileStream(txtPath.Text, FileMode.Open, FileAccess.Read);
+            br = new BinaryReader(fs);
+
             K.ItemsID = txtItemsID.Text;
             K.Description = txtDescription.Text;
             K.ItemsTypeID = txtItemsTypeID.Text;
             K.Type = txtType.Text;
             K.Active = Convert.ToInt32(txtActive.Text);
+            K.Active = Convert.ToInt32(txtActive.Text);
+            K.Path = txtPath.Text;
+            K.Image = br.ReadBytes((int)fs.Length);
 
             if (new mitemsCRUD().insertData(K))
             {
@@ -63,12 +74,17 @@ namespace MyGarment.ViewForm
         private void UbahTSB_Click(object sender, EventArgs e)
         {
             mitems k = new mitems();
-
+            FileStream fs;
+            BinaryReader br;
+            fs = new FileStream(txtPath.Text, FileMode.Open, FileAccess.Read);
+            br = new BinaryReader(fs);
             k.ItemsID = txtItemsID.Text;
             k.Description = txtDescription.Text;
             k.ItemsTypeID = txtItemsTypeDesc.Text;
             k.Type = txtType.Text;
             k.Active = Convert.ToInt32(txtActive.Text);
+            k.Path = txtPath.Text;
+            k.Image = br.ReadBytes((int)fs.Length);
 
             if (new mitemsCRUD().updateData(k))
             {
@@ -137,10 +153,60 @@ namespace MyGarment.ViewForm
                 txtItemsTypeID.Text = row.Cells[2].Value.ToString();
                 txtType.Text = row.Cells[3].Value.ToString();
                 txtActive.Text= row.Cells[4].Value.ToString();
+                if (row.Cells[5].Value.ToString() != string.Empty)
+                {
+                    var data = (Byte[])(row.Cells[5].Value);
+                    var stream = new MemoryStream(data);
+                    picItems.Image = Image.FromStream(stream);
+                }
+                else
+                {
+                    picItems.Image = null;
+                }
+                //picItems.Image = GetDataToImage((byte[])(row.Cells[5].Value));
+
+                txtPath.Text = row.Cells[6].Value.ToString();
 
 
 
             }
+        }
+
+
+        public Image GetDataToImage(byte[] pData)
+        {
+            try
+            {
+                ImageConverter imgConverter = new ImageConverter();
+                return imgConverter.ConvertFrom(pData) as Image;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+        private void cmdImage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.Filter = "Image files | *.jpg";
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    txtPath.Text = openFileDialog1.FileName;
+                    picItems.Image = Image.FromFile(openFileDialog1.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DtGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
    

@@ -12,6 +12,45 @@ namespace MyGarment.ClassMD
     {
         private MySql.Data.MySqlClient.MySqlCommand strQuery = null;
 
+        public DataSet prCosting(string COSTINGNO)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                /*
+                strQuery.CommandText = "SELECT * FROM tblcosting " +
+                        "INNER JOIN tblcostingdetail ON tblcosting.COSTINGNO=tblcostingdetail.COSTINGNO" +
+                        " WHERE tblcosting.COSTINGNO = @COSTINGNO";
+                 */
+                strQuery.CommandText = "SELECT * FROM tblcosting "+
+                        "INNER JOIN tblcostingdetail ON tblcosting.COSTINGNO=tblcostingdetail.COSTINGNO "+
+                        " INNER  JOIN tblmitems ON tblmitems.ITEMSID=tblcosting.ITEMSID" +
+                        " INNER JOIN tblmcategory ON tblmcategory.CATEGORYID=tblcosting.CATEGORYID" +
+                        " INNER JOIN tblmtype ON tblmtype.TYPEID=tblcosting.TYPEID" +
+                        " INNER JOIN tblmcustvend ON tblmcustvend.CUSTVENDCODE=tblcosting.CUSTVENDCODE" +
+                        " INNER JOIN tblmcost ON tblmcost.COSTID=tblcostingdetail.COSTID" +
+                        " WHERE tblcosting.COSTINGNO = @COSTINGNO";
+
+                strQuery.Parameters.AddWithValue("@COSTINGNO", COSTINGNO);
+                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblcosting");
+                Conn.Putus();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ds;
+        }
+
+
         public DataSet getData()
         {
             DataSet ds = null;
@@ -25,7 +64,7 @@ namespace MyGarment.ClassMD
                 strQuery.CommandType = CommandType.Text;
                 strQuery.CommandText = "SELECT COSTINGNO, QTYORDER,GDIV,TYPEID,CATEGORYID,STAT,DATE,OFFICER,"+
                         "ITEMSID,CUSTVENDCODE,APPROVE,APPROVEDATE,APPROVEBY,COGS,MARGIN,MARGINVALUE,NETTPRICE,"+
-                        "DISCOUNT,DISCOUNTVALUE,PPN,PPNVALUE,SELLINGPRICE,KURS,VALUEIN,REVISE,REVISEDATE,REVISEBY,"+
+                        "DISCOUNT,DISCOUNTVALUE,PPN,PPNVALUE,SELLINGPRICE,KURS,VALUEIN,REVISE,REVISEDATE,REVISEBY "+
                         " FROM tblcosting";
                 MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
                 data.Fill(ds, "tblcosting");
@@ -225,6 +264,8 @@ namespace MyGarment.ClassMD
             }
             return stat;
         }
+
+
 
     }
 }

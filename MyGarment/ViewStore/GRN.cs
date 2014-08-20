@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace MyGarment.ViewStore
 {
-    public partial class GRN : Form
+    public partial class frmgrn : Form
     {
-        public GRN()
+        public frmgrn()
         {
             InitializeComponent();
         }

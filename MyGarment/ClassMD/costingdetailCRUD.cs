@@ -115,8 +115,8 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "UPDATE tblcostingdetail SET ID=@ID,COSTID=@COSTID,DESCRIPTION=@DESCRIPTION,WIDTH=@WIDTH,USAG=@USAG,CONSUMPTION=@CONSUMPTION,UOMID=@UOMID," +
-                                       "PRICE=@PRICE,AMOUNT=@AMOUNT,CURRENCY=@CURRENCY,KURS=@KURS,ALLOWANCE=@ALLOWANCE,APPROVE=@APPROVE,APPROVEDATE=@APPROVEDATE,APPROVEBY=@APPROVEBY WHERE COSTINGNO=@COSTINGNO";
+                strQuery.CommandText = "UPDATE tblcostingdetail SET COSTID=@COSTID,DESCRIPTION=@DESCRIPTION,WIDTH=@WIDTH,USAG=@USAG,CONSUMPTION=@CONSUMPTION,UOMID=@UOMID," +
+                                       "PRICE=@PRICE,AMOUNT=@AMOUNT,CURRENCY=@CURRENCY,KURS=@KURS,ALLOWANCE=@ALLOWANCE,APPROVE=@APPROVE,APPROVEDATE=@APPROVEDATE,APPROVEBY=@APPROVEBY WHERE COSTINGNO=@COSTINGNO AND ID=@ID";
                 strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);
                 strQuery.Parameters.AddWithValue("@ID", k.ID);
                 strQuery.Parameters.AddWithValue("@COSTID", k.COSTID);

@@ -35,7 +35,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtType = new System.Windows.Forms.ComboBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.picItems = new System.Windows.Forms.PictureBox();
             this.txtItemsTypeDesc = new System.Windows.Forms.TextBox();
             this.cmdItemsType = new System.Windows.Forms.Button();
             this.txtItemsTypeID = new System.Windows.Forms.TextBox();
@@ -61,8 +61,10 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.DtGrid = new System.Windows.Forms.DataGridView();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtPath = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picItems)).BeginInit();
             this.TSTombol.SuspendLayout();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -72,12 +74,13 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtPath);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.cmdImage);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.txtType);
-            this.panel2.Controls.Add(this.pictureBox3);
+            this.panel2.Controls.Add(this.picItems);
             this.panel2.Controls.Add(this.txtItemsTypeDesc);
             this.panel2.Controls.Add(this.cmdItemsType);
             this.panel2.Controls.Add(this.txtItemsTypeID);
@@ -91,7 +94,7 @@
             this.panel2.Controls.Add(this.txtDescription);
             this.panel2.Location = new System.Drawing.Point(12, 250);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(487, 217);
+            this.panel2.Size = new System.Drawing.Size(487, 241);
             this.panel2.TabIndex = 74;
             // 
             // label10
@@ -111,6 +114,7 @@
             this.cmdImage.Size = new System.Drawing.Size(28, 23);
             this.cmdImage.TabIndex = 85;
             this.cmdImage.UseVisualStyleBackColor = true;
+            this.cmdImage.Click += new System.EventHandler(this.cmdImage_Click);
             // 
             // label9
             // 
@@ -146,13 +150,14 @@
             this.txtType.Size = new System.Drawing.Size(118, 21);
             this.txtType.TabIndex = 82;
             // 
-            // pictureBox3
+            // picItems
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(264, 97);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(173, 113);
-            this.pictureBox3.TabIndex = 81;
-            this.pictureBox3.TabStop = false;
+            this.picItems.Location = new System.Drawing.Point(264, 97);
+            this.picItems.Name = "picItems";
+            this.picItems.Size = new System.Drawing.Size(173, 113);
+            this.picItems.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picItems.TabIndex = 81;
+            this.picItems.TabStop = false;
             // 
             // txtItemsTypeDesc
             // 
@@ -267,9 +272,9 @@
             this.RecordTSB,
             this.TutupTSB});
             this.TSTombol.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.TSTombol.Location = new System.Drawing.Point(0, 473);
+            this.TSTombol.Location = new System.Drawing.Point(0, 494);
             this.TSTombol.Name = "TSTombol";
-            this.TSTombol.Size = new System.Drawing.Size(509, 25);
+            this.TSTombol.Size = new System.Drawing.Size(510, 25);
             this.TSTombol.TabIndex = 78;
             // 
             // SimpanTSB
@@ -398,13 +403,25 @@
             this.DtGrid.Size = new System.Drawing.Size(487, 163);
             this.DtGrid.TabIndex = 79;
             this.DtGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellClick);
+            this.DtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellContentClick);
             this.DtGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellDoubleClick);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // txtPath
+            // 
+            this.txtPath.Location = new System.Drawing.Point(7, 218);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.Size = new System.Drawing.Size(430, 20);
+            this.txtPath.TabIndex = 87;
             // 
             // frmmitems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 498);
+            this.ClientSize = new System.Drawing.Size(510, 519);
             this.Controls.Add(this.DtGrid);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.TSTombol);
@@ -416,7 +433,7 @@
             this.Load += new System.EventHandler(this.frmmitems_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picItems)).EndInit();
             this.TSTombol.ResumeLayout(false);
             this.TSTombol.PerformLayout();
             this.Panel1.ResumeLayout(false);
@@ -460,7 +477,9 @@
         private System.Windows.Forms.ComboBox txtType;
         private System.Windows.Forms.Label label10;
         internal System.Windows.Forms.Button cmdImage;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox picItems;
         private System.Windows.Forms.DataGridView DtGrid;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox txtPath;
     }
 }

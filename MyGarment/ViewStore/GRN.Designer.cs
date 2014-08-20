@@ -1,6 +1,6 @@
 ﻿namespace MyGarment.ViewStore
 {
-    partial class GRN
+    partial class frmgrn
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // GRN
+            // frmgrn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(522, 328);
-            this.Name = "GRN";
-            this.Text = "GRN";
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Name = "frmgrn";
+            this.Text = "grn";
             this.ResumeLayout(false);
 
         }

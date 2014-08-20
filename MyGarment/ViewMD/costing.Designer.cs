@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmcosting));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.HapusTSB = new System.Windows.Forms.ToolStripButton();
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.UbahTSB = new System.Windows.Forms.ToolStripButton();
@@ -67,7 +67,12 @@
             this.dtGrid = new System.Windows.Forms.DataGridView();
             this.cbDIV = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.txtKurs = new System.Windows.Forms.TextBox();
+            this.Print = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cbValueIn = new System.Windows.Forms.ComboBox();
             this.hCostingNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hCostType = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -81,6 +86,12 @@
             this.hCurrency = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.hKurs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hAllowance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtMargin = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtPPN = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtFOB = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.TSTombol.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.Panel1.SuspendLayout();
@@ -149,7 +160,8 @@
             this.ToolStripSeparator1,
             this.RecordTSB,
             this.TutupTSB,
-            this.toolStripButton1});
+            this.toolStripSeparator2,
+            this.Print});
             this.TSTombol.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TSTombol.Location = new System.Drawing.Point(0, 473);
             this.TSTombol.Name = "TSTombol";
@@ -385,7 +397,9 @@
             this.dtGrid.TabIndex = 105;
             this.dtGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dtGrid_CellBeginEdit);
             this.dtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellContentClick);
+            this.dtGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellEndEdit);
             this.dtGrid.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dtGrid_CellValidating);
+            this.dtGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGrid_CellValueChanged);
             // 
             // cbDIV
             // 
@@ -404,15 +418,53 @@
             this.label9.TabIndex = 107;
             this.label9.Text = "Divisi";
             // 
-            // toolStripButton1
+            // txtKurs
             // 
-            this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.txtKurs.Location = new System.Drawing.Point(616, 104);
+            this.txtKurs.Name = "txtKurs";
+            this.txtKurs.Size = new System.Drawing.Size(100, 20);
+            this.txtKurs.TabIndex = 109;
+            this.txtKurs.Text = "0";
+            // 
+            // Print
+            // 
+            this.Print.Image = ((System.Drawing.Image)(resources.GetObject("Print.Image")));
+            this.Print.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Print.Name = "Print";
+            this.Print.Size = new System.Drawing.Size(56, 22);
+            this.Print.Text = "Print";
+            this.Print.Click += new System.EventHandler(this.Print_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(412, 107);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 13);
+            this.label10.TabIndex = 110;
+            this.label10.Text = "Value In";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(570, 107);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(28, 13);
+            this.label11.TabIndex = 111;
+            this.label11.Text = "Kurs";
+            // 
+            // cbValueIn
+            // 
+            this.cbValueIn.FormattingEnabled = true;
+            this.cbValueIn.Location = new System.Drawing.Point(484, 104);
+            this.cbValueIn.Name = "cbValueIn";
+            this.cbValueIn.Size = new System.Drawing.Size(71, 21);
+            this.cbValueIn.TabIndex = 112;
             // 
             // hCostingNo
             // 
@@ -422,9 +474,9 @@
             // 
             // hID
             // 
-            dataGridViewCellStyle11.Format = "N0";
-            dataGridViewCellStyle11.NullValue = null;
-            this.hID.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle6.Format = "N0";
+            dataGridViewCellStyle6.NullValue = null;
+            this.hID.DefaultCellStyle = dataGridViewCellStyle6;
             this.hID.HeaderText = "ID";
             this.hID.Name = "hID";
             this.hID.Visible = false;
@@ -454,9 +506,9 @@
             // 
             // hConsumption
             // 
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.hConsumption.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.hConsumption.DefaultCellStyle = dataGridViewCellStyle7;
             this.hConsumption.FillWeight = 50F;
             this.hConsumption.HeaderText = "Consump";
             this.hConsumption.Name = "hConsumption";
@@ -473,9 +525,9 @@
             // 
             // hPrice
             // 
-            dataGridViewCellStyle13.Format = "N2";
-            dataGridViewCellStyle13.NullValue = null;
-            this.hPrice.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.hPrice.DefaultCellStyle = dataGridViewCellStyle8;
             this.hPrice.FillWeight = 50F;
             this.hPrice.HeaderText = "Price";
             this.hPrice.Name = "hPrice";
@@ -483,11 +535,12 @@
             // 
             // hAmount
             // 
-            dataGridViewCellStyle14.Format = "N2";
-            dataGridViewCellStyle14.NullValue = null;
-            this.hAmount.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.hAmount.DefaultCellStyle = dataGridViewCellStyle9;
             this.hAmount.HeaderText = "Amount";
             this.hAmount.Name = "hAmount";
+            this.hAmount.ReadOnly = true;
             // 
             // hCurrency
             // 
@@ -500,9 +553,9 @@
             // 
             // hKurs
             // 
-            dataGridViewCellStyle15.Format = "N2";
-            dataGridViewCellStyle15.NullValue = null;
-            this.hKurs.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.hKurs.DefaultCellStyle = dataGridViewCellStyle10;
             this.hKurs.FillWeight = 50F;
             this.hKurs.HeaderText = "Kurs";
             this.hKurs.Name = "hKurs";
@@ -514,11 +567,72 @@
             this.hAllowance.Name = "hAllowance";
             this.hAllowance.Width = 50;
             // 
+            // txtMargin
+            // 
+            this.txtMargin.Location = new System.Drawing.Point(484, 135);
+            this.txtMargin.Name = "txtMargin";
+            this.txtMargin.Size = new System.Drawing.Size(46, 20);
+            this.txtMargin.TabIndex = 113;
+            this.txtMargin.Text = "0";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(412, 138);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(39, 13);
+            this.label12.TabIndex = 114;
+            this.label12.Text = "Margin";
+            // 
+            // txtPPN
+            // 
+            this.txtPPN.Location = new System.Drawing.Point(662, 135);
+            this.txtPPN.Name = "txtPPN";
+            this.txtPPN.Size = new System.Drawing.Size(32, 20);
+            this.txtPPN.TabIndex = 115;
+            this.txtPPN.Text = "0";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(613, 138);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(29, 13);
+            this.label13.TabIndex = 116;
+            this.label13.Text = "PPN";
+            // 
+            // txtFOB
+            // 
+            this.txtFOB.Location = new System.Drawing.Point(484, 161);
+            this.txtFOB.Name = "txtFOB";
+            this.txtFOB.Size = new System.Drawing.Size(100, 20);
+            this.txtFOB.TabIndex = 117;
+            this.txtFOB.Text = "0";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(412, 164);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(58, 13);
+            this.label14.TabIndex = 118;
+            this.label14.Text = "FOB Buyer";
+            // 
             // frmcosting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(970, 498);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.txtFOB);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.txtPPN);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtMargin);
+            this.Controls.Add(this.cbValueIn);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txtKurs);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cbDIV);
             this.Controls.Add(this.dtGrid);
@@ -594,7 +708,12 @@
         private System.Windows.Forms.DataGridView dtGrid;
         private System.Windows.Forms.ComboBox cbDIV;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.TextBox txtKurs;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton Print;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cbValueIn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hCostingNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn hID;
         private System.Windows.Forms.DataGridViewComboBoxColumn hCostType;
@@ -608,5 +727,11 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn hCurrency;
         private System.Windows.Forms.DataGridViewTextBoxColumn hKurs;
         private System.Windows.Forms.DataGridViewTextBoxColumn hAllowance;
+        private System.Windows.Forms.TextBox txtMargin;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtPPN;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtFOB;
+        private System.Windows.Forms.Label label14;
     }
 }

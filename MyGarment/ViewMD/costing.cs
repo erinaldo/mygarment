@@ -10,6 +10,7 @@ using MyGarment.ClassMD;
 using MyGarment.ViewMaster;
 using MyGarment.ViewSearch;
 using MyGarment.ClassMaster;
+using MyGarment.PrintMD;
 //using MyGarment.
 
 namespace MyGarment.ViewMD
@@ -23,6 +24,8 @@ namespace MyGarment.ViewMD
         DataSet dsType = new mtypeCRUD().getData();
         DataSet dsDIV = new mdivCRUD().getData();
         //DataSet dsDIV=new 
+ 
+        
         public frmcosting()
         {
             InitializeComponent();
@@ -45,8 +48,11 @@ namespace MyGarment.ViewMD
             K.CUSTVENDCODE = txtCustomerID.Text;
             K.ITEMSID = txtStyleID.Text;
             K.DATE = dateCreated.Value;
-
-            if (new costingCRUD().insertData(K))
+            K.VALUEIN = cbValueIn.Text;
+            if ((txtCategoryID.Text=="") || (txtCustomerID.Text=="")) 
+            {
+                MessageBox.Show("Isian Belum lengkap untuk category, style atau customer");
+            }else  if (new costingCRUD().insertData(K))
             {
                 MessageBox.Show("Data berhasil di tambahkan");
                 SimpanTSB.Enabled = false; 
@@ -70,11 +76,24 @@ namespace MyGarment.ViewMD
             cbDIV.DisplayMember = "DESCRIPTION";
             cbDIV.ValueMember = "DIVID";
 
-            //dtGrid.Columns[""].DataGridView.Columns
+            cbValueIn.DataSource = dsCurrency.Tables[0];
+            cbValueIn.DisplayMember = "CURRENCYID";
+            cbValueIn.ValueMember = "CURRENCYID";
 
+            DataGridViewComboBoxColumn CostType = dtGrid.Columns["hCostType"] as DataGridViewComboBoxColumn;//new DataGridViewComboBoxColumn();
+            DataGridViewComboBoxColumn Uom = dtGrid.Columns["hUom"] as DataGridViewComboBoxColumn;
+            DataGridViewComboBoxColumn Currency = dtGrid.Columns["hCurrency"] as DataGridViewComboBoxColumn;
+            CostType.DataSource = dsCost.Tables[0];
+            CostType.DisplayMember = "DESCRIPTION";
+            CostType.ValueMember = "COSTID";
 
+            Uom.DataSource = dsUOM.Tables[0];
+            Uom.DisplayMember = "DESCRIPTION";
+            Uom.ValueMember = "UOMID";
 
-
+            Currency.DataSource = dsCurrency.Tables[0];
+            Currency.DisplayMember = "CURRENCYID";
+            Currency.ValueMember = "CURRENCYID";
             
         }
 
@@ -89,10 +108,7 @@ namespace MyGarment.ViewMD
             frmcostingSearch f = new frmcostingSearch();
             f.AddItemCallback = new frmcostingSearch.AddCostingDelegate(this.SetCostingCallBack);
             f.ShowDialog();
-
             //txtCostingNo.Text
-            
-            
             if (GStrCode != "")
             {
                 //isi costing header
@@ -107,12 +123,14 @@ namespace MyGarment.ViewMD
                 txtCustomerID.Text = dsHeader.Tables[0].Rows[0]["CUSTVENDCODE"].ToString();
                 txtStyleID.Text = dsHeader.Tables[0].Rows[0]["ITEMSID"].ToString();
                 txtCategoryID.Text = dsHeader.Tables[0].Rows[0]["CATEGORYID"].ToString();
+                txtKurs.Text=dsHeader.Tables[0].Rows[0]["KURS"].ToString();
+                cbValueIn.Text = dsHeader.Tables[0].Rows[0]["VALUEIN"].ToString();
                 //dateCreated.Value = dsHeader.Tables[0].Columns["QTYORDER"]
-                
                 //txtQty
                 //isi detail
                 DataSet dsDetail = new costingdetailCRUD().getData(GStrCode);
                // var index = dtGrid.Rows.Add();
+                dtGrid.Rows.Clear();
                 for (int i = 0; i < dsDetail.Tables[0].Rows.Count; i++)
                 {
                     dtGrid.Rows.Add();
@@ -122,13 +140,13 @@ namespace MyGarment.ViewMD
                     dtGrid.Rows[i].Cells["hAllowance"].Value=dsDetail.Tables[0].Rows[i]["ALLOWANCE"].ToString();
                     dtGrid.Rows[i].Cells["hAmount"].Value=dsDetail.Tables[0].Rows[i]["AMOUNT"].ToString();
                     dtGrid.Rows[i].Cells["hConsumption"].Value=dsDetail.Tables[0].Rows[i]["CONSUMPTION"].ToString();
-                    //dtGrid.Rows[i].Cells["hCostType"].co=dsDetail.Tables[0].Rows[i]["COSTID"].ToString();
+                    dtGrid.Rows[i].Cells["hCostType"].Value=dsDetail.Tables[0].Rows[i]["COSTID"].ToString();
                     
-                   // dtGrid.Rows[i].Cells["hCurrency"].Value=dsDetail.Tables[0].Rows[i]["CURRENCY"].ToString();
+                    dtGrid.Rows[i].Cells["hCurrency"].Value=dsDetail.Tables[0].Rows[i]["CURRENCY"].ToString();
                     dtGrid.Rows[i].Cells["hDescription"].Value=dsDetail.Tables[0].Rows[i]["DESCRIPTION"].ToString();
                     dtGrid.Rows[i].Cells["hKurs"].Value=dsDetail.Tables[0].Rows[i]["KURS"].ToString();
                     dtGrid.Rows[i].Cells["hPrice"].Value=dsDetail.Tables[0].Rows[i]["PRICE"].ToString();
-                    //dtGrid.Rows[i].Cells["hUOM"].Value=dsDetail.Tables[0].Rows[i]["UOMID"].ToString();
+                    dtGrid.Rows[i].Cells["hUOM"].Value=dsDetail.Tables[0].Rows[i]["UOMID"].ToString();
                     dtGrid.Rows[i].Cells["hUsage"].Value=dsDetail.Tables[0].Rows[i]["USAG"].ToString();
                     dtGrid.Rows[i].Cells["hWidth"].Value = dsDetail.Tables[0].Rows[i]["WIDTH"].ToString(); 
   
@@ -259,6 +277,8 @@ namespace MyGarment.ViewMD
             K.CUSTVENDCODE = txtCustomerID.Text;
             K.ITEMSID = txtStyleID.Text;
             K.DATE = dateCreated.Value;
+            K.KURS = (float)Convert.ToDouble(txtKurs.Text);
+            K.VALUEIN = cbValueIn.Text;
 
             if (new costingCRUD().updateData(K))
             {
@@ -266,6 +286,9 @@ namespace MyGarment.ViewMD
                 //SimpanTSB.Enabled = false;
                 // Binding();
                 costingdetail k = new costingdetail();
+                //dtGrid.BeginEdit(true);
+                //dtGrid.Refresh();
+                dtGrid.EndEdit();
                 for (int i = 0; i < dtGrid.Rows.Count - 1; i++)
                 {
                     k.COSTINGNO = txtCostingNo.Text;
@@ -279,7 +302,7 @@ namespace MyGarment.ViewMD
                     //k.COSTINGNO = Convert.ToString(dtGrid.Rows[i].Cells["ALLOWANCE"].Value);
                     k.CURRENCY = Convert.ToString(dtGrid.Rows[i].Cells["hCurrency"].Value);
                     k.DESCRIPTION = Convert.ToString(dtGrid.Rows[i].Cells["hDescription"].Value);
-                    k.ID = i+1;
+                   // k.ID = i+1;
                     k.KURS = Convert.ToSingle(dtGrid.Rows[i].Cells["hKurs"].Value);
                     k.PRICE = Convert.ToSingle(dtGrid.Rows[i].Cells["hPrice"].Value);
                     k.UOMID = Convert.ToString(dtGrid.Rows[i].Cells["hUOM"].Value);
@@ -287,8 +310,10 @@ namespace MyGarment.ViewMD
                     k.WIDTH = Convert.ToString(dtGrid.Rows[i].Cells["hWidth"].Value); 
                     
                     if (dtGrid.Rows[i].HeaderCell.Value.ToString()=="#") {
+                        k.ID = i+1;
                         if (new costingdetailCRUD().insertData(k))
                         {
+                         
                             // MessageBox.Show("Data berhasil di tambahkan");
                             // Binding();
                             dtGrid.Rows[i].HeaderCell.Value = "V";
@@ -322,6 +347,65 @@ namespace MyGarment.ViewMD
                 MessageBox.Show("Update gagal");
             }
 
+        }
+
+        private void dtGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dtGrid.Rows[e.RowIndex];
+                //txtCategoryID.Text = row.Cells[0].Value.ToString();
+                dtGrid.Rows[e.RowIndex].Cells["hAmount"].Value = Convert.ToSingle(dtGrid.Rows[e.RowIndex].Cells["hConsumption"].Value) * Convert.ToSingle(dtGrid.Rows[e.RowIndex].Cells["hPrice"].Value);
+
+            }
+            
+           // int i = dtGrid.CurrentRow.Index;
+            //dtGrid.Rows[i].Cells["hAmount"].Value = Convert.ToSingle(dtGrid.Rows[i].Cells["hConsumption"].Value) * Convert.ToSingle(dtGrid.Rows[i].Cells["hConsumption"].Value);
+
+            //'to
+        }
+
+        private void dtGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int RowIndex = e.RowIndex;
+            int columnIndex = e.ColumnIndex;
+            if (e.ColumnIndex == 1)
+            {
+                bool validation = true;
+                if (dtGrid.Rows[RowIndex].Cells[columnIndex].Value != null && dtGrid.Rows[RowIndex].Cells[columnIndex].Value.ToString().Trim() != "")
+                {
+                    string DataToValidate = dtGrid.Rows[RowIndex].Cells[columnIndex].Value.ToString();
+                    foreach (char c in DataToValidate)
+                    {
+                        if (!char.IsDigit(c))
+                        {
+                            validation = false;
+                            break;
+                        }
+                    }
+
+                    if (validation == false)
+                    {
+
+                        dtGrid.Rows[RowIndex].Cells[columnIndex].ErrorText = "You Can Only Enter Number here ";
+                        dtGrid.Rows[RowIndex].Cells[columnIndex].Value = "";
+
+                    }
+                }
+
+            }
+        }
+
+        private void Print_Click(object sender, EventArgs e)
+        {
+            DataSet data = new costingCRUD().prCosting(txtCostingNo.Text);
+            //Application.DoEvents();
+            data.WriteXml(Application.StartupPath + "\\costing.xml",XmlWriteMode.WriteSchema);
+            //data.WriteXmlSchema(Application.StartupPath + "\\costing.xsd");
+            //data.WriteXmlSchema(Application.StartupPath + "\\costing1.xml");
+            Form f = new PrintCosting();
+            //f.MdiParent = MainMenu.ActiveForm;
+            f.Show();
         }
 
     }

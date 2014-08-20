@@ -12,5 +12,7 @@ namespace MyGarment.ClassMaster
         public string ItemsTypeID { get; set; }
         public string Type { get; set; }
         public int Active { get; set; }
+        public byte[] Image { get; set; }
+        public string Path{get;set;}
     }
 }

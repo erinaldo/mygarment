@@ -82,9 +82,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(4, 13);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 13);
+            this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 69;
-            this.label5.Text = "Style ID";
+            this.label5.Text = "Customer ID";
             // 
             // txtDescription
             // 
@@ -120,9 +120,9 @@
             this.Label3.ForeColor = System.Drawing.Color.Maroon;
             this.Label3.Location = new System.Drawing.Point(64, 13);
             this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(100, 16);
+            this.Label3.Size = new System.Drawing.Size(130, 16);
             this.Label3.TabIndex = 34;
-            this.Label3.Text = "Style  Search";
+            this.Label3.Text = "Customer  Search";
             // 
             // TSTombol
             // 

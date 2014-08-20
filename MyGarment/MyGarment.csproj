@@ -35,9 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +58,16 @@
     <Compile Include="1Global\Active.cs" />
     <Compile Include="1Global\Connection.cs" />
     <Compile Include="1Global\Generate.cs" />
+    <Compile Include="ClassExim\eximbc.cs" />
+    <Compile Include="ClassExim\eximbcCRUD.cs" />
+    <Compile Include="ClassExim\eximdoc.cs" />
+    <Compile Include="ClassExim\eximdocCRUD.cs" />
+    <Compile Include="ClassFinance\invoice.cs" />
+    <Compile Include="ClassFinance\invoiceCRUD.cs" />
+    <Compile Include="ClassFinance\invoicedetail.cs" />
+    <Compile Include="ClassFinance\invoicedetailCRUD.cs" />
+    <Compile Include="ClassMaster\company.cs" />
+    <Compile Include="ClassMaster\companyCRUD.cs" />
     <Compile Include="ClassMaster\mcategory.cs" />
     <Compile Include="ClassMaster\mcategoryCRUD.cs" />
     <Compile Include="ClassMaster\mcolor.cs" />
@@ -75,10 +92,76 @@
     <Compile Include="ClassMaster\mtermofpaymentCRUD.cs" />
     <Compile Include="ClassMaster\mtype.cs" />
     <Compile Include="ClassMaster\mtypeCRUD.cs" />
+    <Compile Include="ClassMD\bom.cs" />
+    <Compile Include="ClassMD\bomCRUD.cs" />
     <Compile Include="ClassMD\costing.cs" />
     <Compile Include="ClassMD\costingCRUD.cs" />
     <Compile Include="ClassMD\costingdetail.cs" />
     <Compile Include="ClassMD\costingdetailCRUD.cs" />
+    <Compile Include="ClassMD\joborder.cs" />
+    <Compile Include="ClassMD\joborderCRUD.cs" />
+    <Compile Include="ClassMD\joborderdetail.cs" />
+    <Compile Include="ClassMD\joborderdetailCRUD.cs" />
+    <Compile Include="ClassMD\purchase.cs" />
+    <Compile Include="ClassMD\purchaseCRUD.cs" />
+    <Compile Include="ClassMD\purchasedetail.cs" />
+    <Compile Include="ClassMD\purchasedetailCRUD.cs" />
+    <Compile Include="ClassStore\gin.cs" />
+    <Compile Include="ClassStore\ginCRUD.cs" />
+    <Compile Include="ClassStore\gindetail.cs" />
+    <Compile Include="ClassStore\gindetailCRUD.cs" />
+    <Compile Include="ClassStore\grn.cs" />
+    <Compile Include="ClassStore\grnCRUD.cs" />
+    <Compile Include="ClassStore\grndetail.cs" />
+    <Compile Include="ClassStore\grndetailCRUD.cs" />
+    <Compile Include="PrintMD\PrintCosting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintMD\PrintCosting.Designer.cs">
+      <DependentUpon>PrintCosting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintMD\PrintCostingCr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintCostingCr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ViewMD\bom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMD\bom.Designer.cs">
+      <DependentUpon>bom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMD\bomSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMD\bomSearch.Designer.cs">
+      <DependentUpon>bomSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMD\joborder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMD\joborder.Designer.cs">
+      <DependentUpon>joborder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMD\joborderSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMD\joborderSearch.Designer.cs">
+      <DependentUpon>joborderSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMD\Purchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMD\Purchase.Designer.cs">
+      <DependentUpon>Purchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMD\PurchaseSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMD\PurchaseSearch.Designer.cs">
+      <DependentUpon>PurchaseSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewMaster\mcategorySearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,14 +336,63 @@
     <Compile Include="ViewSearch\frmStyleSearch.Designer.cs">
       <DependentUpon>frmStyleSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewStore\GRN.cs">
+    <Compile Include="ViewSearch\SupplierSearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ViewStore\GRN.Designer.cs">
-      <DependentUpon>GRN.cs</DependentUpon>
+    <Compile Include="ViewSearch\SupplierSearch.Designer.cs">
+      <DependentUpon>SupplierSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\gin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\gin.Designer.cs">
+      <DependentUpon>gin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\ginSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\ginSearch.Designer.cs">
+      <DependentUpon>ginSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\grn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\grn.Designer.cs">
+      <DependentUpon>grn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\grnSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\grnSearch.Designer.cs">
+      <DependentUpon>grnSearch.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintMD\PrintCosting.resx">
+      <DependentUpon>PrintCosting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintMD\PrintCostingCr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintCostingCr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMD\bom.resx">
+      <DependentUpon>bom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMD\bomSearch.resx">
+      <DependentUpon>bomSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMD\joborder.resx">
+      <DependentUpon>joborder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMD\joborderSearch.resx">
+      <DependentUpon>joborderSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMD\Purchase.resx">
+      <DependentUpon>Purchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMD\PurchaseSearch.resx">
+      <DependentUpon>PurchaseSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMaster\mcategory.resx">
       <DependentUpon>mcategory.cs</DependentUpon>
@@ -353,8 +485,20 @@
     <EmbeddedResource Include="ViewSearch\frmStyleSearch.resx">
       <DependentUpon>frmStyleSearch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewStore\GRN.resx">
-      <DependentUpon>GRN.cs</DependentUpon>
+    <EmbeddedResource Include="ViewSearch\SupplierSearch.resx">
+      <DependentUpon>SupplierSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\gin.resx">
+      <DependentUpon>gin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\ginSearch.resx">
+      <DependentUpon>ginSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\grn.resx">
+      <DependentUpon>grn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\grnSearch.resx">
+      <DependentUpon>grnSearch.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
@@ -370,8 +514,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClassFinance\" />
+    <Folder Include="ClassProduction\" />
+    <Folder Include="ViewExim\" />
     <Folder Include="ViewFinance\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
