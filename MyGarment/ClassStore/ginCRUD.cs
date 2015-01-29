@@ -10,8 +10,9 @@ namespace MyGarment.ClassStore
 {
     class ginCRUD
     {
-        private MySql.Data.MySqlClient.MySqlCommand strQuery = null;
-        public DataSet getData()
+        private MySqlCommand strQuery = null;
+
+        public DataSet prMatIssue(string GINNO)
         {
             DataSet ds = null;
             try
@@ -22,10 +23,70 @@ namespace MyGarment.ClassStore
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT * FROM tblgin " +
+                        " INNER JOIN tblgindetail ON tblgin.GINNO=tblgindetail.GINNO" +
+                        " INNER JOIN tblmcustvend ON tblmcustvend.CUSTVENDCODE=tblgin.CUSTVENDCODE" +
+                        " WHERE tblgin.GINNO = @GINNO";
+                strQuery.Parameters.AddWithValue("@GINNO", GINNO);
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblgin");
+                Conn.Putus();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ds;
+        }
+
+        public DataSet searchData(string GINNO,string OFFICER,string CUSTOMER,string STYLE,string TYPE)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT tblgin.GINNO, tblgin.OFFICER,tblmcustvend.NAME,tblgindetail.STYLEID,tblgin.TYPE from tblgin " +
+                            " INNER  JOIN tblgindetail ON tblgin.GINNO=tblgindetail.GINNO "+
+                            " INNER JOIN tblmcustvend ON tblmcustvend.CUSTVENDCODE=tblgin.CUSTVENDCODE "+
+                            " GROUP BY tblgin.GINNO, tblgin.OFFICER,tblmcustvend.NAME,tblgindetail.STYLEID,tblgin.TYPE " +
+                            " HAVING  tblgin.GINNO LIKE @GINNO AND tblmcustvend.NAME LIKE @CUSTOMER AND tblgin.OFFICER LIKE @OFFICER AND STYLEID LIKE @STYLEID AND TYPE LIKE @TYPE";
+                strQuery.Parameters.AddWithValue("@GINNO", "%" + GINNO + "%");
+                strQuery.Parameters.AddWithValue("@OFFICER", "%" + OFFICER + "%");
+                strQuery.Parameters.AddWithValue("@STYLEID", "%" + STYLE + "%");
+                strQuery.Parameters.AddWithValue("@CUSTOMER", "%" + CUSTOMER + "%");
+                strQuery.Parameters.AddWithValue("@TYPE", "%" + TYPE + "%");
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblginsearch");
+                Conn.Putus();
+            }
+            catch
+            {
+            }
+            return ds;
+        }
+
+
+        public DataSet getData()
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
                 strQuery.CommandText = "SELECT GINNO,GDIV,DATE,OFFICER,DELIVERYTO,REMARKS,STOREID,APPROVE,APPROVEDATE,"+
                                     "APPROVEBY,CLOSE,CUSTVENDCODE,DELIVERYTONAME,DELIVERYTOADDRESS,DOCREGNO,TYPE" +
                                     " FROM tblgin";
-                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
                 data.Fill(ds, "tblgin");
                 Conn.Putus();
             }
@@ -43,14 +104,14 @@ namespace MyGarment.ClassStore
                 ds = new DataSet();
                 Connection Conn = new Connection();
                 Conn.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery = new MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
                 strQuery.CommandText = "SELECT GINNO,GDIV,DATE,OFFICER,DELIVERYTO,REMARKS,STOREID,APPROVE,APPROVEDATE," +
                                     "APPROVEBY,CLOSE,CUSTVENDCODE,DELIVERYTONAME,DELIVERYTOADDRESS,DOCREGNO,TYPE" +
                                 " FROM tblgin WHERE GINNO LIKE @GINNO";
                 strQuery.Parameters.AddWithValue("@GINNO", "%" + GINNO + "%");
-                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
                 data.Fill(ds, "tblgin");
                 Conn.Putus();
 
@@ -70,7 +131,7 @@ namespace MyGarment.ClassStore
                 ds = new DataSet();
                 Connection Conn = new Connection();
                 Conn.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery = new MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
                 strQuery.CommandText = "SELECT GINNO,GDIV,DATE,OFFICER,DELIVERYTO,REMARKS,STOREID,APPROVE,APPROVEDATE," +
@@ -83,7 +144,7 @@ namespace MyGarment.ClassStore
                 strQuery.Parameters.AddWithValue("@OFFICER", "%" + OFFICER + "%");
                 strQuery.Parameters.AddWithValue("@CUSTVENDCODE", "%" + CUSTVENDCODE + "%");
                 strQuery.Parameters.AddWithValue("@APPROVE", "%" + APPROVE + "%");
-                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
                 data.Fill(ds, "tblgin");
                 Conn.Putus();
 
@@ -101,7 +162,7 @@ namespace MyGarment.ClassStore
             {
                 Connection ConnG = new Connection();
                 ConnG.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery = new MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
 
@@ -143,13 +204,20 @@ namespace MyGarment.ClassStore
             {
                 Connection ConnG = new Connection();
                 ConnG.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery = new MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
+                /*
                 strQuery.CommandText = "UPDATE tblgin SET GINNO=@GINNO,GDIV=@GDIV,DATE=@DATE,OFFICER=@OFFICER,DELIVERYTO=@DELIVERYTO,REMARKS=@REMARKS,"+
                         "STOREID=@STOREID,APPROVE=@APPROVE,APPROVEDATE=@APPROVEDATE,APPROVEBY=@APPROVEBY,CLOSE=@CLOSE,CUSTVENDCODE=@CUSTVENDCODE,DELIVERYTONAME=@DELIVERYTONAME,"+
                         "DELIVERYTOADDRESS=@DELIVERYTOADDRESS,DOCREGNO=@DOCREGNO,TYPE=@TYPE,"+
                         " WHERE GINNO=@GINNO";
+                 */
+                strQuery.CommandText = "UPDATE tblgin SET GINNO=@GINNO,GDIV=@GDIV,DATE=@DATE,OFFICER=@OFFICER,DELIVERYTO=@DELIVERYTO,REMARKS=@REMARKS," +
+                    "STOREID=@STOREID,APPROVE=@APPROVE,APPROVEDATE=@APPROVEDATE,APPROVEBY=@APPROVEBY,CLOSE=@CLOSE,CUSTVENDCODE=@CUSTVENDCODE,DELIVERYTONAME=@DELIVERYTONAME," +
+                    "DELIVERYTOADDRESS=@DELIVERYTOADDRESS,DOCREGNO=@DOCREGNO,TYPE=@TYPE " +
+        " WHERE GINNO=@GINNO";
+
                 strQuery.Parameters.AddWithValue("@GINNO", k.GINNO);
                 strQuery.Parameters.AddWithValue("@GDIV", k.GDIV);
                 strQuery.Parameters.AddWithValue("@DATE", k.DATE);
@@ -185,7 +253,7 @@ namespace MyGarment.ClassStore
             {
                 Connection ConnG = new Connection();
                 ConnG.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery = new MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
                 strQuery.CommandText = "DELETE FROM tblgin WHERE GINNO = @GINNO";

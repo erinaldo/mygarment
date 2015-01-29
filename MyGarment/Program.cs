@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-
+using MyGarment.ViewFile;
 namespace MyGarment
 {
     static class Program
@@ -14,9 +14,11 @@ namespace MyGarment
         static void Main()
         {
             
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainMenu());
+           // Application.Run(new frmLogin());
         }
     }
 }

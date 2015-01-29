@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmmitems));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtPath = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cmdImage = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -62,7 +63,6 @@
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.DtGrid = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtPath = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picItems)).BeginInit();
             this.TSTombol.SuspendLayout();
@@ -96,6 +96,13 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(487, 241);
             this.panel2.TabIndex = 74;
+            // 
+            // txtPath
+            // 
+            this.txtPath.Location = new System.Drawing.Point(7, 218);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.Size = new System.Drawing.Size(430, 20);
+            this.txtPath.TabIndex = 87;
             // 
             // label10
             // 
@@ -144,6 +151,7 @@
             this.txtType.Items.AddRange(new object[] {
             "RAW",
             "PRODUCT",
+            "PROCESS",
             "SERVICE"});
             this.txtType.Location = new System.Drawing.Point(87, 94);
             this.txtType.Name = "txtType";
@@ -409,13 +417,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // txtPath
-            // 
-            this.txtPath.Location = new System.Drawing.Point(7, 218);
-            this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(430, 20);
-            this.txtPath.TabIndex = 87;
             // 
             // frmmitems
             // 

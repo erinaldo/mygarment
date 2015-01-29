@@ -10,8 +10,111 @@ namespace MyGarment.ClassStore
 {
     class grndetailCRUD
     {
-        private MySql.Data.MySqlClient.MySqlCommand strQuery = null;
+        private MySqlCommand strQuery = null;
 
+        public DataSet getItemsByStyle(string StyleID)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT *,(-1*(SELECT IFNULL(SUM(QUANTITY),0) FROM tblgindetail a Where a.ITEMSID=b.ITEMSID AND a.COLORID = b.COLORID AND a.SIZEID = b.SIZEID AND a.GRADE=b.GRADE)+QUANTITY ) QTYOH " +
+                    "FROM tblgrndetail b " +
+                    " WHERE JENIS='RAW' AND STYLEID=@StyleID  ";
+                strQuery.Parameters.AddWithValue("@StyleID", StyleID);
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblgrndetail");
+                Conn.Putus();
+            }
+            catch
+            {
+            }
+            return ds;
+        }
+
+        public DataSet SearchDataGrn(string StyleID,string StyleDesc,string Type)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT DISTINCT tblgrndetail.ITEMSID,tblmitems.DESCRIPTION from tblgrndetail " +
+                            "INNER JOIN tblmitems ON tblgrndetail.ITEMSID=tblmitems.ITEMSID " +
+                            "WHERE tblgrndetail.ITEMSID LIKE @StyleID AND TYPE like @Type AND tblmitems.DESCRIPTION LIKE @StyleDesc ";
+                strQuery.Parameters.AddWithValue("@StyleID","%"+ StyleID+"%");
+                strQuery.Parameters.AddWithValue("@StyleDesc", "%" + StyleDesc + "%");
+                strQuery.Parameters.AddWithValue("@Type", "%" + Type + "%");
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblgrndetail");
+                Conn.Putus();
+            }
+            catch
+            {
+            }
+            return ds;
+        }
+
+        public DataSet getDataStyle(string StyleID)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                //strQuery.CommandText = "select * from tblgrndetail WHERE ITEMSID=@StyleID ";
+                strQuery.CommandText = "SELECT *,(-1*(SELECT IFNULL(SUM(QUANTITY),0) FROM tblgindetail a Where a.ITEMSID=b.ITEMSID AND a.COLORID = b.COLORID AND a.SIZEID = b.SIZEID AND a.GRADE=b.GRADE)+QUANTITY ) QTYOH " +
+                    "FROM tblgrndetail b " +
+                    "WHERE ITEMSID=@StyleID ";
+                strQuery.Parameters.AddWithValue("@StyleID", StyleID);
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblgrndetail");
+                Conn.Putus();
+            }
+            catch
+            {
+            }
+            return ds;
+        }
+
+        public DataSet getDataItems(string StyleID)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                //strQuery.CommandText = "select * from tblgrndetail WHERE ITEMSID=@StyleID ";
+                strQuery.CommandText = "SELECT *,(-1*(SELECT IFNULL(SUM(QUANTITY),0) FROM tblgindetail a Where a.ITEMSID=b.ITEMSID AND a.STYLEID=b.STYLEID)+QUANTITY ) QTYOH " +
+                    "FROM tblgrndetail b " +
+                    "WHERE ITEMSID=@StyleID ";
+                strQuery.Parameters.AddWithValue("@StyleID", StyleID);
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblgrndetail");
+                Conn.Putus();
+            }
+            catch
+            {
+            }
+            return ds;
+        }
 
         public DataSet getData()
         {
@@ -21,14 +124,13 @@ namespace MyGarment.ClassStore
                 ds = new DataSet();
                 Connection Conn = new Connection();
                 Conn.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery = new MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT GINNO,GDIV,DATE,OFFICER,DELIVERYTO,REMARKS,STOREID,APPROVE,APPROVEDATE," +
-                                    "APPROVEBY,CLOSE,CUSTVENDCODE,DELIVERYTONAME,DELIVERYTOADDRESS,DOCREGNO,TYPE" +
-                                    " FROM tblgin";
-                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
-                data.Fill(ds, "tblgin");
+                strQuery.CommandText = "SELECT * " +
+                                    " FROM tblgrndetail";
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblgrndetail");
                 Conn.Putus();
             }
             catch
@@ -37,7 +139,7 @@ namespace MyGarment.ClassStore
             return ds;
         }
 
-        public DataSet getData(string GINNO)
+        public DataSet getData(string GRNNO)
         {
             DataSet ds = null;
             try
@@ -45,15 +147,14 @@ namespace MyGarment.ClassStore
                 ds = new DataSet();
                 Connection Conn = new Connection();
                 Conn.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery = new MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT GINNO,GDIV,DATE,OFFICER,DELIVERYTO,REMARKS,STOREID,APPROVE,APPROVEDATE," +
-                                    "APPROVEBY,CLOSE,CUSTVENDCODE,DELIVERYTONAME,DELIVERYTOADDRESS,DOCREGNO,TYPE" +
-                                " FROM tblgin WHERE GINNO LIKE @GINNO";
-                strQuery.Parameters.AddWithValue("@GINNO", "%" + GINNO + "%");
-                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
-                data.Fill(ds, "tblgin");
+                strQuery.CommandText = "SELECT * " +
+                                " FROM tblgrndetail WHERE GRNNO LIKE @GRNNO";
+                strQuery.Parameters.AddWithValue("@GRNNO", "%" + GRNNO + "%");
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblgrndetail");
                 Conn.Putus();
 
             }
@@ -64,68 +165,35 @@ namespace MyGarment.ClassStore
             return ds;
         }
 
-        public DataSet getData(string ginNO, string TYPEID, string STAT, string OFFICER, string CUSTVENDCODE, int APPROVE)
-        {
-            DataSet ds = null;
-            try
-            {
-                ds = new DataSet();
-                Connection Conn = new Connection();
-                Conn.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
-                strQuery.Connection = Conn.Conn;
-                strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT GINNO,GDIV,DATE,OFFICER,DELIVERYTO,REMARKS,STOREID,APPROVE,APPROVEDATE," +
-                                    "APPROVEBY,CLOSE,CUSTVENDCODE,DELIVERYTONAME,DELIVERYTOADDRESS,DOCREGNO,TYPE" +
-                        " FROM tblgin WHERE ginNO LIKE @ginNO AND TYPEID LIKE @TYPEID AND IFNULL(STAT,1) LIKE @STAT " +
-                        "AND IFNULL(OFFICER,1) LIKE @OFFICER AND CUSTVENDCODE LIKE @CUSTVENDCODE AND APPROVE LIKE @APPROVE";
-                strQuery.Parameters.AddWithValue("@ginNO", "%" + ginNO + "%");
-                strQuery.Parameters.AddWithValue("@TYPEID", "%" + TYPEID + "%");
-                strQuery.Parameters.AddWithValue("@STAT", "%" + STAT + "%");
-                strQuery.Parameters.AddWithValue("@OFFICER", "%" + OFFICER + "%");
-                strQuery.Parameters.AddWithValue("@CUSTVENDCODE", "%" + CUSTVENDCODE + "%");
-                strQuery.Parameters.AddWithValue("@APPROVE", "%" + APPROVE + "%");
-                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
-                data.Fill(ds, "tblgin");
-                Conn.Putus();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return ds;
-        }
-        public bool insertData(gin k)
+        public bool insertData(grndetail k)
         {
             bool stat = false;
             try
             {
                 Connection ConnG = new Connection();
                 ConnG.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery = new MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
 
-                strQuery.CommandText = "INSERT INTO tblgin VALUES(@GINNO,@GDIV,@DATE,@OFFICER,@DELIVERYTO,@REMARKS," +
-                    "@STOREID,@APPROVE,@APPROVEDATE,@APPROVEBY,@CLOSE,@CUSTVENDCODE,@DELIVERYTONAME,@DELIVERYTOADDRESS,@DOCREGNO,@TYPE" +
-                    ")";
-                strQuery.Parameters.AddWithValue("@GINNO", k.GINNO);
-                strQuery.Parameters.AddWithValue("@GDIV", k.GDIV);
-                strQuery.Parameters.AddWithValue("@DATE", k.DATE);
-                strQuery.Parameters.AddWithValue("@OFFICER", k.OFFICER);
-                strQuery.Parameters.AddWithValue("@DELIVERYTO", k.DELIVERYTO);
-                strQuery.Parameters.AddWithValue("@REMARKS", k.REMARKS);
-                strQuery.Parameters.AddWithValue("@STOREID", k.STOREID);
-                strQuery.Parameters.AddWithValue("@APPROVE", k.APPROVE);
-                strQuery.Parameters.AddWithValue("@APPROVEDATE", k.APPROVEDATE);
-                strQuery.Parameters.AddWithValue("@APPROVEBY", k.APPROVEBY);
-                strQuery.Parameters.AddWithValue("@CLOSE", k.CLOSE);
-                strQuery.Parameters.AddWithValue("@CUSTVENDCODE", k.CUSTVENDCODE);
-                strQuery.Parameters.AddWithValue("@DELIVERYTONAME", k.DELIVERYTONAME);
-                strQuery.Parameters.AddWithValue("@DELIVERYTOADDRESS", k.DELIVERYTOADDRESS);
-                strQuery.Parameters.AddWithValue("@DOCREGNO", k.DOCREGNO);
-                strQuery.Parameters.AddWithValue("@TYPE", k.TYPE);
+                strQuery.CommandText = "INSERT INTO tblgrndetail (GRNNO,ID,ITEMSID,DESCRIPTION,JENIS,COLORID,SIZEID,GRADE,STYLEID,PONO,QUANTITY,UOM,CONVER,QTYPURCHASE,UOMPURCHASE) "+
+                            " VALUES(@GRNNO,@ID,@ITEMSID,@DESCRIPTION,@JENIS,@COLORID,@SIZEID,@GRADE,@STYLEID,@PONO,@QUANTITY,@UOM,@CONVER,@QTYPURCHASE,@UOMPURCHASE)";
+                strQuery.Parameters.AddWithValue("@GRNNO", k.GRNNO);
+                strQuery.Parameters.AddWithValue("@ID", k.ID);
+                strQuery.Parameters.AddWithValue("@ITEMSID", k.ITEMSID);
+                strQuery.Parameters.AddWithValue("@DESCRIPTION", k.DESCRIPTION);
+                strQuery.Parameters.AddWithValue("@JENIS", k.JENIS);
+                strQuery.Parameters.AddWithValue("@COLORID", k.COLORID);
+                strQuery.Parameters.AddWithValue("@SIZEID", k.SIZEID);
+                strQuery.Parameters.AddWithValue("@GRADE", k.GRADE);
+                strQuery.Parameters.AddWithValue("@STYLEID", k.STYLEID);
+                strQuery.Parameters.AddWithValue("@PONO", k.PONO);
+                strQuery.Parameters.AddWithValue("@QUANTITY", k.QUANTITY);
+                strQuery.Parameters.AddWithValue("@UOM", k.UOM);
+                strQuery.Parameters.AddWithValue("@CONVER", k.CONVER);
+                strQuery.Parameters.AddWithValue("@QTYPURCHASE", k.QTYPURCHASE);
+                strQuery.Parameters.AddWithValue("@UOMPURCHASE", k.UOMPURCHASE);
+
 
 
                 strQuery.ExecuteNonQuery();
@@ -138,36 +206,38 @@ namespace MyGarment.ClassStore
             }
             return stat;
         }
-        public bool updateData(gin k)
+        public bool updateData(grndetail k,string GRNNo,int ID)
         {
             bool stat = false;
             try
             {
                 Connection ConnG = new Connection();
                 ConnG.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery = new MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "UPDATE tblgin SET QTYORDER=@QTYORDER,GDIV=@GDIV,TYPEID=@TYPEID,CATEGORYID=@CATEGORYID,STAT=@STAT,DATE=@DATE,OFFICER=@OFFICER," +
-                        "ITEMSID=@ITEMSID,CUSTVENDCODE=@CUSTVENDCODE,APPROVE=@APPROVE,APPROVEDATE=@APPROVEDATE,APPROVEBY=@APPROVEBY,COGS=@COGS,MARGIN=@MARGIN,MARGINVALUE=@MARGINVALUE,NETTPRICE=@NETTPRICE," +
-                        "DISCOUNT=@DISCOUNT,DISCOUNTVALUE=@DISCOUNTVALUE,PPN=@PPN,PPNVALUE=@PPNVALUE,SELLINGPRICE=@SELLINGPRICE,KURS=@KURS,VALUEIN=@VALUEIN,REVISE=@REVISE,REVISEDATE=@REVISEDATE,REVISEBY=@REVISEBY" +
-                        " WHERE GINNO=@GINNO";
-                strQuery.Parameters.AddWithValue("@GINNO", k.GINNO);
-                strQuery.Parameters.AddWithValue("@GDIV", k.GDIV);
-                strQuery.Parameters.AddWithValue("@DATE", k.DATE);
-                strQuery.Parameters.AddWithValue("@OFFICER", k.OFFICER);
-                strQuery.Parameters.AddWithValue("@DELIVERYTO", k.DELIVERYTO);
-                strQuery.Parameters.AddWithValue("@REMARKS", k.REMARKS);
-                strQuery.Parameters.AddWithValue("@STOREID", k.STOREID);
-                strQuery.Parameters.AddWithValue("@APPROVE", k.APPROVE);
-                strQuery.Parameters.AddWithValue("@APPROVEDATE", k.APPROVEDATE);
-                strQuery.Parameters.AddWithValue("@APPROVEBY", k.APPROVEBY);
-                strQuery.Parameters.AddWithValue("@CLOSE", k.CLOSE);
-                strQuery.Parameters.AddWithValue("@CUSTVENDCODE", k.CUSTVENDCODE);
-                strQuery.Parameters.AddWithValue("@DELIVERYTONAME", k.DELIVERYTONAME);
-                strQuery.Parameters.AddWithValue("@DELIVERYTOADDRESS", k.DELIVERYTOADDRESS);
-                strQuery.Parameters.AddWithValue("@DOCREGNO", k.DOCREGNO);
-                strQuery.Parameters.AddWithValue("@TYPE", k.TYPE);
+                strQuery.CommandText = "UPDATE tblgrndetail SET GRNNO=@GRNNO,ID=@ID,ITEMSID=@ITEMSID,DESCRIPTION=@DESCRIPTION,JENIS=@JENIS,COLORID=@COLORID,SIZEID=@SIZEID,GRADE=@GRADE,STYLEID=@STYLEID,PONO=@PONO,QUANTITY=@QUANTITY,UOM=@UOM,CONVER=@CONVER,QTYPURCHASE=@QTYPURCHASE,UOMPURCHASE=@UOMPURCHASE"+
+                            " WHERE GRNNO=@GRNNO1 AND ID=@ID1";
+                strQuery.Parameters.AddWithValue("@GRNNO", k.GRNNO);
+                strQuery.Parameters.AddWithValue("@ID", k.ID);
+                strQuery.Parameters.AddWithValue("@ITEMSID", k.ITEMSID);
+                strQuery.Parameters.AddWithValue("@DESCRIPTION", k.DESCRIPTION);
+                strQuery.Parameters.AddWithValue("@JENIS", k.JENIS);
+                strQuery.Parameters.AddWithValue("@COLORID", k.COLORID);
+                strQuery.Parameters.AddWithValue("@SIZEID", k.SIZEID);
+                strQuery.Parameters.AddWithValue("@GRADE", k.GRADE);
+                strQuery.Parameters.AddWithValue("@STYLEID", k.STYLEID);
+                strQuery.Parameters.AddWithValue("@PONO", k.PONO);
+                strQuery.Parameters.AddWithValue("@QUANTITY", k.QUANTITY);
+                strQuery.Parameters.AddWithValue("@UOM", k.UOM);
+                strQuery.Parameters.AddWithValue("@CONVER", k.CONVER);
+                strQuery.Parameters.AddWithValue("@QTYPURCHASE", k.QTYPURCHASE);
+                strQuery.Parameters.AddWithValue("@UOMPURCHASE", k.UOMPURCHASE);
+                //key
+                strQuery.Parameters.AddWithValue("@GRNNO1", GRNNo);
+                strQuery.Parameters.AddWithValue("@ID1", ID);
+
+
                 strQuery.ExecuteNonQuery();
 
                 ConnG.Putus();
@@ -180,18 +250,19 @@ namespace MyGarment.ClassStore
             }
             return stat;
         }
-        public bool deleteData(string GINNO)
+        public bool deleteData(string GRNNO,int ID)
         {
             bool stat = false;
             try
             {
                 Connection ConnG = new Connection();
                 ConnG.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery = new MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "DELETE FROM tblgin WHERE GINNO = @GINNO";
-                strQuery.Parameters.AddWithValue("@CostID", GINNO);
+                strQuery.CommandText = "DELETE FROM tblgrndetail WHERE GRNNO = @GRNNO AND ID=@ID";
+                strQuery.Parameters.AddWithValue("@GRNNO", GRNNO);
+                strQuery.Parameters.AddWithValue("@ID", ID);
                 strQuery.ExecuteNonQuery();
                 stat = true;
                 ConnG.Putus();

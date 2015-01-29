@@ -13,6 +13,55 @@ namespace MyGarment.ClassMaster
     {
         private MySql.Data.MySqlClient.MySqlCommand strQuery = null;
 
+
+        public DataSet getType(string Type)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT ITEMSID,DESCRIPTION,ITEMSTYPEID,TYPE,ACTIVE,IMAGE,PATH FROM tblmitems WHERE TYPE=@Type";
+                strQuery.Parameters.AddWithValue("@Type",  Type );
+                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblmitems");
+                Conn.Putus();
+            }
+            catch
+            {
+            }
+            return ds;
+        }
+
+        public DataSet getStyleGRN(string StyleID,string StyleDesc)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT ITEMSID,DESCRIPTION,ITEMSTYPEID,TYPE,ACTIVE,IMAGE,PATH FROM tblmitems WHERE ITEMSID LIKE @ItemsID AND DESCRIPTION LIKE @Description";
+                strQuery.Parameters.AddWithValue("@ItemsID", "%" + StyleID + "%");
+                strQuery.Parameters.AddWithValue("@Description", "%" + StyleDesc + "%");
+
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblmitems");
+                Conn.Putus();
+
+            }
+            catch
+            {
+            }
+            return ds;
+        }
         public DataSet getData()
         {
             DataSet ds = null;
@@ -36,6 +85,28 @@ namespace MyGarment.ClassMaster
             return ds;
         }
 
+        public DataSet getData(string ItemsID)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT ITEMSID,DESCRIPTION,ITEMSTYPEID,TYPE,ACTIVE,IMAGE,PATH FROM tblmitems WHERE ITEMSID LIKE @ItemsID";
+                strQuery.Parameters.AddWithValue("@ItemsID", "%" + ItemsID + "%");
+                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblmitems");
+                Conn.Putus();
+            }
+            catch
+            {
+            }
+            return ds;
+        }
 
 
         public DataSet getData(string ItemsID, string Description,string ItemsTypeID,string Type)

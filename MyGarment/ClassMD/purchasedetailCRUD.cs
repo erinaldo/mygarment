@@ -46,7 +46,7 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "PONO,ID,COSTINGNO,COSTINGID,COSTINGDESC,MATERIALTYPEID,ITEMSID,DESCRIPTIN,QUANTITY,UOM,PRICE,QTYPURCHASE,UOMPURCHASE,PRICEPURCHASE,TOTAL,CURRENCYID,KURS,DISCOUNT,PPN" +
+                strQuery.CommandText = "SELECT PONO,ID,COSTINGNO,COSTINGID,COSTINGDESC,MATERIALTYPEID,ITEMSID,DESCRIPTION,QUANTITY,UOM,PRICE,QTYPURCHASE,UOMPURCHASE,PRICEPURCHASE,TOTAL,CURRENCYID,KURS,DISCOUNT,PPN,CONVER" +
                                        " FROM tblpurchasedetail WHERE PONO=@PONO";
                 strQuery.Parameters.AddWithValue("@PONO", PONO);
                 MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
@@ -59,6 +59,57 @@ namespace MyGarment.ClassMD
             return ds;
         }
 
+        public DataSet getDataGrn(string PONO)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT PONO,ID,tblpurchasedetail.COSTINGNO,COSTINGID,COSTINGDESC,MATERIALTYPEID,tblpurchasedetail.ITEMSID,DESCRIPTION,QUANTITY,UOM,PRICE,QTYPURCHASE,UOMPURCHASE,PRICEPURCHASE,TOTAL,CURRENCYID,tblpurchasedetail.KURS,tblpurchasedetail.DISCOUNT,tblpurchasedetail.PPN,CONVER,tblcosting.ITEMSID AS STYLEID"+
+                                       " FROM tblpurchasedetail "+
+                                       " LEFT JOIN tblcosting ON tblcosting.COSTINGNO=tblpurchasedetail.COSTINGNO "+
+                                       " WHERE PONO=@PONO";
+                strQuery.Parameters.AddWithValue("@PONO", PONO);
+                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblpurchasedetail");
+                Conn.Putus();
+            }
+            catch
+            {
+            }
+            return ds;
+        }
+
+
+        public DataSet getData(string PONO,int ID)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT PONO,ID,COSTINGNO,COSTINGID,COSTINGDESC,MATERIALTYPEID,ITEMSID,DESCRIPTION,QUANTITY,UOM,PRICE,QTYPURCHASE,UOMPURCHASE,PRICEPURCHASE,TOTAL,CURRENCYID,KURS,DISCOUNT,PPN,CONVER" +
+                                       " FROM tblpurchasedetail WHERE PONO=@PONO AND ID=@ID";
+                strQuery.Parameters.AddWithValue("@PONO", PONO);
+                strQuery.Parameters.AddWithValue("@ID", ID);
+                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblpurchasedetail");
+                Conn.Putus();
+            }
+            catch
+            {
+            }
+            return ds;
+        }
 
         public bool insertData(purchasedetail k)
         {
@@ -71,8 +122,9 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "INSERT INTO tblpurchasedetail VALUES(@PONO,@ID,@COSTINGNO,@COSTINGID,@COSTINGDESC,@MATERIALTYPEID,@ITEMSID,@DESCRIPTION,@QUANTITY,@UOM, "+
-                                        "@PRICE,@QTYPURCHASE,@UOMPURCHASE,@PRICEPURCHASE,@TOTAL,@CURRENCYID,@KURS,@DISCOUNT,@PPN)";
+                strQuery.CommandText = "INSERT INTO tblpurchasedetail(PONO,ID,COSTINGNO,COSTINGID,COSTINGDESC,MATERIALTYPEID,ITEMSID,DESCRIPTION,QUANTITY,UOM, PRICE,QTYPURCHASE,UOMPURCHASE,PRICEPURCHASE,TOTAL,CURRENCYID,KURS,DISCOUNT,PPN,CONVER)"+ 
+                                        " VALUES(@PONO,@ID,@COSTINGNO,@COSTINGID,@COSTINGDESC,@MATERIALTYPEID,@ITEMSID,@DESCRIPTION,@QUANTITY,@UOM," +
+                                        "@PRICE,@QTYPURCHASE,@UOMPURCHASE,@PRICEPURCHASE,@TOTAL,@CURRENCYID,@KURS,@DISCOUNT,@PPN,@CONVER)";
                 strQuery.Parameters.AddWithValue("@PONO", k.PONO);
                 strQuery.Parameters.AddWithValue("@ID", k.ID);
                 strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);
@@ -81,7 +133,8 @@ namespace MyGarment.ClassMD
                 strQuery.Parameters.AddWithValue("@MATERIALTYPEID", k.MATERIALTYPEID);
                 strQuery.Parameters.AddWithValue("@ITEMSID", k.ITEMSID);
                 strQuery.Parameters.AddWithValue("@DESCRIPTION", k.DESCRIPTION);
-                strQuery.Parameters.AddWithValue("@UOMID", k.UOM);
+                strQuery.Parameters.AddWithValue("@QUANTITY", k.QUANTITY);
+                strQuery.Parameters.AddWithValue("@UOM", k.UOM);
                 strQuery.Parameters.AddWithValue("@PRICE", k.PRICE);
                 strQuery.Parameters.AddWithValue("@QTYPURCHASE", k.QTYPURCHASE);
                 strQuery.Parameters.AddWithValue("@UOMPURCHASE", k.UOMPURCHASE);
@@ -91,6 +144,7 @@ namespace MyGarment.ClassMD
                 strQuery.Parameters.AddWithValue("@KURS", k.KURS);
                 strQuery.Parameters.AddWithValue("@DISCOUNT", k.DISCOUNT);
                 strQuery.Parameters.AddWithValue("@PPN", k.PPN);
+                strQuery.Parameters.AddWithValue("@CONVER", k.CONVER);
                 strQuery.ExecuteNonQuery();
                 stat = true;
 
@@ -115,9 +169,12 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "UPDATE tblpurchasedetail SET PONO=@PONO,ID=@ID,COSTINGNO=@COSTINGNO,COSTINGID=@COSTINGID,COSTINGDESC=@COSTINGDESC,MATERIALTYPEID=@MATERIALTYPEID,ITEMSID=@ITEMSID,DESCRIPTION=@DESCRIPTION,QUANTITY=@QUANTITY,UOM=@UOM, " +
-                                        "PRICE=@PRICE,QTYPURCHASE=@QTYPURCHASE,UOMPURCHASE=@UOMPURCHASE,PRICEPURCHASE=@PRICEPURCHASE,TOTAL=@TOTAL,CURRENCYID=@CURRENCYID,KURS=@KURS,DISCOUNT=@DISCOUNT,PPN=@PPN" +
-                                        "WHERE PONO=@PONO AND ID=@ID";
+                
+                strQuery.CommandText = "UPDATE tblpurchasedetail SET COSTINGNO=@COSTINGNO,COSTINGID=@COSTINGID,COSTINGDESC=@COSTINGDESC,MATERIALTYPEID=@MATERIALTYPEID,ITEMSID=@ITEMSID,DESCRIPTION=@DESCRIPTION,QUANTITY=@QUANTITY,UOM=@UOM, " +
+                                        "PRICE=@PRICE,QTYPURCHASE=@QTYPURCHASE,UOMPURCHASE=@UOMPURCHASE,PRICEPURCHASE=@PRICEPURCHASE,TOTAL=@TOTAL,CURRENCYID=@CURRENCYID,KURS=@KURS,DISCOUNT=@DISCOUNT,PPN=@PPN,CONVER=@CONVER " +
+                                        " WHERE PONO=@PONO AND ID=@ID";
+                
+
                 strQuery.Parameters.AddWithValue("@PONO", k.PONO);
                 strQuery.Parameters.AddWithValue("@ID", k.ID);
                 strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);
@@ -126,7 +183,8 @@ namespace MyGarment.ClassMD
                 strQuery.Parameters.AddWithValue("@MATERIALTYPEID", k.MATERIALTYPEID);
                 strQuery.Parameters.AddWithValue("@ITEMSID", k.ITEMSID);
                 strQuery.Parameters.AddWithValue("@DESCRIPTION", k.DESCRIPTION);
-                strQuery.Parameters.AddWithValue("@UOMID", k.UOM);
+                strQuery.Parameters.AddWithValue("@QUANTITY", k.QUANTITY);
+                strQuery.Parameters.AddWithValue("@UOM", k.UOM);
                 strQuery.Parameters.AddWithValue("@PRICE", k.PRICE);
                 strQuery.Parameters.AddWithValue("@QTYPURCHASE", k.QTYPURCHASE);
                 strQuery.Parameters.AddWithValue("@UOMPURCHASE", k.UOMPURCHASE);
@@ -136,18 +194,20 @@ namespace MyGarment.ClassMD
                 strQuery.Parameters.AddWithValue("@KURS", k.KURS);
                 strQuery.Parameters.AddWithValue("@DISCOUNT", k.DISCOUNT);
                 strQuery.Parameters.AddWithValue("@PPN", k.PPN);
+                strQuery.Parameters.AddWithValue("@CONVER", k.CONVER);
                 strQuery.ExecuteNonQuery();
 
                 ConnG.Putus();
                 stat = true;
 
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
             }
             return stat;
         }
-        public bool deleteData(string costID)
+        public bool deleteData(string PONO,int ID)
         {
             bool stat = false;
             try
@@ -157,8 +217,9 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "DELETE FROM tblcosting WHERE COSTINGNO = @CostID";
-                strQuery.Parameters.AddWithValue("@CostID", costID);
+                strQuery.CommandText = "DELETE FROM tblpurchasedetail  WHERE PONO=@PONO AND ID=@ID";
+                strQuery.Parameters.AddWithValue("@PONO", PONO);
+                strQuery.Parameters.AddWithValue("@ID", ID);
                 strQuery.ExecuteNonQuery();
                 stat = true;
                 ConnG.Putus();

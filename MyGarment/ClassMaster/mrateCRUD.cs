@@ -36,6 +36,29 @@ namespace MyGarment.ClassMaster
             return ds;
         }
 
+        public DataSet getData(string CURRENCYID)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "SELECT ID,DATE,CURRENCYID,KURS from tblmrate WHERE CURRENCYID=@CURRENCYID ORDER BY DATE DESC LIMIT 1";
+                MySqlDataAdapter data = new MySqlDataAdapter(strQuery);
+                strQuery.Parameters.AddWithValue("@CURRENCYID", CURRENCYID);
+                data.Fill(ds, "tblmrate");
+                Conn.Putus();
+
+            }
+            catch
+            {
+            }
+            return ds;
+        }
 
 
         public DataSet getData(DateTime Date1, DateTime Date2)

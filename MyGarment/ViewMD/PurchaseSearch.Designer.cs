@@ -34,7 +34,7 @@
             this.cbApprove = new System.Windows.Forms.ComboBox();
             this.txtOfficer = new System.Windows.Forms.TextBox();
             this.txtStatus = new System.Windows.Forms.TextBox();
-            this.txtCostingNo = new System.Windows.Forms.TextBox();
+            this.txtPONO = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtTypeID = new System.Windows.Forms.TextBox();
@@ -60,7 +60,7 @@
             this.panel2.Controls.Add(this.cbApprove);
             this.panel2.Controls.Add(this.txtOfficer);
             this.panel2.Controls.Add(this.txtStatus);
-            this.panel2.Controls.Add(this.txtCostingNo);
+            this.panel2.Controls.Add(this.txtPONO);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.txtTypeID);
@@ -103,13 +103,13 @@
             this.txtStatus.Size = new System.Drawing.Size(164, 20);
             this.txtStatus.TabIndex = 75;
             // 
-            // txtCostingNo
+            // txtPONO
             // 
-            this.txtCostingNo.BackColor = System.Drawing.SystemColors.Info;
-            this.txtCostingNo.Location = new System.Drawing.Point(87, 13);
-            this.txtCostingNo.Name = "txtCostingNo";
-            this.txtCostingNo.Size = new System.Drawing.Size(129, 20);
-            this.txtCostingNo.TabIndex = 67;
+            this.txtPONO.BackColor = System.Drawing.SystemColors.Info;
+            this.txtPONO.Location = new System.Drawing.Point(87, 13);
+            this.txtPONO.Name = "txtPONO";
+            this.txtPONO.Size = new System.Drawing.Size(129, 20);
+            this.txtPONO.TabIndex = 67;
             // 
             // label4
             // 
@@ -264,7 +264,7 @@
         private System.Windows.Forms.ComboBox cbApprove;
         private System.Windows.Forms.TextBox txtOfficer;
         private System.Windows.Forms.TextBox txtStatus;
-        private System.Windows.Forms.TextBox txtCostingNo;
+        private System.Windows.Forms.TextBox txtPONO;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtTypeID;

@@ -9,8 +9,15 @@ namespace MyGarment
 {
     class Connection
     {
-        string strCon = "Server=localhost;Port=3306;UID=root;PWD='';Database=mygarment";
-        public MySql.Data.MySqlClient.MySqlConnection Conn = new MySql.Data.MySqlClient.MySqlConnection();
+        //string strCon = "Server=192.168.1.243;Port=3306;UID=root;PWD='';Database=mygarment";
+        //string strCon = "Server=localhost;Port=3306;UID=root;PWD='';Database=mygarment";
+        string Server = Properties.Settings.Default.Server;
+        string Database = Properties.Settings.Default.Database;
+        string strCon;
+        //= "Server="+Server+";Port=3306;UID=root;PWD='';Database=mygarment";
+        
+
+        public MySqlConnection Conn = new MySqlConnection();
 
         //method untuk koneksi database
         public void Konek()
@@ -18,6 +25,7 @@ namespace MyGarment
             Conn.Close();
             try
             {
+                strCon = "Server=" + Server + ";Port=3306;UID=root;PWD='';Database="+Database;
                 Conn.ConnectionString = strCon;
                 Conn.Open();
             }
@@ -49,6 +57,7 @@ namespace MyGarment
             //close connection
             return true;
         }
+
 
     }
 }

@@ -7,15 +7,16 @@ namespace MyGarment.ClassMD
 {
     class joborderdetail
     {
-        public string ORDERNO{ get; set; }
-        public string ITEMSID{ get; set; }
-        public string COLORID{ get; set; }
-        public string SIZEID{ get; set; }
-        public string NOURUT{ get; set; }
-        public string DELIVERY{ get; set; }
-        public string QUANTITY{ get; set; }
-        public string CUTTINGQTY{ get; set; }
-        public string ALLOWANCE{ get; set; }
+        public string ORDERNO { get; set; }
+        public string POCUSTOMER { get; set; }
+        public string COLORID { get; set; }
+        public string SIZEID { get; set; }
+        public int NOURUT { get; set; }
+        public DateTime? DELIVERY { get; set; }
+        public float QUANTITY { get; set; }
+        public float CUTTINGQTY { get; set; }
+        public float ALLOWANCE { get; set; }
         public string DESTINATION { get; set; }
+
     }
 }

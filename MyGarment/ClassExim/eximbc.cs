@@ -7,5 +7,9 @@ namespace MyGarment.ClassExim
 {
     class eximbc
     {
+        public string DOCTYPE { get; set; }
+        public string JENIS { get; set; }
+        public string DESCRIPTION { get; set; }
+
     }
 }

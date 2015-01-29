@@ -36,11 +36,29 @@ namespace MyGarment.ViewForm
         private void SimpanTSB_Click(object sender, EventArgs e)
         {
             mcustvend K = new mcustvend();
-            K.CustVendCode = txtCustVendCode.Text;
-            K.Name = txtName.Text;
-            K.Type = txtType.Text;
-            K.Active = Convert.ToInt32(txtActive.Text);
-            //K.Type = null;
+           
+
+            K.CUSTVENDCODE=txtCustVendCode.Text;
+            K.NAME=txtName.Text;
+            K.TYPE=txtType.Text;
+            K.ACTIVE=Convert.ToInt32(txtActive.Text);
+            //K.DATE=
+            K.CONTACTPERSON=txtContactPerson.Text;
+            K.CONTACTTITLE=txtContactTitle.Text;
+            K.ADDRESS=txtAddress.Text;
+            K.CITY=txtCity.Text;
+            K.ZIPCODE=txtZipCode.Text;
+            K.COUNTRY=txtCountry.Text;
+            K.HP=txtHP.Text;
+            K.PHONE=txtPhone.Text;
+            K.FAX=txtFax.Text;
+            //K.REMARKS=txtre
+            //K.TAX=
+            //K.CURRENCYID=
+            //K.NPWP=
+            //K.NPKP=
+        
+            
             if (new mcustvendCRUD().insertData(K))
             {
                 MessageBox.Show("Data berhasil di tambahkan");
@@ -54,14 +72,24 @@ namespace MyGarment.ViewForm
 
         private void UbahTSB_Click(object sender, EventArgs e)
         {
-            mcustvend k = new mcustvend();
+            mcustvend K = new mcustvend();
 
-            k.CustVendCode = txtCustVendCode.Text;
-            k.Name = txtName.Text;
-            k.Type = txtType.Text;
-            k.Active = Convert.ToInt32(txtActive.Text);
+            K.CUSTVENDCODE = txtCustVendCode.Text;
+            K.NAME = txtName.Text;
+            K.TYPE = txtType.Text;
+            K.ACTIVE = Convert.ToInt32(txtActive.Text);
+            //K.DATE=
+            K.CONTACTPERSON = txtContactPerson.Text;
+            K.CONTACTTITLE = txtContactTitle.Text;
+            K.ADDRESS = txtAddress.Text;
+            K.CITY = txtCity.Text;
+            K.ZIPCODE = txtZipCode.Text;
+            K.COUNTRY = txtCountry.Text;
+            K.HP = txtHP.Text;
+            K.PHONE = txtPhone.Text;
+            K.FAX = txtFax.Text;
           
-            if (new mcustvendCRUD().updateData(k))
+            if (new mcustvendCRUD().updateData(K))
             {
                 MessageBox.Show("Update Sukses");
                 Binding();
@@ -99,6 +127,45 @@ namespace MyGarment.ViewForm
             txtName.Text = null;
             txtType.Text = null;
 
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DtGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.DtGrid.Rows[e.RowIndex];
+                /*
+                txtCostID.Text = row.Cells[0].Value.ToString();
+                txtDescription.Text = row.Cells[1].Value.ToString();
+                txtActive.Text = row.Cells[2].Value.ToString();
+                */
+                txtCustVendCode.Text = row.Cells[0].Value.ToString();
+                txtName.Text = row.Cells[1].Value.ToString();
+                txtType.Text = row.Cells[2].Value.ToString(); 
+                txtActive.Text=row.Cells[3].Value.ToString();
+                //K.DATE=4
+                txtContactPerson.Text = row.Cells[5].Value.ToString();
+                txtContactTitle.Text = row.Cells[6].Value.ToString();
+                txtAddress.Text = row.Cells[7].Value.ToString();
+                txtCity.Text = row.Cells[8].Value.ToString();
+                txtZipCode.Text = row.Cells[9].Value.ToString();
+                txtCountry.Text = row.Cells[10].Value.ToString();
+                txtHP.Text = row.Cells[11].Value.ToString();
+                txtPhone.Text = row.Cells[12].Value.ToString();
+                txtFax.Text = row.Cells[13].Value.ToString(); 
+                //K.REMARKS=txtre
+                //K.TAX=
+                //K.CURRENCYID=
+                //K.NPWP=
+                //K.NPKP=
+
+
+            }
         }
     }
 }

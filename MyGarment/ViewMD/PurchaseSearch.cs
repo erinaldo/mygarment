@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MyGarment.ClassMD;
 
 namespace MyGarment.ViewFinance
 {
@@ -51,9 +52,9 @@ namespace MyGarment.ViewFinance
 
         private void RecordTSB_Click(object sender, EventArgs e)
         {
-            //DataSet data = new purchaseCRUD().getData(txtCostingNo.Text, txtTypeID.Text, txtStatus.Text, txtOfficer.Text, txtCustomer.Text, Convert.ToInt32(cbApprove.Text));
-            //DtGrid.DataSource = data;
-            //DtGrid.DataMember = "tblcosting";
+            DataSet data = new purchaseCRUD().getData(txtPONO.Text);
+            DtGrid.DataSource = data;
+            DtGrid.DataMember = "tblpurchase";
         }
     }
 }

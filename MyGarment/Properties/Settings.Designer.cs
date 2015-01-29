@@ -23,13 +23,39 @@ namespace MyGarment.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.67;Initial Catalog=dbDATA;User ID=itmis;Password=itmis")]
-        public string dbDATAConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
+        public string Server {
             get {
-                return ((string)(this["dbDATAConnectionString"]));
+                return ((string)(this["Server"]));
+            }
+            set {
+                this["Server"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MyGarment")]
+        public string Database {
+            get {
+                return ((string)(this["Database"]));
+            }
+            set {
+                this["Database"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("user")]
+        public string UserID {
+            get {
+                return ((string)(this["UserID"]));
+            }
+            set {
+                this["UserID"] = value;
             }
         }
     }

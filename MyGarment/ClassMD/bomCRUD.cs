@@ -12,7 +12,8 @@ namespace MyGarment.ClassMD
     {
         private MySql.Data.MySqlClient.MySqlCommand strQuery = null;
 
-        public DataSet prCosting(string COSTINGNO)
+
+        public DataSet prBOM(string COSTINGNO)
         {
             DataSet ds = null;
             try
@@ -24,22 +25,33 @@ namespace MyGarment.ClassMD
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
                 /*
-                strQuery.CommandText = "SELECT * FROM tblbom " +
-                        "INNER JOIN tblbomdetail ON tblbom.COSTINGNO=tblbomdetail.COSTINGNO" +
-                        " WHERE tblbom.COSTINGNO = @COSTINGNO";
-                 */
-                strQuery.CommandText = "SELECT * FROM tblbom " +
-                        "INNER JOIN tblbomdetail ON tblbom.COSTINGNO=tblbomdetail.COSTINGNO " +
-                        " INNER  JOIN tblmitems ON tblmitems.ITEMSID=tblbom.ITEMSID" +
-                        " INNER JOIN tblmcategory ON tblmcategory.CATEGORYID=tblbom.CATEGORYID" +
-                        " INNER JOIN tblmtype ON tblmtype.TYPEID=tblbom.TYPEID" +
-                        " INNER JOIN tblmcustvend ON tblmcustvend.CUSTVENDCODE=tblbom.CUSTVENDCODE" +
-                        " INNER JOIN tblmcost ON tblmcost.COSTID=tblbomdetail.COSTID" +
-                        " WHERE tblbom.COSTINGNO = @COSTINGNO";
+                strQuery.CommandText = "SELECT * FROM tblcosting " +
+                        "INNER JOIN tblcostingdetail ON tblcosting.COSTINGNO=tblcostingdetail.COSTINGNO " +
+                        "LEFT JOIN tblbom ON tblcosting.COSTINGNO=tblbom.COSTINGNO AND tblcostingdetail.ID=tblbom.ID " +
+                        " INNER  JOIN tblmitems ON tblmitems.ITEMSID=tblcosting.ITEMSID" +
+                        " LEFT JOIN tblmitems tblmitems1 ON tblmitems1.ITEMSID=tblbom.ITEMSID " +
+                        " INNER JOIN tblmcategory ON tblmcategory.CATEGORYID=tblcosting.CATEGORYID" +
+                        " INNER JOIN tblmtype ON tblmtype.TYPEID=tblcosting.TYPEID" +
+                        " INNER JOIN tblmcustvend ON tblmcustvend.CUSTVENDCODE=tblcosting.CUSTVENDCODE" +
+                        " INNER JOIN tblmcost ON tblmcost.COSTID=tblcostingdetail.COSTID" +
+                        " LEFT JOIN tbljoborder ON tblcosting.JONO=tbljoborder.ORDERNO" +
+                        " WHERE tblcosting.COSTINGNO = @COSTINGNO";
+                */
+                strQuery.CommandText = "SELECT * FROM tblcosting " +
+                        "INNER JOIN tblcostingdetail ON tblcosting.COSTINGNO=tblcostingdetail.COSTINGNO " +
+                        "LEFT JOIN tblbom ON tblcosting.COSTINGNO=tblbom.COSTINGNO AND tblcostingdetail.ID=tblbom.ID " +
+                        " INNER  JOIN tblmitems ON tblmitems.ITEMSID=tblcosting.ITEMSID" +
+                        " INNER JOIN tblmitems tblmitems1 ON tblmitems1.ITEMSID=tblbom.ITEMSID " +
+                        " INNER JOIN tblmcategory ON tblmcategory.CATEGORYID=tblcosting.CATEGORYID" +
+                        " INNER JOIN tblmtype ON tblmtype.TYPEID=tblcosting.TYPEID" +
+                        " INNER JOIN tblmcustvend ON tblmcustvend.CUSTVENDCODE=tblcosting.CUSTVENDCODE" +
+                        " INNER JOIN tblmcost ON tblmcost.COSTID=tblcostingdetail.COSTID" +
+                        " LEFT JOIN tbljoborder ON tblcosting.JONO=tbljoborder.ORDERNO" +
+                        " WHERE tblcosting.COSTINGNO = @COSTINGNO";
 
                 strQuery.Parameters.AddWithValue("@COSTINGNO", COSTINGNO);
                 MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
-                data.Fill(ds, "tblbom");
+                data.Fill(ds, "tblcosting");
                 Conn.Putus();
 
             }
@@ -49,7 +61,6 @@ namespace MyGarment.ClassMD
             }
             return ds;
         }
-
 
         public DataSet getData()
         {
@@ -62,10 +73,8 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT COSTINGNO, QTYORDER,GDIV,TYPEID,CATEGORYID,STAT,DATE,OFFICER," +
-                        "ITEMSID,CUSTVENDCODE,APPROVE,APPROVEDATE,APPROVEBY,COGS,MARGIN,MARGINVALUE,NETTPRICE," +
-                        "DISCOUNT,DISCOUNTVALUE,PPN,PPNVALUE,SELLINGPRICE,KURS,VALUEIN,REVISE,REVISEDATE,REVISEBY " +
-                        " FROM tblbom";
+                strQuery.CommandText = "SELECT * " +
+                                        " FROM tblbom";
                 MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
                 data.Fill(ds, "tblbom");
                 Conn.Putus();
@@ -76,7 +85,7 @@ namespace MyGarment.ClassMD
             return ds;
         }
 
-        public DataSet getData(string COSTINGNO)
+        public DataSet getData(string COSTINGNO,int ID)
         {
             DataSet ds = null;
             try
@@ -87,11 +96,51 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT COSTINGNO,QTYORDER,GDIV,TYPEID,CATEGORYID,STAT,DATE,OFFICER," +
-                        "ITEMSID,CUSTVENDCODE,APPROVE,APPROVEDATE,APPROVEBY,COGS,MARGIN,MARGINVALUE,NETTPRICE," +
-                        "DISCOUNT,DISCOUNTVALUE,PPN,PPNVALUE,SELLINGPRICE,KURS,VALUEIN,REVISE,REVISEDATE,REVISEBY" +
-                        " FROM tblbom WHERE COSTINGNO LIKE @COSTINGNO";
-                strQuery.Parameters.AddWithValue("@COSTINGNO", "%" + COSTINGNO + "%");
+                strQuery.CommandText = "SELECT * " +
+                        " FROM tblbom WHERE COSTINGNO=@COSTINGNO AND ID=@ID";
+                strQuery.Parameters.AddWithValue("@COSTINGNO",COSTINGNO);
+                strQuery.Parameters.AddWithValue("@ID",ID);
+                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
+                data.Fill(ds, "tblbom");
+                Conn.Putus();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ds;
+        }
+
+        public DataSet getData(bom k)
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = new DataSet();
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = "";
+                strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);
+                strQuery.Parameters.AddWithValue("@ID", k.ID);
+                strQuery.Parameters.AddWithValue("@COLORID", k.COLORID);
+                strQuery.Parameters.AddWithValue("@SIZEID", k.SIZEID);
+                strQuery.Parameters.AddWithValue("@ITEMSID", k.ITEMSID);
+                strQuery.Parameters.AddWithValue("@ORDERNO", k.ORDERNO);
+                strQuery.Parameters.AddWithValue("@REMARKS", k.REMARKS);
+                strQuery.Parameters.AddWithValue("@CONSUMPTION", k.CONSUMPTION);
+                strQuery.Parameters.AddWithValue("@ALLOWANCE", k.ALLOWANCE);
+                strQuery.Parameters.AddWithValue("@QTYORDER", k.QTYORDER);
+                strQuery.Parameters.AddWithValue("@TOTCONSUMPTION", k.TOTCONSUMPTION);
+                strQuery.Parameters.AddWithValue("@UOM", k.UOM);
+                strQuery.Parameters.AddWithValue("@SUPPLIER", k.SUPPLIER);
+                strQuery.Parameters.AddWithValue("@PONO", k.PONO);
+                strQuery.Parameters.AddWithValue("@QTYPO", k.QTYPO);
+                strQuery.Parameters.AddWithValue("@QTYSTORE", k.QTYSTORE);
+
                 MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
                 data.Fill(ds, "tblbom");
                 Conn.Putus();
@@ -103,41 +152,7 @@ namespace MyGarment.ClassMD
             }
             return ds;
         }
-
-        public DataSet getData(string COSTINGNO, string TYPEID, string STAT, string OFFICER, string CUSTVENDCODE, int APPROVE)
-        {
-            DataSet ds = null;
-            try
-            {
-                ds = new DataSet();
-                Connection Conn = new Connection();
-                Conn.Konek();
-                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
-                strQuery.Connection = Conn.Conn;
-                strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT COSTINGNO,QTYORDER,GDIV,TYPEID,CATEGORYID,STAT,DATE,OFFICER," +
-                        "ITEMSID,CUSTVENDCODE,APPROVE,APPROVEDATE,APPROVEBY,COGS,MARGIN,MARGINVALUE,NETTPRICE," +
-                        "DISCOUNT,DISCOUNTVALUE,PPN,PPNVALUE,SELLINGPRICE,KURS,VALUEIN,REVISE,REVISEDATE,REVISEBY" +
-                        " FROM tblbom WHERE COSTINGNO LIKE @COSTINGNO AND TYPEID LIKE @TYPEID AND IFNULL(STAT,1) LIKE @STAT " +
-                        "AND IFNULL(OFFICER,1) LIKE @OFFICER AND CUSTVENDCODE LIKE @CUSTVENDCODE AND APPROVE LIKE @APPROVE";
-                strQuery.Parameters.AddWithValue("@COSTINGNO", "%" + COSTINGNO + "%");
-                strQuery.Parameters.AddWithValue("@TYPEID", "%" + TYPEID + "%");
-                strQuery.Parameters.AddWithValue("@STAT", "%" + STAT + "%");
-                strQuery.Parameters.AddWithValue("@OFFICER", "%" + OFFICER + "%");
-                strQuery.Parameters.AddWithValue("@CUSTVENDCODE", "%" + CUSTVENDCODE + "%");
-                strQuery.Parameters.AddWithValue("@APPROVE", "%" + APPROVE + "%");
-                MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
-                data.Fill(ds, "tblbom");
-                Conn.Putus();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return ds;
-        }
-        public bool insertData(costing k)
+        public bool insertData(bom k)
         {
             bool stat = false;
             try
@@ -148,36 +163,26 @@ namespace MyGarment.ClassMD
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
 
-                strQuery.CommandText = "INSERT INTO tblbom VALUES(@COSTINGNO,@QTYORDER,@GDIV,@TYPEID,@CATEGORYID,@STAT,@DATE,@OFFICER," +
-                        "@ITEMSID,@CUSTVENDCODE,@APPROVE,@APPROVEDATE,@APPROVEBY,@COGS,@MARGIN,@MARGINVALUE,@NETTPRICE," +
-                        "@DISCOUNT,@DISCOUNTVALUE,@PPN,@PPNVALUE,@SELLINGPRICE,@KURS,@VALUEIN,@REVISE,@REVISEDATE,@REVISEBY)";
+                strQuery.CommandText = "INSERT INTO tblbom(COSTINGNO,ID,COLORID,SIZEID,ITEMSID,ORDERNO,REMARKS,CONSUMPTION,ALLOWANCE,QTYORDER,TOTCONSUMPTION,UOM,SUPPLIER,PONO,QTYSTORE,QTYPO) " +
+                        "VALUES(@COSTINGNO,@ID,@COLORID,@SIZEID,@ITEMSID,@ORDERNO,@REMARKS,@CONSUMPTION,@ALLOWANCE,@QTYORDER,@TOTCONSUMPTION,@UOM,@SUPPLIER,@PONO,@QTYSTORE,@QTYPO)";
                 strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);
-                strQuery.Parameters.AddWithValue("@QTYORDER", k.QTYORDER);
-                strQuery.Parameters.AddWithValue("@GDIV", k.GDIV);
-                strQuery.Parameters.AddWithValue("@TYPEID", k.TYPEID);
-                strQuery.Parameters.AddWithValue("@CATEGORYID", k.CATEGORYID);
-                strQuery.Parameters.AddWithValue("@STAT", k.STAT);
-                strQuery.Parameters.AddWithValue("@DATE", k.DATE);
-                strQuery.Parameters.AddWithValue("@OFFICER", k.OFFICER);
+                strQuery.Parameters.AddWithValue("@ID", k.ID);
+                strQuery.Parameters.AddWithValue("@COLORID", k.COLORID);
+                strQuery.Parameters.AddWithValue("@SIZEID", k.SIZEID);
                 strQuery.Parameters.AddWithValue("@ITEMSID", k.ITEMSID);
-                strQuery.Parameters.AddWithValue("@CUSTVENDCODE", k.CUSTVENDCODE);
-                strQuery.Parameters.AddWithValue("@APPROVE", k.APPROVE);
-                strQuery.Parameters.AddWithValue("@APPROVEDATE", k.APPROVEDATE);
-                strQuery.Parameters.AddWithValue("@APPROVEBY", k.APPROVEBY);
-                strQuery.Parameters.AddWithValue("@COGS", k.COGS);
-                strQuery.Parameters.AddWithValue("@MARGIN", k.MARGIN);
-                strQuery.Parameters.AddWithValue("@MARGINVALUE", k.MARGINVALUE);
-                strQuery.Parameters.AddWithValue("@NETTPRICE", k.NETTPRICE);
-                strQuery.Parameters.AddWithValue("@DISCOUNT", k.DISCOUNT);
-                strQuery.Parameters.AddWithValue("@DISCOUNTVALUE", k.DISCOUNTVALUE);
-                strQuery.Parameters.AddWithValue("@PPN", k.PPN);
-                strQuery.Parameters.AddWithValue("@PPNVALUE", k.PPNVALUE);
-                strQuery.Parameters.AddWithValue("@SELLINGPRICE", k.SELLINGPRICE);
-                strQuery.Parameters.AddWithValue("@KURS", k.KURS);
-                strQuery.Parameters.AddWithValue("@VALUEIN", k.VALUEIN);
-                strQuery.Parameters.AddWithValue("@REVISE", k.REVISE);
-                strQuery.Parameters.AddWithValue("@REVISEDATE", k.REVISEDATE);
-                strQuery.Parameters.AddWithValue("@REVISEBY", k.REVISEBY);
+                strQuery.Parameters.AddWithValue("@ORDERNO", k.ORDERNO);
+                strQuery.Parameters.AddWithValue("@REMARKS", k.REMARKS);
+                strQuery.Parameters.AddWithValue("@CONSUMPTION", k.CONSUMPTION);
+                strQuery.Parameters.AddWithValue("@ALLOWANCE", k.ALLOWANCE);
+                strQuery.Parameters.AddWithValue("@QTYORDER", k.QTYORDER);
+                strQuery.Parameters.AddWithValue("@TOTCONSUMPTION", k.TOTCONSUMPTION);
+                strQuery.Parameters.AddWithValue("@UOM", k.UOM);
+                strQuery.Parameters.AddWithValue("@SUPPLIER", k.SUPPLIER);
+                strQuery.Parameters.AddWithValue("@PONO", k.PONO);
+                strQuery.Parameters.AddWithValue("@QTYPO", k.QTYPO);
+                strQuery.Parameters.AddWithValue("@QTYSTORE", k.QTYSTORE);
+
+
 
                 strQuery.ExecuteNonQuery();
                 stat = true;
@@ -189,7 +194,7 @@ namespace MyGarment.ClassMD
             }
             return stat;
         }
-        public bool updateData(costing k)
+        public bool updateData(bom k,string CostingNo,int ID,string ColorID,string SizeID)
         {
             bool stat = false;
             try
@@ -199,37 +204,28 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "UPDATE tblbom SET QTYORDER=@QTYORDER,GDIV=@GDIV,TYPEID=@TYPEID,CATEGORYID=@CATEGORYID,STAT=@STAT,DATE=@DATE,OFFICER=@OFFICER," +
-                        "ITEMSID=@ITEMSID,CUSTVENDCODE=@CUSTVENDCODE,APPROVE=@APPROVE,APPROVEDATE=@APPROVEDATE,APPROVEBY=@APPROVEBY,COGS=@COGS,MARGIN=@MARGIN,MARGINVALUE=@MARGINVALUE,NETTPRICE=@NETTPRICE," +
-                        "DISCOUNT=@DISCOUNT,DISCOUNTVALUE=@DISCOUNTVALUE,PPN=@PPN,PPNVALUE=@PPNVALUE,SELLINGPRICE=@SELLINGPRICE,KURS=@KURS,VALUEIN=@VALUEIN,REVISE=@REVISE,REVISEDATE=@REVISEDATE,REVISEBY=@REVISEBY" +
-                        " WHERE COSTINGNO=@COSTINGNO";
-                strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);
+                strQuery.CommandText = "UPDATE tblbom SET COSTINGNO=@COSTINGNO,ID=@ID,COLORID=@COLORID,SIZEID=@SIZEID,ITEMSID=@ITEMSID,ORDERNO=ORDERNO,REMARKS=@REMARKS, " +
+                                " CONSUMPTION=@CONSUMPTION,ALLOWANCE=@ALLOWANCE,QTYORDER=@QTYORDER,TOTCONSUMPTION=@TOTCONSUMPTION,UOM=@UOM,SUPPLIER=@SUPPLIER, "+
+                                " PONO=@PONO,QTYSTORE=@QTYSTORE,QTYPO=@QTYPO" +
+                                " WHERE COSTINGNO=@COSTINGNO1 AND ID=@ID1 AND COLORID=@COLORID1 AND SIZEID=@SIZEID1 ";
+                strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);  strQuery.Parameters.AddWithValue("@ID", k.ID);
+                strQuery.Parameters.AddWithValue("@COLORID", k.COLORID);      strQuery.Parameters.AddWithValue("@SIZEID", k.SIZEID);
+                strQuery.Parameters.AddWithValue("@ITEMSID", k.ITEMSID);      strQuery.Parameters.AddWithValue("@ORDERNO", k.ORDERNO);
+                strQuery.Parameters.AddWithValue("@REMARKS", k.REMARKS);
+                strQuery.Parameters.AddWithValue("@CONSUMPTION", k.CONSUMPTION);
+                strQuery.Parameters.AddWithValue("@ALLOWANCE", k.ALLOWANCE);
                 strQuery.Parameters.AddWithValue("@QTYORDER", k.QTYORDER);
-                strQuery.Parameters.AddWithValue("@GDIV", k.GDIV);
-                strQuery.Parameters.AddWithValue("@TYPEID", k.TYPEID);
-                strQuery.Parameters.AddWithValue("@CATEGORYID", k.CATEGORYID);
-                strQuery.Parameters.AddWithValue("@STAT", k.STAT);
-                strQuery.Parameters.AddWithValue("@DATE", k.DATE);
-                strQuery.Parameters.AddWithValue("@OFFICER", k.OFFICER);
-                strQuery.Parameters.AddWithValue("@ITEMSID", k.ITEMSID);
-                strQuery.Parameters.AddWithValue("@CUSTVENDCODE", k.CUSTVENDCODE);
-                strQuery.Parameters.AddWithValue("@APPROVE", k.APPROVE);
-                strQuery.Parameters.AddWithValue("@APPROVEDATE", k.APPROVEDATE);
-                strQuery.Parameters.AddWithValue("@APPROVEBY", k.APPROVEBY);
-                strQuery.Parameters.AddWithValue("@COGS", k.COGS);
-                strQuery.Parameters.AddWithValue("@MARGIN", k.MARGIN);
-                strQuery.Parameters.AddWithValue("@MARGINVALUE", k.MARGINVALUE);
-                strQuery.Parameters.AddWithValue("@NETTPRICE", k.NETTPRICE);
-                strQuery.Parameters.AddWithValue("@DISCOUNT", k.DISCOUNT);
-                strQuery.Parameters.AddWithValue("@DISCOUNTVALUE", k.DISCOUNTVALUE);
-                strQuery.Parameters.AddWithValue("@PPN", k.PPN);
-                strQuery.Parameters.AddWithValue("@PPNVALUE", k.PPNVALUE);
-                strQuery.Parameters.AddWithValue("@SELLINGPRICE", k.SELLINGPRICE);
-                strQuery.Parameters.AddWithValue("@KURS", k.KURS);
-                strQuery.Parameters.AddWithValue("@VALUEIN", k.VALUEIN);
-                strQuery.Parameters.AddWithValue("@REVISE", k.REVISE);
-                strQuery.Parameters.AddWithValue("@REVISEDATE", k.REVISEDATE);
-                strQuery.Parameters.AddWithValue("@REVISEBY", k.REVISEBY);
+                strQuery.Parameters.AddWithValue("@TOTCONSUMPTION", k.TOTCONSUMPTION);
+                strQuery.Parameters.AddWithValue("@UOM", k.UOM);
+                strQuery.Parameters.AddWithValue("@SUPPLIER", k.SUPPLIER);
+                strQuery.Parameters.AddWithValue("@PONO", k.PONO);
+                strQuery.Parameters.AddWithValue("@QTYPO", k.QTYPO);
+                strQuery.Parameters.AddWithValue("@QTYSTORE", k.QTYSTORE);
+                //key
+                strQuery.Parameters.AddWithValue("@COSTINGNO1", CostingNo); strQuery.Parameters.AddWithValue("@ID1", ID);
+                strQuery.Parameters.AddWithValue("@COLORID1", ColorID); strQuery.Parameters.AddWithValue("@SIZEID1", SizeID);
+
+
                 strQuery.ExecuteNonQuery();
 
                 ConnG.Putus();
@@ -242,7 +238,7 @@ namespace MyGarment.ClassMD
             }
             return stat;
         }
-        public bool deleteData(string costID)
+        public bool deleteData(string COSTINGNO,int ID, string COLORID,string SIZEID)
         {
             bool stat = false;
             try
@@ -252,8 +248,11 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "DELETE FROM tblbom WHERE COSTINGNO = @CostID";
-                strQuery.Parameters.AddWithValue("@CostID", costID);
+                strQuery.CommandText = "DELETE FROM tblbom WHERE COSTINGNO=@COSTINGNO AND ID=@ID AND COLORID=@COLORID AND SIZEID=@SIZEID";
+                strQuery.Parameters.AddWithValue("@COSTINGNO",COSTINGNO);
+                strQuery.Parameters.AddWithValue("@ID", ID);
+                strQuery.Parameters.AddWithValue("@COLORID", COLORID);
+                strQuery.Parameters.AddWithValue("@SIZEID", SIZEID);
                 strQuery.ExecuteNonQuery();
                 stat = true;
                 ConnG.Putus();

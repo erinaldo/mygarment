@@ -45,12 +45,14 @@ namespace MyGarment.ViewForm
         private void SimpanTSB_Click(object sender, EventArgs e)
         {
             mitems K = new mitems();
-            
-            FileStream fs;
-            BinaryReader br;
-            fs = new FileStream(txtPath.Text, FileMode.Open, FileAccess.Read);
-            br = new BinaryReader(fs);
-
+            if (txtPath.Text != "")
+            {
+                FileStream fs;
+                BinaryReader br;
+                fs = new FileStream(txtPath.Text, FileMode.Open, FileAccess.Read);
+                br = new BinaryReader(fs);
+                K.Image = br.ReadBytes((int)fs.Length);
+            }
             K.ItemsID = txtItemsID.Text;
             K.Description = txtDescription.Text;
             K.ItemsTypeID = txtItemsTypeID.Text;
@@ -58,7 +60,7 @@ namespace MyGarment.ViewForm
             K.Active = Convert.ToInt32(txtActive.Text);
             K.Active = Convert.ToInt32(txtActive.Text);
             K.Path = txtPath.Text;
-            K.Image = br.ReadBytes((int)fs.Length);
+         
 
             if (new mitemsCRUD().insertData(K))
             {
@@ -74,17 +76,20 @@ namespace MyGarment.ViewForm
         private void UbahTSB_Click(object sender, EventArgs e)
         {
             mitems k = new mitems();
-            FileStream fs;
-            BinaryReader br;
-            fs = new FileStream(txtPath.Text, FileMode.Open, FileAccess.Read);
-            br = new BinaryReader(fs);
+            if (txtPath.Text != "" && File.Exists(txtPath.Text) )
+            {
+                FileStream fs;
+                BinaryReader br;
+                fs = new FileStream(txtPath.Text, FileMode.Open, FileAccess.Read);
+                br = new BinaryReader(fs);
+                k.Image = br.ReadBytes((int)fs.Length);
+            }
             k.ItemsID = txtItemsID.Text;
             k.Description = txtDescription.Text;
             k.ItemsTypeID = txtItemsTypeDesc.Text;
             k.Type = txtType.Text;
             k.Active = Convert.ToInt32(txtActive.Text);
             k.Path = txtPath.Text;
-            k.Image = br.ReadBytes((int)fs.Length);
 
             if (new mitemsCRUD().updateData(k))
             {

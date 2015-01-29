@@ -22,7 +22,7 @@ namespace MyGarment.ClassMD
         public float KURS{ get; set; }
         public float ALLOWANCE{ get; set; }
         public int APPROVE{ get; set; }
-        public DateTime APPROVEDATE{ get; set; }
+        public DateTime? APPROVEDATE{ get; set; }
         public string APPROVEBY{ get; set; }
         /*
         public string CostingNo;

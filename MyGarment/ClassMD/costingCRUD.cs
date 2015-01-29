@@ -12,6 +12,29 @@ namespace MyGarment.ClassMD
     {
         private MySql.Data.MySqlClient.MySqlCommand strQuery = null;
 
+        public bool exec_query(string query)
+        {
+            try
+            {
+              
+                Connection Conn = new Connection();
+                Conn.Konek();
+                strQuery = new MySql.Data.MySqlClient.MySqlCommand();
+                strQuery.Connection = Conn.Conn;
+                strQuery.CommandType = CommandType.Text;
+                strQuery.CommandText = query;
+                strQuery.ExecuteNonQuery();
+                Conn.Putus();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            //return true;
+        }
+
+
         public DataSet prCosting(string COSTINGNO)
         {
             DataSet ds = null;
@@ -62,9 +85,7 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT COSTINGNO, QTYORDER,GDIV,TYPEID,CATEGORYID,STAT,DATE,OFFICER,"+
-                        "ITEMSID,CUSTVENDCODE,APPROVE,APPROVEDATE,APPROVEBY,COGS,MARGIN,MARGINVALUE,NETTPRICE,"+
-                        "DISCOUNT,DISCOUNTVALUE,PPN,PPNVALUE,SELLINGPRICE,KURS,VALUEIN,REVISE,REVISEDATE,REVISEBY "+
+                strQuery.CommandText = "SELECT * "+
                         " FROM tblcosting";
                 MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
                 data.Fill(ds, "tblcosting");
@@ -87,9 +108,7 @@ namespace MyGarment.ClassMD
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT COSTINGNO,QTYORDER,GDIV,TYPEID,CATEGORYID,STAT,DATE,OFFICER," +
-                        "ITEMSID,CUSTVENDCODE,APPROVE,APPROVEDATE,APPROVEBY,COGS,MARGIN,MARGINVALUE,NETTPRICE," +
-                        "DISCOUNT,DISCOUNTVALUE,PPN,PPNVALUE,SELLINGPRICE,KURS,VALUEIN,REVISE,REVISEDATE,REVISEBY" +
+                strQuery.CommandText = "SELECT * " +
                         " FROM tblcosting WHERE COSTINGNO LIKE @COSTINGNO";
                 strQuery.Parameters.AddWithValue("@COSTINGNO", "%" + COSTINGNO + "%");
                 MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
@@ -148,9 +167,8 @@ namespace MyGarment.ClassMD
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
 
-                strQuery.CommandText = "INSERT INTO tblcosting VALUES(@COSTINGNO,@QTYORDER,@GDIV,@TYPEID,@CATEGORYID,@STAT,@DATE,@OFFICER," +
-                        "@ITEMSID,@CUSTVENDCODE,@APPROVE,@APPROVEDATE,@APPROVEBY,@COGS,@MARGIN,@MARGINVALUE,@NETTPRICE," +
-                        "@DISCOUNT,@DISCOUNTVALUE,@PPN,@PPNVALUE,@SELLINGPRICE,@KURS,@VALUEIN,@REVISE,@REVISEDATE,@REVISEBY)";
+                strQuery.CommandText = "INSERT INTO tblcosting(COSTINGNO,QTYORDER,GDIV,TYPEID,CATEGORYID,STAT,DATE,OFFICER,ITEMSID,CUSTVENDCODE,APPROVE,APPROVEDATE,APPROVEBY,COGS,MARGIN,MARGINVALUE,NETTPRICE,DISCOUNT,DISCOUNTVALUE,PPN,PPNVALUE,SELLINGPRICE,KURS,VALUEIN,REVISE,REVISEDATE,REVISEBY,REMARKS) "+
+                        " VALUES(@COSTINGNO,@QTYORDER,@GDIV,@TYPEID,@CATEGORYID,@STAT,@DATE,@OFFICER,@ITEMSID,@CUSTVENDCODE,@APPROVE,@APPROVEDATE,@APPROVEBY,@COGS,@MARGIN,@MARGINVALUE,@NETTPRICE,@DISCOUNT,@DISCOUNTVALUE,@PPN,@PPNVALUE,@SELLINGPRICE,@KURS,@VALUEIN,@REVISE,@REVISEDATE,@REVISEBY,@REMARKS)";
                 strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);
                 strQuery.Parameters.AddWithValue("@QTYORDER", k.QTYORDER);
                 strQuery.Parameters.AddWithValue("@GDIV", k.GDIV);
@@ -178,6 +196,8 @@ namespace MyGarment.ClassMD
                 strQuery.Parameters.AddWithValue("@REVISE", k.REVISE);
                 strQuery.Parameters.AddWithValue("@REVISEDATE", k.REVISEDATE);
                 strQuery.Parameters.AddWithValue("@REVISEBY", k.REVISEBY);
+                strQuery.Parameters.AddWithValue("@REMARKS", k.REMARKS);
+                //strQuery.Parameters.AddWithValue("@JONO", k.JONO);
 
                 strQuery.ExecuteNonQuery();
                 stat = true;
@@ -201,7 +221,7 @@ namespace MyGarment.ClassMD
                 strQuery.CommandType = CommandType.Text;
                 strQuery.CommandText = "UPDATE tblcosting SET QTYORDER=@QTYORDER,GDIV=@GDIV,TYPEID=@TYPEID,CATEGORYID=@CATEGORYID,STAT=@STAT,DATE=@DATE,OFFICER=@OFFICER," +
                         "ITEMSID=@ITEMSID,CUSTVENDCODE=@CUSTVENDCODE,APPROVE=@APPROVE,APPROVEDATE=@APPROVEDATE,APPROVEBY=@APPROVEBY,COGS=@COGS,MARGIN=@MARGIN,MARGINVALUE=@MARGINVALUE,NETTPRICE=@NETTPRICE," +
-                        "DISCOUNT=@DISCOUNT,DISCOUNTVALUE=@DISCOUNTVALUE,PPN=@PPN,PPNVALUE=@PPNVALUE,SELLINGPRICE=@SELLINGPRICE,KURS=@KURS,VALUEIN=@VALUEIN,REVISE=@REVISE,REVISEDATE=@REVISEDATE,REVISEBY=@REVISEBY" +
+                        "DISCOUNT=@DISCOUNT,DISCOUNTVALUE=@DISCOUNTVALUE,PPN=@PPN,PPNVALUE=@PPNVALUE,SELLINGPRICE=@SELLINGPRICE,KURS=@KURS,VALUEIN=@VALUEIN,REVISE=@REVISE,REVISEDATE=@REVISEDATE,REVISEBY=@REVISEBY,REMARKS=@REMARKS" +
                         " WHERE COSTINGNO=@COSTINGNO";
                 strQuery.Parameters.AddWithValue("@COSTINGNO", k.COSTINGNO);
                 strQuery.Parameters.AddWithValue("@QTYORDER", k.QTYORDER);
@@ -230,6 +250,7 @@ namespace MyGarment.ClassMD
                 strQuery.Parameters.AddWithValue("@REVISE", k.REVISE);
                 strQuery.Parameters.AddWithValue("@REVISEDATE", k.REVISEDATE);
                 strQuery.Parameters.AddWithValue("@REVISEBY", k.REVISEBY);
+                strQuery.Parameters.AddWithValue("@REMARKS", k.REMARKS);
                 strQuery.ExecuteNonQuery();
 
                 ConnG.Putus();

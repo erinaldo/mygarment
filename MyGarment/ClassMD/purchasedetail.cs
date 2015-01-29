@@ -17,8 +17,9 @@ namespace MyGarment.ClassMD
         public string DESCRIPTION { get; set; }
         public float QUANTITY { get; set; }
         public string UOM { get; set; }
+        public float CONVER { get; set; }
         public float PRICE { get; set; }
-        public string QTYPURCHASE { get; set; }
+        public float QTYPURCHASE { get; set; }
         public string UOMPURCHASE { get; set; }
         public float PRICEPURCHASE { get; set; }
         public float TOTAL { get; set; }
@@ -26,7 +27,6 @@ namespace MyGarment.ClassMD
         public float KURS { get; set; }
         public float DISCOUNT { get; set; }
         public float PPN { get; set; }
-
         
     }
 }

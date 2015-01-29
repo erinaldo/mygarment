@@ -24,7 +24,7 @@ namespace MyGarment.ClassMaster
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT CUSTVENDCODE,NAME,TYPE,ACTIVE from tblmcustvend";
+                strQuery.CommandText = "SELECT * from tblmcustvend";
                 MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
                 data.Fill(ds, "tblmcustvend");
 
@@ -48,10 +48,11 @@ namespace MyGarment.ClassMaster
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = Conn.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "SELECT CUSTVENDCODE,NAME,TYPE,ACTIVE from tblmcustvend WHERE CUSTVENDCODE LIKE @CustVendCode AND NAME LIKE @Name AND TYPE LIKE @Type";
-                strQuery.Parameters.AddWithValue("@CustVendCode", "%" + CustVendCode + "%");
-                strQuery.Parameters.AddWithValue("@Name", "%" + Name + "%");
-                strQuery.Parameters.AddWithValue("@Type", "%" + Type + "%");
+                //strQuery.CommandText = "SELECT CUSTVENDCODE,NAME,TYPE,ACTIVE from tblmcustvend WHERE CUSTVENDCODE LIKE @CustVendCode AND NAME LIKE @Name AND TYPE LIKE @Type";
+                strQuery.CommandText = "SELECT * from tblmcustvend WHERE CUSTVENDCODE LIKE @CUSTVENDCODE AND NAME LIKE @NAME AND TYPE LIKE @TYPE ";
+                strQuery.Parameters.AddWithValue("@CUSTVENDCODE", "%" + CustVendCode + "%");
+                strQuery.Parameters.AddWithValue("@NAME", "%" + Name + "%");
+                strQuery.Parameters.AddWithValue("@TYPE", "%" + Type + "%");
                 MySql.Data.MySqlClient.MySqlDataAdapter data = new MySql.Data.MySqlClient.MySqlDataAdapter(strQuery);
                 data.Fill(ds, "tblmcustvend");
                 Conn.Putus();
@@ -75,11 +76,28 @@ namespace MyGarment.ClassMaster
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
                 
-                strQuery.CommandText = "INSERT INTO tblmcustvend(CUSTVENDCODE,NAME,TYPE,ACTIVE) VALUES(@CustVendCode,@Name,@Type,@Active)";
-                strQuery.Parameters.AddWithValue("@CustVendCode", k.CustVendCode);
-                strQuery.Parameters.AddWithValue("@Name", k.Name);
-                strQuery.Parameters.AddWithValue("@Type", k.Type);
-                strQuery.Parameters.AddWithValue("@Active", k.Active);
+                strQuery.CommandText = "INSERT INTO tblmcustvend(CUSTVENDCODE,NAME,TYPE,ACTIVE,DATE,CONTACTPERSON,CONTACTTITLE,ADDRESS,CITY,ZIPCODE,COUNTRY,HP,PHONE,FAX,REMARKS,TAX,CURRENCYID,NPWP,NPKP) "+
+                    " VALUES(@CUSTVENDCODE,@NAME,@TYPE,@ACTIVE,@DATE,@CONTACTPERSON,@CONTACTTITLE,@ADDRESS,@CITY,@ZIPCODE,@COUNTRY,@HP,@PHONE,@FAX,@REMARKS,@TAX,@CURRENCYID,@NPWP,@NPKP)";
+                strQuery.Parameters.AddWithValue("@CUSTVENDCODE", k.CUSTVENDCODE);
+                strQuery.Parameters.AddWithValue("@NAME", k.NAME);
+                strQuery.Parameters.AddWithValue("@TYPE", k.TYPE);
+                strQuery.Parameters.AddWithValue("@ACTIVE", k.ACTIVE);
+                strQuery.Parameters.AddWithValue("@DATE", k.DATE);
+                strQuery.Parameters.AddWithValue("@CONTACTPERSON", k.CONTACTPERSON);
+                strQuery.Parameters.AddWithValue("@CONTACTTITLE", k.CONTACTTITLE);
+                strQuery.Parameters.AddWithValue("@ADDRESS", k.ADDRESS);
+                strQuery.Parameters.AddWithValue("@CITY", k.CITY);
+                strQuery.Parameters.AddWithValue("@ZIPCODE", k.ZIPCODE);
+                strQuery.Parameters.AddWithValue("@COUNTRY", k.COUNTRY);
+                strQuery.Parameters.AddWithValue("@HP", k.HP);
+                strQuery.Parameters.AddWithValue("@PHONE", k.PHONE);
+                strQuery.Parameters.AddWithValue("@FAX", k.FAX);
+                strQuery.Parameters.AddWithValue("@REMARKS", k.REMARKS);
+                strQuery.Parameters.AddWithValue("@TAX", k.TAX);
+                strQuery.Parameters.AddWithValue("@CURRENCYID", k.CURRENCYID);
+                strQuery.Parameters.AddWithValue("@NPWP", k.NPWP);
+                strQuery.Parameters.AddWithValue("@NPKP", k.NPKP);
+
                 
                 strQuery.ExecuteNonQuery();
                 stat = true;
@@ -101,10 +119,30 @@ namespace MyGarment.ClassMaster
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "UPDATE tblmvendcode SET NAME=@Name,TYPE=@Type,ACTIVE=@Active WHERE CUSTVENDCODE=@CusVendCode";
-                strQuery.Parameters.AddWithValue("@Name", k.Name);
-                strQuery.Parameters.AddWithValue("@Active", k.Active);
-                strQuery.Parameters.AddWithValue("@Type", k.Type);
+                strQuery.CommandText = "UPDATE tblmcustvend SET NAME=@NAME,TYPE=@TYPE,ACTIVE=@ACTIVE," +
+                            "DATE=@DATE,CONTACTPERSON=@CONTACTPERSON,CONTACTTITLE=@CONTACTTITLE,ADDRESS=@ADDRESS,CITY=@CITY,ZIPCODE=@ZIPCODE,"+
+                            "COUNTRY=@COUNTRY,HP=@HP,PHONE=@PHONE,FAX=@FAX,REMARKS=@REMARKS,TAX=@TAX,CURRENCYID=@CURRENCYID,NPWP=@NPWP,"+
+                            "NPKP=@NPKP WHERE CUSTVENDCODE=@CUSTVENDCODE";
+                strQuery.Parameters.AddWithValue("@CUSTVENDCODE", k.CUSTVENDCODE);
+                strQuery.Parameters.AddWithValue("@NAME", k.NAME);
+                strQuery.Parameters.AddWithValue("@TYPE", k.TYPE);
+                strQuery.Parameters.AddWithValue("@ACTIVE", k.ACTIVE);
+                strQuery.Parameters.AddWithValue("@DATE", k.DATE);
+                strQuery.Parameters.AddWithValue("@CONTACTPERSON", k.CONTACTPERSON);
+                strQuery.Parameters.AddWithValue("@CONTACTTITLE", k.CONTACTTITLE);
+                strQuery.Parameters.AddWithValue("@ADDRESS", k.ADDRESS);
+                strQuery.Parameters.AddWithValue("@CITY", k.CITY);
+                strQuery.Parameters.AddWithValue("@ZIPCODE", k.ZIPCODE);
+                strQuery.Parameters.AddWithValue("@COUNTRY", k.COUNTRY);
+                strQuery.Parameters.AddWithValue("@HP", k.HP);
+                strQuery.Parameters.AddWithValue("@PHONE", k.PHONE);
+                strQuery.Parameters.AddWithValue("@FAX", k.FAX);
+                strQuery.Parameters.AddWithValue("@REMARKS", k.REMARKS);
+                strQuery.Parameters.AddWithValue("@TAX", k.TAX);
+                strQuery.Parameters.AddWithValue("@CURRENCYID", k.CURRENCYID);
+                strQuery.Parameters.AddWithValue("@NPWP", k.NPWP);
+                strQuery.Parameters.AddWithValue("@NPKP", k.NPKP);
+
                 strQuery.ExecuteNonQuery();
                 ConnG.Putus();
                 stat = true;
@@ -112,6 +150,7 @@ namespace MyGarment.ClassMaster
             }
             catch
             {
+                //MessageBox.Show("error");
             }
             return stat;
         }
@@ -125,8 +164,8 @@ namespace MyGarment.ClassMaster
                 strQuery = new MySql.Data.MySqlClient.MySqlCommand();
                 strQuery.Connection = ConnG.Conn;
                 strQuery.CommandType = CommandType.Text;
-                strQuery.CommandText = "DELETE FROM tblmcost WHERE CUSTVENDCODE = @CustVendCode";
-                strQuery.Parameters.AddWithValue("@CostID", CustVendCode);
+                strQuery.CommandText = "DELETE FROM tblmcost WHERE CUSTVENDCODE = @CUSTVENDCODE";
+                strQuery.Parameters.AddWithValue("@CUSTVENDCODE", CustVendCode);
                 strQuery.ExecuteNonQuery();
                 stat = true;
                 ConnG.Putus();

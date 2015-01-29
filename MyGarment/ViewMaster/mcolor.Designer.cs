@@ -266,6 +266,7 @@
             this.DtGrid.Size = new System.Drawing.Size(475, 178);
             this.DtGrid.TabIndex = 76;
             this.DtGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellClick);
+            this.DtGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DtGrid_CellContentClick);
             // 
             // frmmcolor
             // 

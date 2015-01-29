@@ -14,6 +14,24 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>\\192.168.1.67\htdocs\drn\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -34,11 +52,29 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>AF22E995CD8BB019C94548461E9F22D0E82A9731</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>MyGarment_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>newss.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="ExtendedControls">
+      <HintPath>dll\ExtendedControls.dll</HintPath>
+    </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -56,12 +92,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="1Global\Active.cs" />
+    <Compile Include="1Global\CekType.cs" />
     <Compile Include="1Global\Connection.cs" />
+    <Compile Include="1Global\Conversion.cs" />
     <Compile Include="1Global\Generate.cs" />
     <Compile Include="ClassExim\eximbc.cs" />
     <Compile Include="ClassExim\eximbcCRUD.cs" />
+    <Compile Include="ClassExim\eximbcdetail.cs" />
+    <Compile Include="ClassExim\eximbcdetailCRUD.cs" />
     <Compile Include="ClassExim\eximdoc.cs" />
     <Compile Include="ClassExim\eximdocCRUD.cs" />
+    <Compile Include="ClassExim\eximdocdetail.cs" />
+    <Compile Include="ClassExim\eximdocdetailCRUD.cs" />
+    <Compile Include="ClassExim\invoice.cs" />
+    <Compile Include="ClassExim\invoiceCRUD.cs" />
+    <Compile Include="ClassExim\invoicedetail.cs" />
+    <Compile Include="ClassExim\invoicedetailCRUD.cs" />
+    <Compile Include="ClassFile\modul.cs" />
+    <Compile Include="ClassFile\modulCRUD.cs" />
+    <Compile Include="ClassFile\moduluser.cs" />
+    <Compile Include="ClassFile\moduluserCRUD.cs" />
+    <Compile Include="ClassFile\muser.cs" />
+    <Compile Include="ClassFile\muserCRUD.cs" />
     <Compile Include="ClassFinance\invoice.cs" />
     <Compile Include="ClassFinance\invoiceCRUD.cs" />
     <Compile Include="ClassFinance\invoicedetail.cs" />
@@ -72,6 +124,10 @@
     <Compile Include="ClassMaster\mcategoryCRUD.cs" />
     <Compile Include="ClassMaster\mcolor.cs" />
     <Compile Include="ClassMaster\mcolorCRUD.cs" />
+    <Compile Include="ClassMaster\mconvert.cs" />
+    <Compile Include="ClassMaster\mconvertCRUD.cs" />
+    <Compile Include="ClassMaster\mcourier.cs" />
+    <Compile Include="ClassMaster\mcourierCRUD.cs" />
     <Compile Include="ClassMaster\mcurrency.cs" />
     <Compile Include="ClassMaster\mcurrencyCRUD.cs" />
     <Compile Include="ClassMaster\mcustvend.cs" />
@@ -86,6 +142,8 @@
     <Compile Include="ClassMaster\mitemstypeCRUD.cs" />
     <Compile Include="ClassMaster\mrate.cs" />
     <Compile Include="ClassMaster\mrateCRUD.cs" />
+    <Compile Include="ClassMaster\msize.cs" />
+    <Compile Include="ClassMaster\msizeCRUD.cs" />
     <Compile Include="ClassMaster\mstore.cs" />
     <Compile Include="ClassMaster\mstoreCRUD.cs" />
     <Compile Include="ClassMaster\mtermofpayment.cs" />
@@ -106,6 +164,13 @@
     <Compile Include="ClassMD\purchaseCRUD.cs" />
     <Compile Include="ClassMD\purchasedetail.cs" />
     <Compile Include="ClassMD\purchasedetailCRUD.cs" />
+    <Compile Include="ClassProduction\cutt.cs" />
+    <Compile Include="ClassProduction\cuttdetail.cs" />
+    <Compile Include="ClassProduction\cuttdetailCRUD.cs" />
+    <Compile Include="ClassProduction\production.cs" />
+    <Compile Include="ClassProduction\productionsize.cs" />
+    <Compile Include="ClassProduction\productionsizeCRUD.cs" />
+    <Compile Include="ClassProduction\productionCRUD.cs" />
     <Compile Include="ClassStore\gin.cs" />
     <Compile Include="ClassStore\ginCRUD.cs" />
     <Compile Include="ClassStore\gindetail.cs" />
@@ -114,6 +179,104 @@
     <Compile Include="ClassStore\grnCRUD.cs" />
     <Compile Include="ClassStore\grndetail.cs" />
     <Compile Include="ClassStore\grndetailCRUD.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="mysql.cs" />
+    <Compile Include="PrintExim\PrintBeaCukai1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai1.Designer.cs">
+      <DependentUpon>PrintBeaCukai1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai1Cr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintBeaCukai1Cr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBarangJadi.Designer.cs">
+      <DependentUpon>PrintBeaCukai2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai2Cr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintBeaCukai2Cr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai3Cr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintBeaCukai3Cr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai4.Designer.cs">
+      <DependentUpon>PrintBeaCukai4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai4Cr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintBeaCukai4Cr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai5.Designer.cs">
+      <DependentUpon>PrintBeaCukai5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai5Cr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintBeaCukai5Cr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai6.Designer.cs">
+      <DependentUpon>PrintBeaCukai6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai6Cr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintBeaCukai6Cr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai7.Designer.cs">
+      <DependentUpon>PrintBeaCukai7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai3.Designer.cs">
+      <DependentUpon>PrintBeaCukai3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintExim\PrintBeaCukai7Cr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintBeaCukai7Cr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintMD\PrintBOM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintMD\PrintBOM.Designer.cs">
+      <DependentUpon>PrintBOM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintMD\PrintBOMCr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintBOMCr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PrintMD\PrintCosting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +288,126 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PrintCostingCr.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintMD\PrintJO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintMD\PrintJO.Designer.cs">
+      <DependentUpon>PrintJO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintMD\PrintJOCr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintJOCr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintMD\PrintPO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintMD\PrintPO.Designer.cs">
+      <DependentUpon>PrintPO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintMD\PrintPOCr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintPOCr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintMD\PrintJObyPO.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintJObyPO.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintStore\PrintMatIssue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintStore\PrintMatIssue.Designer.cs">
+      <DependentUpon>PrintMatIssue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintStore\PrintMatIssueCr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintMatIssueCr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintStore\PrintMatSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintStore\PrintMatSupplier.Designer.cs">
+      <DependentUpon>PrintMatSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintStore\PrintMatSupplierCr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintMatSupplierCr.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ViewExim\bcInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewExim\bcInput.Designer.cs">
+      <DependentUpon>bcInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewExim\bcInputSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewExim\bcInputSearch.Designer.cs">
+      <DependentUpon>bcInputSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewExim\invoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewExim\invoice.Designer.cs">
+      <DependentUpon>invoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewExim\invoiceSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewExim\invoiceSearch.Designer.cs">
+      <DependentUpon>invoiceSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewExim\ReportBeaCukai.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewExim\ReportBeaCukai.Designer.cs">
+      <DependentUpon>ReportBeaCukai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewFile\approve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewFile\approve.Designer.cs">
+      <DependentUpon>approve.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewFile\login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewFile\login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewFile\moduluser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewFile\moduluser.Designer.cs">
+      <DependentUpon>moduluser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewFile\user.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewFile\user.Designer.cs">
+      <DependentUpon>user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewFile\userchange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewFile\userchange.Designer.cs">
+      <DependentUpon>userchange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMaster\msize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMaster\msize.Designer.cs">
+      <DependentUpon>msize.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewMD\bom.cs">
       <SubType>Form</SubType>
@@ -155,6 +438,12 @@
     </Compile>
     <Compile Include="ViewMD\Purchase.Designer.cs">
       <DependentUpon>Purchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewMD\PurchaseCekBudget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewMD\PurchaseCekBudget.Designer.cs">
+      <DependentUpon>PurchaseCekBudget.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewMD\PurchaseSearch.cs">
       <SubType>Form</SubType>
@@ -324,11 +613,125 @@
     <Compile Include="ViewMD\costingSearch.Designer.cs">
       <DependentUpon>costingSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewProduction\cutting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\cutting.Designer.cs">
+      <DependentUpon>cutting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\cuttingcompreceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\cuttingcompreceive.Designer.cs">
+      <DependentUpon>cuttingcompreceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\cuttingcompreturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\cuttingcompreturn.Designer.cs">
+      <DependentUpon>cuttingcompreturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\cuttingmatreturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\cuttingmatreturn.Designer.cs">
+      <DependentUpon>cuttingmatreturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\cuttingmatreceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\cuttingmatreceive.Designer.cs">
+      <DependentUpon>cuttingmatreceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\finishing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\finishing.Designer.cs">
+      <DependentUpon>finishing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\finishingcompreceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\finishingcompreceive.Designer.cs">
+      <DependentUpon>finishingcompreceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\finishingcompreturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\finishingcompreturn.Designer.cs">
+      <DependentUpon>finishingcompreturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\finishingmatreceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\finishingmatreceive.Designer.cs">
+      <DependentUpon>finishingmatreceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\finishingmatreturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\finishingmatreturn.Designer.cs">
+      <DependentUpon>finishingmatreturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\InitProduction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\InitProduction.Designer.cs">
+      <DependentUpon>InitProduction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\findProductionStyle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\findProductionStyle.Designer.cs">
+      <DependentUpon>findProductionStyle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\sewing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\sewing.Designer.cs">
+      <DependentUpon>sewing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\sewingcompreceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\sewingcompreceive.Designer.cs">
+      <DependentUpon>sewingcompreceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\sewingcompreturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\sewingcompreturn.Designer.cs">
+      <DependentUpon>sewingcompreturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\sewingmatreceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\sewingmatreceive.Designer.cs">
+      <DependentUpon>sewingmatreceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProduction\sewingmatreturn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewProduction\sewingmatreturn.Designer.cs">
+      <DependentUpon>sewingmatreturn.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewSearch\frmCustomerSearch.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ViewSearch\frmCustomerSearch.Designer.cs">
       <DependentUpon>frmCustomerSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSearch\frmGrnSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewSearch\frmGrnSearch.Designer.cs">
+      <DependentUpon>frmGrnSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSearch\frmItemsSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewSearch\frmItemsSearch.Designer.cs">
+      <DependentUpon>frmItemsSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewSearch\frmStyleSearch.cs">
       <SubType>Form</SubType>
@@ -336,17 +739,35 @@
     <Compile Include="ViewSearch\frmStyleSearch.Designer.cs">
       <DependentUpon>frmStyleSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewSearch\SupplierSearch.cs">
+    <Compile Include="ViewSearch\frmSupplierSearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ViewSearch\SupplierSearch.Designer.cs">
-      <DependentUpon>SupplierSearch.cs</DependentUpon>
+    <Compile Include="ViewSearch\frmSupplierSearch.Designer.cs">
+      <DependentUpon>frmSupplierSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewStore\gin.cs">
+    <Compile Include="ViewStore\grnComponent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ViewStore\gin.Designer.cs">
-      <DependentUpon>gin.cs</DependentUpon>
+    <Compile Include="ViewStore\grnComponent.Designer.cs">
+      <DependentUpon>grnComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\ginGarment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\ginGarment.Designer.cs">
+      <DependentUpon>ginGarment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\ginGarmentSearchStyle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\ginGarmentSearchStyle.Designer.cs">
+      <DependentUpon>ginGarmentSearchStyle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\ginMat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\ginMat.Designer.cs">
+      <DependentUpon>ginMat.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewStore\ginSearch.cs">
       <SubType>Form</SubType>
@@ -354,11 +775,35 @@
     <Compile Include="ViewStore\ginSearch.Designer.cs">
       <DependentUpon>ginSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewStore\grn.cs">
+    <Compile Include="ViewStore\ginComponent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ViewStore\grn.Designer.cs">
-      <DependentUpon>grn.cs</DependentUpon>
+    <Compile Include="ViewStore\ginComponent.Designer.cs">
+      <DependentUpon>ginComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\grnMat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\grnMat.Designer.cs">
+      <DependentUpon>grnMat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\grnGarment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\grnGarment.Designer.cs">
+      <DependentUpon>grnGarment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\grnGarmentOther.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\grnGarmentOther.Designer.cs">
+      <DependentUpon>grnGarmentOther.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStore\grnMatOther.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStore\grnMatOther.Designer.cs">
+      <DependentUpon>grnMatOther.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewStore\grnSearch.cs">
       <SubType>Form</SubType>
@@ -369,12 +814,133 @@
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai1.resx">
+      <DependentUpon>PrintBeaCukai1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai1Cr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintBeaCukai1Cr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai2.resx">
+      <DependentUpon>PrintBeaCukai2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai2Cr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintBeaCukai2Cr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai3.resx">
+      <DependentUpon>PrintBeaCukai3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai3Cr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintBeaCukai3Cr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai4.resx">
+      <DependentUpon>PrintBeaCukai4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai4Cr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintBeaCukai4Cr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai5.resx">
+      <DependentUpon>PrintBeaCukai5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai5Cr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintBeaCukai5Cr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai6.resx">
+      <DependentUpon>PrintBeaCukai6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai6Cr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintBeaCukai6Cr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai7.resx">
+      <DependentUpon>PrintBeaCukai7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintExim\PrintBeaCukai7Cr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintBeaCukai7Cr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintMD\PrintBOM.resx">
+      <DependentUpon>PrintBOM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintMD\PrintBOMCr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintBOMCr.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrintMD\PrintCosting.resx">
       <DependentUpon>PrintCosting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintMD\PrintCostingCr.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PrintCostingCr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintMD\PrintJO.resx">
+      <DependentUpon>PrintJO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintMD\PrintJOCr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintJOCr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintMD\PrintPO.resx">
+      <DependentUpon>PrintPO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintMD\PrintPOCr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintPOCr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintMD\PrintJObyPO.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintJObyPO.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintStore\PrintMatIssue.resx">
+      <DependentUpon>PrintMatIssue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintStore\PrintMatIssueCr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintMatIssueCr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintStore\PrintMatSupplier.resx">
+      <DependentUpon>PrintMatSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintStore\PrintMatSupplierCr.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintMatSupplierCr.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewExim\bcInput.resx">
+      <DependentUpon>bcInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewExim\bcInputSearch.resx">
+      <DependentUpon>bcInputSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewExim\invoice.resx">
+      <DependentUpon>invoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewExim\invoiceSearch.resx">
+      <DependentUpon>invoiceSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewExim\ReportBeaCukai.resx">
+      <DependentUpon>ReportBeaCukai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewFile\approve.resx">
+      <DependentUpon>approve.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewFile\login.resx">
+      <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewFile\moduluser.resx">
+      <DependentUpon>moduluser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewFile\user.resx">
+      <DependentUpon>user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewFile\userchange.resx">
+      <DependentUpon>userchange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMaster\msize.resx">
+      <DependentUpon>msize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMD\bom.resx">
       <DependentUpon>bom.cs</DependentUpon>
@@ -390,6 +956,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMD\Purchase.resx">
       <DependentUpon>Purchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewMD\PurchaseCekBudget.resx">
+      <DependentUpon>PurchaseCekBudget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMD\PurchaseSearch.resx">
       <DependentUpon>PurchaseSearch.cs</DependentUpon>
@@ -479,23 +1048,101 @@
     <EmbeddedResource Include="ViewMD\costingSearch.resx">
       <DependentUpon>costingSearch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\cutting.resx">
+      <DependentUpon>cutting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\cuttingcompreceive.resx">
+      <DependentUpon>cuttingcompreceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\cuttingcompreturn.resx">
+      <DependentUpon>cuttingcompreturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\cuttingmatreceive.resx">
+      <DependentUpon>cuttingmatreceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\cuttingmatreturn.resx">
+      <DependentUpon>cuttingmatreturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\findProductionStyle.resx">
+      <DependentUpon>findProductionStyle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\finishing.resx">
+      <DependentUpon>finishing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\finishingcompreceive.resx">
+      <DependentUpon>finishingcompreceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\finishingcompreturn.resx">
+      <DependentUpon>finishingcompreturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\finishingmatreceive.resx">
+      <DependentUpon>finishingmatreceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\finishingmatreturn.resx">
+      <DependentUpon>finishingmatreturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\InitProduction.resx">
+      <DependentUpon>InitProduction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\sewing.resx">
+      <DependentUpon>sewing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\sewingcompreceive.resx">
+      <DependentUpon>sewingcompreceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\sewingcompreturn.resx">
+      <DependentUpon>sewingcompreturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\sewingmatreceive.resx">
+      <DependentUpon>sewingmatreceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewProduction\sewingmatreturn.resx">
+      <DependentUpon>sewingmatreturn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewSearch\frmCustomerSearch.resx">
       <DependentUpon>frmCustomerSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewSearch\frmGrnSearch.resx">
+      <DependentUpon>frmGrnSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewSearch\frmItemsSearch.resx">
+      <DependentUpon>frmItemsSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewSearch\frmStyleSearch.resx">
       <DependentUpon>frmStyleSearch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewSearch\SupplierSearch.resx">
-      <DependentUpon>SupplierSearch.cs</DependentUpon>
+    <EmbeddedResource Include="ViewSearch\frmSupplierSearch.resx">
+      <DependentUpon>frmSupplierSearch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewStore\gin.resx">
-      <DependentUpon>gin.cs</DependentUpon>
+    <EmbeddedResource Include="ViewStore\grnComponent.resx">
+      <DependentUpon>grnComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\ginGarment.resx">
+      <DependentUpon>ginGarment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\ginGarmentSearchStyle.resx">
+      <DependentUpon>ginGarmentSearchStyle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\ginMat.resx">
+      <DependentUpon>ginMat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewStore\ginSearch.resx">
       <DependentUpon>ginSearch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewStore\grn.resx">
-      <DependentUpon>grn.cs</DependentUpon>
+    <EmbeddedResource Include="ViewStore\ginComponent.resx">
+      <DependentUpon>ginComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\grnMat.resx">
+      <DependentUpon>grnMat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\grnGarment.resx">
+      <DependentUpon>grnGarment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\grnGarmentOther.resx">
+      <DependentUpon>grnGarmentOther.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewStore\grnMatOther.resx">
+      <DependentUpon>grnMatOther.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewStore\grnSearch.resx">
       <DependentUpon>grnSearch.cs</DependentUpon>
@@ -514,12 +1161,37 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ClassProduction\" />
-    <Folder Include="ViewExim\" />
+    <Folder Include="PrintProduction\" />
     <Folder Include="ViewFinance\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClassProduction\cuttCRUD.cs" />
+    <Content Include="newss.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

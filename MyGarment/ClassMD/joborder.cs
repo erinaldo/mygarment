@@ -8,31 +8,26 @@ namespace MyGarment.ClassMD
     class joborder
     {
 
-        public string  ORDERNO { get; set; }
-        public string COSTINGNO { get; set; }
+        public string ORDERNO { get; set; }
+        public string ITEMSID { get; set; }
         public string GDIV { get; set; }
+        public int QUANTITY { get; set; }
+        public string TYPEID { get; set; }
+        public string CATEGORYID { get; set; }
         public string POCUSTOMER { get; set; }
-        public string TYPE { get; set; }
-        public string DATE { get; set; }
-        public string DATESTART { get; set; }
-        public string DATEFINISH { get; set; }
+        public DateTime? DATE { get; set; }
         public string OFFICER { get; set; }
-        public string ADDRESSCODE{ get; set; }
-        public string DELIVERYDATE{ get; set; }
-        public string DELIVERY{ get; set; }
-        public string REMARKS{ get; set; }
-        public string APPROVE{ get; set; }
-        public string APPROVEDATE{ get; set; }
-        public string APPROVEBY{ get; set; }
-        public string CLOSE{ get; set; }
-        public string CLOSEBY{ get; set; }
-        public string CLOSEDATE{ get; set; }
-        public string CHECKED{ get; set; }
-        public string CHECKDATE{ get; set; }
-        public string CHECKBY{ get; set; }
-        public string CUSTPODATE{ get; set; }
-        public string REVISE{ get; set; }
-        public string REVISEBY{ get; set; }
-        public string REVISEDATE { get; set; }
+        public string CUSTVENDCODE { get; set; }
+        public string ADDRESS { get; set; }
+        public DateTime? DELIVERYDATE { get; set; }
+        public string DELIVERY { get; set; }
+        public string REMARKS { get; set; }
+        public int APPROVE { get; set; }
+        public DateTime? APPROVEDATE { get; set; }
+        public string APPROVEBY { get; set; }
+        public string WASH { get; set; }
+
+
+
        }
 }

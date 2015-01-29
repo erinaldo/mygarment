@@ -123,5 +123,10 @@ namespace MyGarment.ViewForm
 
             }
         }
+
+        private void DtGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

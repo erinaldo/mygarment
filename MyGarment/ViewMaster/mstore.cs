@@ -101,5 +101,10 @@ namespace MyGarment.ViewForm
         {
             this.Dispose();
         }
+
+        private void DtGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

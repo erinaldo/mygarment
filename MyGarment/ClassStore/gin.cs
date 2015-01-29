@@ -9,9 +9,9 @@ namespace MyGarment.ClassStore
     {
         public string GINNO { get; set; }
         public string GDIV { get; set; }
-        public DateTime DATE { get; set; }
+        public DateTime? DATE { get; set; }
         public string OFFICER { get; set; }
-        public string DELIVERYTO { get; set; }
+        public string DELIVERYTO { get; set; }  // untuk refer to
         public string REMARKS { get; set; }
         public string STOREID { get; set; }
         public int APPROVE { get; set; }

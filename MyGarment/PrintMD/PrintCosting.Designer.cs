@@ -41,15 +41,19 @@
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
             this.crystalReportViewer1.ReportSource = this.PrintCostingCr1;
-            this.crystalReportViewer1.Size = new System.Drawing.Size(592, 335);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(843, 335);
             this.crystalReportViewer1.TabIndex = 0;
             this.crystalReportViewer1.Load += new System.EventHandler(this.crystalReportViewer1_Load);
+            // 
+            // PrintCostingCr1
+            // 
+            this.PrintCostingCr1.InitReport += new System.EventHandler(this.PrintCostingCr1_InitReport);
             // 
             // PrintCosting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 335);
+            this.ClientSize = new System.Drawing.Size(843, 335);
             this.Controls.Add(this.crystalReportViewer1);
             this.Name = "PrintCosting";
             this.Text = "PrintCosting";
@@ -62,7 +66,6 @@
         #endregion
 
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportViewer1;
-       
         private PrintCostingCr PrintCostingCr1;
     }
 }

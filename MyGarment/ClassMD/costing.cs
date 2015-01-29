@@ -13,12 +13,12 @@ namespace MyGarment.ClassMD
         public string TYPEID{ get; set; }
         public string CATEGORYID{ get; set;}
         public string STAT{ get; set; }
-        public DateTime DATE{ get; set; }
+        public DateTime? DATE{ get; set; }
         public string OFFICER{ get; set; }
         public string ITEMSID{ get; set; }
         public string CUSTVENDCODE{ get; set; }
         public int APPROVE{ get; set; }
-        public DateTime APPROVEDATE{ get; set; }
+        public DateTime? APPROVEDATE{ get; set; }
         public string APPROVEBY{ get; set; }
         public float COGS{ get; set; }
         public float MARGIN{ get; set; }
@@ -32,8 +32,9 @@ namespace MyGarment.ClassMD
         public float KURS{ get; set; }
         public string VALUEIN{ get; set; }
         public int REVISE{ get; set; }
-        public DateTime REVISEDATE{ get; set; }
+        public DateTime? REVISEDATE{ get; set; }
         public string REVISEBY{ get; set; }
+        public string REMARKS { get; set; }
 
         /*
         public string CostingNo;

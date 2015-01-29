@@ -22,7 +22,7 @@ namespace MyGarment.ViewSearch
 
         private void RecordTSB_Click(object sender, EventArgs e)
         {
-            DataSet data = new mitemsCRUD().getData();
+            DataSet data = new mitemsCRUD().getType("PRODUCT");
             DtGrid.DataSource = data;
             DtGrid.DataMember = "tblmitems";
         }
